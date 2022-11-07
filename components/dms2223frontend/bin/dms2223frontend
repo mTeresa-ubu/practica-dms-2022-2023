@@ -34,6 +34,14 @@ app = Flask(
 )
 app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 
+# Alvar [4/11/2022]
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["FLASK_DEBUG"] = True
+
+# Alvar [4/11/2022]
+@app.route("/", methods=['GET'])
+def get_default():
+    return SessionEndpoints.get_home(auth_service)
 
 @app.route("/login", methods=['GET'])
 def get_login():
