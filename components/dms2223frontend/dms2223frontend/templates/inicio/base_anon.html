@@ -6,11 +6,11 @@
         <div id="nav">{{ navbar(roles) }}</div>
         <div id="session-info">
             {% if name %}
-                {{ name }}
+                Hola, {{ name }}
             {% else %}
-                Annonymous
+                No estas logeado
             {% endif %}
-            &nbsp;(<a href="/logout">Log out</a>)
+            &nbsp;(<a href="/login">Login</a>)
         </div>
     </div>
     {{ flashedmessages() }}

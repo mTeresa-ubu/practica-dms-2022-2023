@@ -12,6 +12,7 @@ from dms2223frontend.presentation.web import \
 
 cfg: FrontendConfiguration = FrontendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
+
 auth_service_cfg: Dict = cfg.get_auth_service()
 auth_service: AuthService = AuthService(
     auth_service_cfg['host'], auth_service_cfg['port'],
@@ -33,11 +34,15 @@ app = Flask(
     template_folder=os.path.dirname(
         inspect.getfile(dms2223frontend)) + '/templates'
 )
-app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
-
 # Alvar [4/11/2022]
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-app.config["FLASK_DEBUG"] = True
+app.config["TESTING"] = True
+app.testing=True
+app.config.update(
+    TEMPLATES_AUTO_RELOAD = True
+)
+
+
+app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 
 # Alvar [4/11/2022]
 @app.route("/", methods=['GET'])
