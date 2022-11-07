@@ -23,7 +23,13 @@ class CommonEndpoints():
         # Editado por alvar el 4/11/2022 apra evitar la redireccion, linea 26, 27
         """
         if not WebAuth.test_token(auth_service):
-            #return redirect(url_for('get_login'))
-            name = "Anonymous"
+            return redirect(url_for('get_login'))
         name = session['user']
         return render_template('home.html', name=name, roles=session['roles'])
+
+    @staticmethod
+    def get_inicio():
+        """ Genstiona el acceso a inicio sin ningun tipo de login necesario
+        
+        """
+        return render_template('inicio/inicio.html')

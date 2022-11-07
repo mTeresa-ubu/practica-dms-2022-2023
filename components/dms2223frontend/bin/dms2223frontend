@@ -18,6 +18,7 @@ auth_service: AuthService = AuthService(
     apikey_header='X-ApiKey-Auth',
     apikey_secret=auth_service_cfg['apikey_secret']
 )
+
 backend_service_cfg: Dict = cfg.get_backend_service()
 backend_service: BackendService = BackendService(
     backend_service_cfg['host'], backend_service_cfg['port'],
@@ -41,7 +42,8 @@ app.config["FLASK_DEBUG"] = True
 # Alvar [4/11/2022]
 @app.route("/", methods=['GET'])
 def get_default():
-    return SessionEndpoints.get_home(auth_service)
+    return CommonEndpoints.get_inicio()
+    #return CommonEndpoints.get_home(auth_service)
 
 @app.route("/login", methods=['GET'])
 def get_login():
