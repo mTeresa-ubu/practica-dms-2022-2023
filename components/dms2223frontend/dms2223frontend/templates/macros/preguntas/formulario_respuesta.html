@@ -1,0 +1,22 @@
+{% macro form_respuesta(pregunta_anterior) %}
+{% from "macros/buttons.html" import submit_button %}
+
+<div class="contenedor_respuesta">
+    <form action="comentario" method="post">
+    <h3>Tu respuesta:</h3>
+        <input type="hidden" id="pregunta_anterior" value="{{ pregunta_anterior }}">
+        <div id="editor_respuesta">
+            <!-- Convertir en macro -->
+            <div id="controles_texto">
+                <!-- Botones de negrita, cursiva etc.. -->
+            </div>
+            <!--  -->
+            <textarea >
+                Pon tu respuesta aqui
+            </textarea>
+            {{ submit_button('bluebg', 'Responder') }}
+        </div>
+    </form>
+</div>
+{% endmacro %}
+

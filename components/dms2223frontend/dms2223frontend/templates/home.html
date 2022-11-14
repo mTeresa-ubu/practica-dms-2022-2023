@@ -1,6 +1,8 @@
 {% extends "base_logged_in.html" %}
 {% from 'macros/preguntas/preguntas_container.html' import preguntas %}
 {% from "macros/buttons.html" import button %}
+<!-- Solo como test -->
+{% from 'macros/preguntas/formulario_respuesta.html' import form_respuesta %}
 
 {% block title %}Home{% endblock %}
 
@@ -12,4 +14,5 @@
         {{button("greenbg","/nueva_pregunta","Crear nueva",())}}
     </div>
     {{ preguntas() }}
+    {{ form_respuesta(1234) }}
 {% endblock %}
