@@ -162,6 +162,15 @@ table th {
     box-shadow: 0 0.3em 0.1em inset rgb(0 0 0 / 20%);
 }
 
+.greenbg {
+    background-color: #1cbd4c;
+    color: #fff;
+}
+
+.greenbg a {
+    color: #fff;
+}
+
 .bluebg {
     background-color: #253aa7;
     color: #fff;
@@ -203,4 +212,14 @@ table th {
 .questionscore {
     font-size: smaller;
     color: #777;
+}
+
+/* Pagina de inico 
+*  Alvar [14/11/2022]
+*/
+
+.container2cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

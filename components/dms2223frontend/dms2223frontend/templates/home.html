@@ -1,5 +1,15 @@
 {% extends "base_logged_in.html" %}
+{% from 'macros/preguntas/preguntas_container.html' import preguntas %}
+{% from "macros/buttons.html" import button %}
+
 {% block title %}Home{% endblock %}
+
 {% block contentheading %}Home{% endblock %}
+
 {% block maincontent %}
+    <div>
+        <h2>Preguntas recientes</h2> 
+        {{button("greenbg","/nueva_pregunta","Crear nueva",())}}
+    </div>
+    {{ preguntas() }}
 {% endblock %}

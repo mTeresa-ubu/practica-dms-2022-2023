@@ -4,16 +4,18 @@
 <section id="registro">
     <h2> Nuevo usuario </h2>
     <form action="registro" method="post">
-        <label for="user"> Nombre de Usuario </label>
-        <input type="text" name="user" placeholder="Usuario" />
+        <label for="user"> Nombre de Usuario: </label>
+        <input type="text" name="user" placeholder="Usuario" /><br/>
 
-        <label for="pass"> Contraseña </label>
-        <input type="password" name="pass" placeholder="contraseña" />
+        <label for="pass"> Contraseña: </label>
+        <input type="password" name="pass" placeholder="contraseña" /><br/>
 
-        <label for="re_pass"> Repite la contraseña </label>
-        <input type="password" name="re_pass" placeholder="" />
+        <label for="re_pass"> Repite la contraseña: </label>
+        <input type="password" name="re_pass" placeholder="" /><br/>
 
         <p class="aligncenter">{{ submit_button('bluebg', 'Registrarse') }}</p>
+
+        <p>¿Ya tienes una cuenta? entra <a href="/login">aqui</a>.</p>
     </form>
 </section>
 
