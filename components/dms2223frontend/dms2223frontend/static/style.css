@@ -223,3 +223,30 @@ table th {
     flex-direction: row;
     justify-content: space-around;
 }
+
+/* Editor de respuestas
+*  Alvar [14/11/2022]
+*/
+
+textarea {
+    padding: .2em;
+    border: 0em;
+}
+
+textarea:focus {
+    outline: .2em;
+}
+
+.marco_texto{
+    padding: .5em .1em 0em .1em;
+    /* border-radius: .5em; */
+    border: .1em solid #777;
+    width: fit-content;
+    margin: 0;
+}
+
+#editor_respuesta {
+    width: fit-content;
+    border-radius: .5em;
+    border-style: solid;
+}
