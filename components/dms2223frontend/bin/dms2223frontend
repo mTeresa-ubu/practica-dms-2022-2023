@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
-from flask import Flask
+from pregunta import Pregunta
+from flask import Flask, request
 import inspect
 import os
 from typing import Dict
@@ -97,6 +97,12 @@ def get_admin_users_edit():
 @app.route("/admin/users/edit", methods=['POST'])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
+
+# Alvar [16/11/2022]
+@app.route("/pregunta",method=['GET'])
+def obtener_pregunta():
+    id=request.args.get('id')
+    return id
 
 if __name__ == '__main__':
     app.run(
