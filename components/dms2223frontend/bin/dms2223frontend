@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-from pregunta import Pregunta
+from dms2223frontend.data.clases.pregunta import Pregunta
+from datetime import datetime
+
 from flask import Flask, request
 import inspect
 import os
@@ -99,10 +101,23 @@ def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
 # Alvar [16/11/2022]
-@app.route("/pregunta",method=['GET'])
+@app.route("/pregunta",methods=['GET'])
 def obtener_pregunta():
-    id=request.args.get('id')
-    return id
+    id = request.args.get('id')
+    preg = Pregunta(
+        "Que dia es hoy",
+        id,
+        datetime.now(),
+        34,
+        35,
+        12,
+        "Yo"
+    )
+
+    if id:
+        return preg
+    else:
+        return "No encontrada"
 
 if __name__ == '__main__':
     app.run(
