@@ -1,18 +1,24 @@
-
-{% from "macros/buttons.html" import button, submit_button %}
 {% macro respuesta (respuestaEnviada) %}
+{% from "macros/buttons.html" import button, submit_button %}
+
     <h2>Respuesta</h2>
     <div> class = "Respuesta"
-        <!--Quien ha respondido...-->
-        <!--Hace cuánto ha respondido...-->
-        <!--Respuesta a la pregunta...-->
-        {{ respuestaEnviada.contenido }}
+        <!--Quien ha respondido...
+        <label> for = "usuario" Usuario que ha respondido: </label> 
+        <input type="text" name="usuario" placeholder="Usuario" /><br/>
+        Hace cuánto ha respondido...
+        <label> for = "usuario" Usuario que ha respondido: </label> 
+        Respuesta a la pregunta...
+        {{ respuestaEnviada.contenido }}-->
         <!--Feedback positivo a la pregunta...-->
         <!--Feedback negativo a la pregunta...-->
         <!--Feedback neutro a la pregunta...-->
         <!--Botón responder...-->
+        <p> {{ submit_button('greengb','Responder') }} </p>
         <!--Añadir comentario ???...-->
+        <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p>
         <!--Botón para reportar la respuesta...-->
+        <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
     </div>
 {% endmacro %}
 {% block body %}{% endblock %}
