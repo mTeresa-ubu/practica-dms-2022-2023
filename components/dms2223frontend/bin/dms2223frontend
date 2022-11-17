@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 from dms2223frontend.data.clases.pregunta import Pregunta
-from datetime import datetime
-
 from flask import Flask, request
 import inspect
 import os
@@ -10,7 +8,8 @@ import dms2223frontend
 from dms2223frontend.data.config import FrontendConfiguration
 from dms2223frontend.data.rest import AuthService, BackendService
 from dms2223frontend.presentation.web import \
-    AdminEndpoints, CommonEndpoints, SessionEndpoints, DiscussionEndpoints, ModeratorEndpoints
+    AdminEndpoints, CommonEndpoints, SessionEndpoints, \
+    DiscussionEndpoints, ModeratorEndpoints, PreguntasEndpoints
 
 cfg: FrontendConfiguration = FrontendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
@@ -101,23 +100,9 @@ def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
 # Alvar [16/11/2022]
-@app.route("/pregunta",methods=['GET'])
-def obtener_pregunta():
-    id = request.args.get('id')
-    preg = Pregunta(
-        "Que dia es hoy",
-        id,
-        datetime.now(),
-        34,
-        35,
-        12,
-        "Yo"
-    )
-
-    if id:
-        return preg
-    else:
-        return "No encontrada"
+@app.route("/pregunta/<id_preg>",methods=['GET'])
+def get_pregunta(id_preg):
+    return PreguntasEndpoints.get_pregunta(auth_service,id_preg)
 
 if __name__ == '__main__':
     app.run(
