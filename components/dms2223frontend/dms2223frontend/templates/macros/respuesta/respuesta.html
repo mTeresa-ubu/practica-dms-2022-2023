@@ -10,13 +10,20 @@
         <label> for = "usuario" Usuario que ha respondido: </label> 
         Respuesta a la pregunta...
         {{ respuestaEnviada.contenido }}-->
+        <!--Hace cuánto ha respondido...-->
+        {{ timestamp|timestamp_to_time|datetimeformat('%a, %B %d') }}
         <!--Feedback positivo a la pregunta...-->
+        <p> {{ submit_button('greengb','Feedback positivo') }} </p><br>
         <!--Feedback negativo a la pregunta...-->
+        <p> {{ submit_button('redgb','Feedback negativo') }} </p><br>
         <!--Feedback neutro a la pregunta...-->
+        <p> {{ submit_button('bluegb','Feedback neutro') }} </p><br>
+        <!--Botón votar...-->
+        <p> {{ submit_button('greengb','Votar') }} </p><br>
         <!--Botón responder...-->
-        <p> {{ submit_button('greengb','Responder') }} </p>
+        <p> {{ submit_button('greengb','Responder') }} </p><br>
         <!--Añadir comentario ???...-->
-        <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p>
+        <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p><br>
         <!--Botón para reportar la respuesta...-->
         <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
     </div>
