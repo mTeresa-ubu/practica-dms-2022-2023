@@ -10,9 +10,8 @@
 {% block maincontent %}
     <div>
         <h2>Respuesta a la pregunta</h2>
-        respuesta.
+        {{button("greenbg","/nueva_respuesta","Crear respuesta",())}}
     </div>
-
-
+    {{ respuesta(respuestaEnviada) }}
 
 {% endblock %}
