@@ -1,0 +1,28 @@
+
+{% from "macros/buttons.html" import button, submit_button %}
+{% macro respuesta (respuestaEnviada) %}
+    <h2>Respuesta</h2>
+    <div> class = "Respuesta"
+        <!--Quien ha respondido...-->
+        <!--Hace cuánto ha respondido...-->
+        <!--Respuesta a la pregunta...-->
+        {{ respuestaEnviada.contenido }}
+        <!--Feedback positivo a la pregunta...-->
+        <!--Feedback negativo a la pregunta...-->
+        <!--Feedback neutro a la pregunta...-->
+        <!--Botón responder...-->
+        <!--Añadir comentario ???...-->
+        <!--Botón para reportar la respuesta...-->
+    </div>
+{% endmacro %}
+{% block body %}{% endblock %}
+
+
+
+  
+
+
+
+
+
+
