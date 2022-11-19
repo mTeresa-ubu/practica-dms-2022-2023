@@ -1,4 +1,5 @@
 import time
+{% from 'macros/respuesta/inputs.html' import input %}
 {% macro respuesta (respuestaEnviada) %}
 {% from "macros/buttons.html" import button, submit_button %}
 {% from "macros/respuesta/contenedorRespuesta.html" import contenedorRespuestas %}
@@ -8,9 +9,11 @@ import time
             
     <p> {{ submit_button('greengb','Votar') }} </p><br>
     
-    <p> {{ submit_button('greengb','Responder') }} </p><br>
+    <p> {{ submit_button('greengb','Responder') }} </p>
+    <p> {{ input('Responder') }}</p><br>
     
-    <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p><br>
+    <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p>
+    <p> {{ input('Comentario') }}</p><br>
     
     <p> {{ submit_button('greengb','Feedback positivo') }} </p><br>
     
@@ -24,14 +27,6 @@ import time
     {{ respuesta.fechaHoraRespondidas }}
     
 {% endmacro %}
-
-
-
-
-  
-
-
-
 
 
 
