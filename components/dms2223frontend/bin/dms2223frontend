@@ -85,7 +85,6 @@ def get_admin_users_edit():
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
-
 #@app.route("/respuesta/<id_respuesta>",methods=['GET'])
 #def get_respuesta(id_respuesta):
     #return RespuestasEndpoints.get_respuesta(auth_service,id_pregunta)
