@@ -2,9 +2,15 @@
 <h2 class="questiontext">{{titulo}}</h2>
 {% endmacro %}
 
+{% macro datosPregunta(usuario,fecha) %}
+<div class="datosPregunta">
+    <p>Preguntado por:{{usuario}}</p>
+    <p>Fecha de la pregunta:{{fecha}}</p>
+</div>
+{% endmacro %}
+
 {% macro cuepoPregunta(descripcion) %}
 <div class="questiondiv">
     <p>{{descripcion}}</p>
 </div>
 {% endmacro %}
-
