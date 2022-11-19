@@ -1,9 +1,10 @@
 import time
 {% macro respuesta (respuestaEnviada) %}
 {% from "macros/buttons.html" import button, submit_button %}
+{% from "macros/respuesta/contenedorRespuesta.html" import contenedorRespuestas %}
 
     <h2>Respuesta</h2>
-    {{ Respuesta.contenidoRespuesta }}
+    {{ respuesta.contenidoRespuesta }}
             
     <p> {{ submit_button('greengb','Votar') }} </p><br>
     
@@ -11,11 +12,11 @@ import time
     
     <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p><br>
     
-    <p> {{ submit_button('greengb','    Feedback positivo') }} </p><br>
+    <p> {{ submit_button('greengb','Feedback positivo') }} </p><br>
     
-    <p> {{ submit_button('redgb','      Feedback negativo') }} </p><br>
+    <p> {{ submit_button('redgb','Feedback negativo') }} </p><br>
     
-    <p> {{ submit_button('bluegb','     Feedback neutro') }} </p><br>
+    <p> {{ submit_button('bluegb','Feedback neutro') }} </p><br>
     
     <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
     

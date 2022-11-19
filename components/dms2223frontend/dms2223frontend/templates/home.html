@@ -1,6 +1,7 @@
 {% extends "base_logged_in.html" %}
 {% from "macros/buttons.html" import button, submit_button %} {# Importar botón #}
 {% from 'macros/respuesta/respuesta.html' import respuesta %} {# Importar macro #}
+{% from "macros/respuesta/contenedorRespuesta.html" import contenedorRespuestas %}
 
 
 {% block title %}Home{% endblock %}
@@ -10,6 +11,7 @@
 {% block maincontent %}
     <div>
         <h2>Respuesta a la pregunta</h2>
+        {{ respuesta.contenidoRespuesta }}
         {{button("greenbg","/nueva_respuesta","Crear respuesta",())}}
     </div>
     {{ respuesta(respuestaEnviada) }}
