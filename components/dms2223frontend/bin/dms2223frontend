@@ -8,7 +8,8 @@ import dms2223frontend
 from dms2223frontend.data.config import FrontendConfiguration
 from dms2223frontend.data.rest import AuthService, BackendService
 from dms2223frontend.presentation.web import \
-    AdminEndpoints, CommonEndpoints, SessionEndpoints, DiscussionEndpoints, ModeratorEndpoints
+    AdminEndpoints, CommonEndpoints, SessionEndpoints, DiscussionEndpoints, ModeratorEndpoints, RespuestasEndpoints
+from dms2223frontend.data.clases.
 
 cfg: FrontendConfiguration = FrontendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
@@ -82,6 +83,12 @@ def get_admin_users_edit():
 @app.route("/admin/users/edit", methods=['POST'])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
+
+
+@app.route("/respuesta/<id_respuesta>",methods=['GET'])
+def get_respuesta(id_respuesta):
+    return RespuestasEndpoints.get_respuesta(auth_service,id_pregunta)
+
 
 if __name__ == '__main__':
     app.run(
