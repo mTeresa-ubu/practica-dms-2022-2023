@@ -4,3 +4,7 @@
 {% macro submit_button(color_class, content) %}
 {{ button(color_class, '#', content, 'this.closest(\'form\').submit();return false;') }}
 {% endmacro %}
+
+{% macro reset_button(color_class, content) %}
+{{ button(color_class, '#', content, 'this.closest(\'form\').reset();return false;') }}
+{% endmacro %}
