@@ -3,20 +3,19 @@ import time
 {% from "macros/buttons.html" import button, submit_button %}
 
     <h2>Respuesta</h2>
-    
-    {{ time | from_timestamp('%Y.%m.%d. %H:%M:%S UTC') }}
-    
-    <p> {{ submit_button('greengb','Feedback positivo') }} </p><br>
-    
-    <p> {{ submit_button('redgb','Feedback negativo') }} </p><br>
-    
-    <p> {{ submit_button('bluegb','Feedback neutro') }} </p><br>
-    
+    {{ Respuesta.contenidoRespuesta }}
+            
     <p> {{ submit_button('greengb','Votar') }} </p><br>
     
     <p> {{ submit_button('greengb','Responder') }} </p><br>
     
     <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p><br>
+    
+    <p> {{ submit_button('greengb','    Feedback positivo') }} </p><br>
+    
+    <p> {{ submit_button('redgb','      Feedback negativo') }} </p><br>
+    
+    <p> {{ submit_button('bluegb','     Feedback neutro') }} </p><br>
     
     <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
     
