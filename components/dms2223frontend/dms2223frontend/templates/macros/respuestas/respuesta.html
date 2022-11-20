@@ -1,0 +1,28 @@
+import time
+{% from 'macros/respuestas/inputs.html' import input %}
+{% from "macros/buttons.html" import button, submit_button %}
+{% from "macros/respuestas/contenedorRespuesta.html" import contenedorRespuestas %}
+
+{% macro respuesta(respuesta) %}
+<div class="questiondiv">
+    <h2>Respuesta</h2>
+    {{ respuesta.contenidoRespuesta }}
+
+    <p> {{ submit_button('greengb','Votar') }} </p><br>
+
+    <p> {{ submit_button('greengb','Responder') }} </p>
+    <p> {{ input('Responder') }}</p><br>
+
+    <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p>
+    <p> {{ input('Comentario') }}</p><br>
+
+    <p> {{ submit_button('greengb','Voto positivo') }} </p><br>
+
+    <p> {{ submit_button('redgb','Voto negativo') }} </p><br>
+
+    <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
+
+    {{ respuesta.usuarioQueResponde }}
+    {{ respuesta.fecha.strftime('%Y-%m-%d') }}
+</div>
+{% endmacro %}

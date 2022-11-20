@@ -1,4 +1,4 @@
-from dms2223frontend.data.claseRespuesta.respuesta import Respuesta
+from dms2223frontend.data.clases.respuesta import Respuesta
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response
@@ -20,4 +20,4 @@ class RespuestasEndpoints():
             12,
             "Yo"
         )
-        return render_template('inicio/pregunta.html', pregunta=resp)
+        return render_template('respuesta.html', respuesta_env=resp)

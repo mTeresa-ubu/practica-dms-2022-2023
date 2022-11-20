@@ -13,8 +13,8 @@ class Elemento:
     Attributes:
         fecha (datetime): Fecha de creacion, se genrea automaticamente
     """
-    def __init__(self,id_preg,fecha,votos_positivos,votos_negativos,votos_neutros,autor) -> None:
-        self.id = id_preg
+    def __init__(self,iden,fecha,votos_positivos,votos_negativos,votos_neutros,autor) -> None:
+        self.id = iden
         self.fecha_creacion = fecha
         self.votos_positivos = votos_positivos
         self.votos_negativos = votos_negativos
