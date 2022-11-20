@@ -98,12 +98,6 @@ def get_admin_users_edit():
 @app.route("/admin/users/edit", methods=['POST'])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
-  
-"""Creacion de un metodo de muestra de Pregunta por Bilal 14/11/2022
-@app.route("/macros/pregunta/pregunta", methods=['POST'])
-def mestraPregunta():
-    return "¿Como se hace una pregunta?"
-"""
 
 # Alvar [16/11/2022]
 @app.route("/pregunta/<id_preg>",methods=['GET'])
