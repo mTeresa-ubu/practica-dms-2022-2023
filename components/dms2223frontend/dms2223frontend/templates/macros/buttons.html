@@ -1,6 +1,16 @@
 {% macro button(color_class, href, content, onclick=None) %}
 <a class="button {{ color_class }}" href="{{ href }}" {% if onclick %}onclick="{{ onclick }}"{%endif%}>{{ content }}</a>
 {% endmacro %}
+
 {% macro submit_button(color_class, content) %}
 {{ button(color_class, '#', content, 'this.closest(\'form\').submit();return false;') }}
 {% endmacro %}
+<!--MACRO PARA CREAR BOTON DE VOTO POSITIVO (FALTA IMPLEMENTAR QUE DETECTE SI YA SE PULSÓ ANTERIORMENTE)-->
+{% macro voteUp_button() %}
+{{ button(greenbg, '#', "vote Up", 'this.voteUp()') }}
+{% endmacro %}
+<!--MACRO PARA CREAR BOTON DE VOTO NEGATIVO (FALTA IMPLEMENTAR QUE DETECTE SI YA SE PULSÓ ANTERIORMENTE)-->
+{% macro voteDown_button() %}
+{{ button(redbg, '#', "vote Down", 'this.voteDown()') }}
+{% endmacro %}
+
