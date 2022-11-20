@@ -63,7 +63,6 @@ La base de las aplicacion son las preguntas con respuestas a modo de resolucion 
   - Tendran un tamñano mas reducido en pantalla
   - Se sombrearan según la valoracion
   - Podran ser votados para resaltar los mas útiles
-<<<<<<< HEAD
 
 #### 1.5 Respuesta
 Para responder a una pregunta realizada por un usuario, se ha creado una macro, llamada respuesta y que, como es de esperar, contiene la respuesta a una pregunta realizada por un usuario.
@@ -79,11 +78,9 @@ Y, cuando queramos ver el contenido de la respuesta lo llamaremos utilizando {{ 
 Por si además se desea crear una nueva respuesta, se ha implementado un botón "Crear respuesta", que se visualizará despues del contenido de la respuesta.
 
 
-
-=======
 #### 1.6 Respuesta (Votaciones)
 Para llevar a cabo las votaciones de las preguntas y las respuestas se han creado dos macros correspondientes con los botones para votos positivos y para votos negativos. Dichas macros se encuentran en el fichero "buttons.html", obteniendo cada una de ellas características especiales como el color de fondo (verde en caso de voto positivo y rojo en caso de voto negativo) y el texto que contiene (vote Up en caso de voto positivo y vote Down en caso de voto negativo), tambien se realiza una llamada en cada caso al método correspondiente cuando es pulsado (voteUp() en caso de voto positivo y voteDown() en caso de voto negativo). Los metodos a los que se llaman cuando se pulsa el boton se encuentran en el fichero votos.py, en el que se ha creado la clase Voto con cuatro metodos posibles: El primero "voteUp" hará que se sume un punto positivo a los votos de la pregunta/respuesta. El segundo "unvoteUp" se llamará en caso de querer anular el punto positivo de la pregunta/respuesta en caso de haber sumado previamente dicho punto. El tercero "voteDown" hara que se sume un punto negativo a los votos de la pregunta/respuesta. Por ultimo, el cuarto "unvoteDown" se llamará en caso de querer anular el punto negativo de la pregunta/respuesta en caso de haber sumado previamente dicho punto. Adicionalmente, se ha creado un Endpoint para actualizar las votaciones de las preguntas/respuestas, quedando tambien reflejado en el frontend.
->>>>>>> 06a3f64762f4ec17301b5ea5f9fc52084fd4de0d
+
 ### 2. Consideraciones de para el desarrollo
 #### 2.1 Docker
 Por su simplicidad se han decidido modificar los ficheros de instalacion e inicio y asi permitir el desarrollo sin necesiadad de reinicios.
