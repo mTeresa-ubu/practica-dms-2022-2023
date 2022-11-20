@@ -35,8 +35,8 @@ services:
     container_name: dms2223frontend
     volumes:
       - ../../components/dms2223common:/tmp/deps/src/common:ro
-      - ../../components/dms2223frontend:/tmp/src:ro
-      - ./dms2223-frontend:/root/.config:ro
+      - ../../components/dms2223frontend:/tmp/src
+      - ./dms2223-frontend:/root/.config
     networks:
       dms2223:
         ipv4_address: 172.10.1.30

@@ -1,0 +1,22 @@
+{% extends "inicio/base_anon.html" %}
+{% from 'macros/preguntas/preguntas_container.html' import preguntas %}
+{% from 'macros/auth/registro.html' import registro %}
+{% block title %} Inicio {% endblock %}
+
+{% block contentheading %}
+    <h1> Bienvenidos a la app de preguntas</h1>
+{% endblock %}
+
+{% block maincontent %}
+    <div class="container2cols">
+
+        <div id="registro">
+            {{ registro() }}
+        </div>
+        
+        <div id="pregutas">
+            <h2>Preguntas recientes</h2>
+            {{ preguntas() }}
+        </div>
+    </div>
+{% endblock %}
