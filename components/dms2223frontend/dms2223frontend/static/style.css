@@ -198,6 +198,24 @@ table th {
     color: #000;
 }
 
+.greenbg {
+    background-color: #167c24;
+    color: #fff;
+}
+
+.greenbg a {
+    color: #fff;
+}
+
+.graybg {
+    background-color: #444444;
+    color: #fff;
+}
+
+.graybg a {
+    color: #fff;
+}
+
 .questiondiv {
     margin: 10px;
     padding: 5px;

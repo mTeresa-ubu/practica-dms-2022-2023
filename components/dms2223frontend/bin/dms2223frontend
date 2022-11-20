@@ -99,6 +99,10 @@ def get_admin_users_edit():
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
+@app.route("/crear_pregunta", methods=['GET'])
+def get_crear_preguntas():
+    return SessionEndpoints.get_crear_preguntas(auth_service)
+
 # Alvar [16/11/2022]
 @app.route("/pregunta/<id_preg>",methods=['GET'])
 def get_pregunta(id_preg):
