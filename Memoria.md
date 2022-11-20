@@ -64,6 +64,21 @@ La base de las aplicacion son las preguntas con respuestas a modo de resolucion 
   - Se sombrearan según la valoracion
   - Podran ser votados para resaltar los mas útiles
 
+#### 1.5 Respuesta
+Para responder a una pregunta realizada por un usuario, se ha creado una macro, llamada respuesta y que, como es de esperar, contiene la respuesta a una pregunta realizada por un usuario.
+En el fichero respuesta.html podemos encontrar:
+  -En primer lugar, los imports tanto de la macro input como de los botones y del contenedor de respuestas creado.
+  -Posteriormente, se visualizará "Respuesta" y, a continuación, el contenido concreto de la respuesta.
+  -Una vez visualizado este, el usuario visualizará por pantalla las acciones que puede realizar. Estas son: Votar, responder, añadir un comentario, dar feedback(positivo, negativo o neutro) y, por último, reportar la respuesta.
+  -Además, al final aparecerá el nombre del usuario que ha respondido junto con la fecha y la hora en la que lo hizo.
+  Estos datos se sacarán del backend.
+El acceso a la respuesta se realizará desde "/respuesta".
+Cuando deseemos implementar esta macro, lo primero que debemos de realizar es un import de ella.
+Y, cuando queramos ver el contenido de la respuesta lo llamaremos utilizando {{ respuesta.contenidoRespuesta }}.
+Por si además se desea crear una nueva respuesta, se ha implementado un botón "Crear respuesta", que se visualizará despues del contenido de la respuesta.
+
+
+
 ### 2. Consideraciones de para el desarrollo
 #### 2.1 Docker
 Por su simplicidad se han decidido modificar los ficheros de instalacion e inicio y asi permitir el desarrollo sin necesiadad de reinicios.
