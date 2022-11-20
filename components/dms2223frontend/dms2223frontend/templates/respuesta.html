@@ -1,0 +1,13 @@
+{% extends "inicio/base_anon.html" %}
+{% from 'macros/respuestas/respuesta.html' import respuesta %}
+{% from 'macros/auth/registro.html' import registro %}
+{% block title %} Pregunta {% endblock %}
+
+
+{% block contentheading %}
+    <h1> Respuesta n</h1>
+{% endblock %}
+
+{% block maincontent %}
+    {{ respuesta(respuesta_env) }}
+{% endblock %}

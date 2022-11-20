@@ -1,6 +1,6 @@
 <!--Imports de los botones de votacion-->
-{% from '../buttons.html' import voteUp_button %}
-{% from '../buttons.html' import voteDown_button %}
+{% from 'macros/buttons.html' import voteUp_button %}
+{% from 'macros/buttons.html' import voteDown_button %}
 
 <!--Pregunta en formato de titulo-->
 {% macro tituloPregunta(titulo) %}
@@ -21,7 +21,16 @@
 
 <!--Macro del cuerpo de la pregunta-->
 {% macro cuepoPregunta(descripcion) %}
-<div class="questiondiv">
+<div class="questiontext">
     <p>{{descripcion}}</p>
+</div>
+{% endmacro %}
+
+<!--Macro de la pregunta completa-->
+{% macro pregunta(pregunta) %}
+<div class="questiondiv">
+    {{tituloPregunta(pregunta.titulo)}}
+    {{datosPregunta(pregunta.autor,pregunta.fecha)}}
+    {{cuepoPregunta(pregunta.contenidoPregunta)}}
 </div>
 {% endmacro %}

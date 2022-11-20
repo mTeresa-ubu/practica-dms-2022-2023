@@ -1,3 +1,8 @@
+"""
+Por favor primero subir un diseño, luego se programa
+"""
+
+
 class Voto():
     def __init__(self, idPregunta):
         self.idPregunta = idPregunta

@@ -2,6 +2,7 @@
 """    
 
 from dms2223frontend.data.clases.pregunta import Pregunta
+from dms2223frontend.data.rest.authservice import AuthService
 
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
@@ -21,9 +22,10 @@ class PreguntasEndpoints():
             34,
             35,
             12,
-            "Yo"
+            "Yo",
+            "Titulo"
         )
-        return render_template('inicio/pregunta.html', pregunta=preg)
+        return render_template('pregunta.html', pregunta_env=preg)
      
     """ Monostate class responsible of handling the session web endpoint requests.
     """
