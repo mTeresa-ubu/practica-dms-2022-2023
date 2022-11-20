@@ -1,11 +1,10 @@
 {% extends "base_logged_in.html" %}
 
 {% from "macros/buttons.html" import button, submit_button %} 
-{% from 'macros/respuesta/respuesta.html' import respuesta %} 
-{% from "macros/respuesta/contenedorRespuesta.html" import contenedorRespuestas %}
-{% from 'macros/preguntas/preguntas_container.html' import preguntas %}
-<!-- Solo como test -->
-{% from 'macros/preguntas/formulario_respuesta.html' import form_respuesta %}
+{% from 'macros/respuestas/respuesta.html' import respuesta %} 
+{% from "macros/respuestas/contenedorRespuesta.html" import contenedorRespuestas %}
+{% from "macros/preguntas/contenedor_preguntas.html" import contenedor_preguntas %}
+
 
 
 {% block title %}Home{% endblock %}
@@ -13,17 +12,9 @@
 {% block contentheading %}Home{% endblock %}
 
 {% block maincontent %}
-    <div>
-        <h2>Respuesta a la pregunta</h2>
-        {{ respuesta.contenidoRespuesta }}
-        {{button("greenbg","/nueva_respuesta","Crear respuesta",())}}
-    </div>
-    {{ respuesta(respuestaEnviada) }}
-        <h2>Preguntas recientes</h2> 
+    <h2>Preguntas recientes</h2> 
         {{button("greenbg","/nueva_pregunta","Crear nueva",())}}
     </div>
-    {{ preguntas() }}
-    <!-- Solo como test -->
-    {{ form_respuesta(1234) }}
+    {{ contenedor_preguntas(preguntas) }}
 {% endblock %}
 

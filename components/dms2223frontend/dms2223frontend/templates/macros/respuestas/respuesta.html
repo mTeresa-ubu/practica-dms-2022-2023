@@ -1,0 +1,37 @@
+<<<<<<< HEAD:components/dms2223frontend/dms2223frontend/templates/macros/respuesta/respuesta.html
+{% from 'macros/respuesta/inputs.html' import input %}
+=======
+import time
+{% from 'macros/respuestas/inputs.html' import input %}
+>>>>>>> 06a3f64762f4ec17301b5ea5f9fc52084fd4de0d:components/dms2223frontend/dms2223frontend/templates/macros/respuestas/respuesta.html
+{% from "macros/buttons.html" import button, submit_button %}
+{% from "macros/respuestas/contenedorRespuesta.html" import contenedorRespuestas %}
+
+<<<<<<< HEAD:components/dms2223frontend/dms2223frontend/templates/macros/respuesta/respuesta.html
+{% macro respuesta (respuestaEnviada) %}
+
+=======
+{% macro respuesta(respuesta) %}
+<div class="questiondiv">
+>>>>>>> 06a3f64762f4ec17301b5ea5f9fc52084fd4de0d:components/dms2223frontend/dms2223frontend/templates/macros/respuestas/respuesta.html
+    <h2>Respuesta</h2>
+    {{ respuesta.contenidoRespuesta }}
+
+    <p> {{ submit_button('greengb','Votar') }} </p><br>
+
+    <p> {{ submit_button('greengb','Responder') }} </p>
+    <p> {{ input('Responder') }}</p><br>
+
+    <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p>
+    <p> {{ input('Comentario') }}</p><br>
+
+    <p> {{ submit_button('greengb','Voto positivo') }} </p><br>
+
+    <p> {{ submit_button('redgb','Voto negativo') }} </p><br>
+
+    <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
+
+    {{ respuesta.usuarioQueResponde }}
+    {{ respuesta.fecha.strftime('%Y-%m-%d') }}
+</div>
+{% endmacro %}
