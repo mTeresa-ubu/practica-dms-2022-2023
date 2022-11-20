@@ -1,7 +1,8 @@
 {% from 'macros/respuesta/inputs.html' import input %}
-{% macro respuesta (respuestaEnviada) %}
 {% from "macros/buttons.html" import button, submit_button %}
 {% from "macros/respuesta/contenedorRespuesta.html" import contenedorRespuestas %}
+
+{% macro respuesta (respuestaEnviada) %}
 
     <h2>Respuesta</h2>
     {{ respuesta.contenidoRespuesta }}
