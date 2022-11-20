@@ -1,6 +1,8 @@
 {% extends "inicio/base_anon.html" %}
-{% from 'macros/preguntas/preguntas_container.html' import preguntas %}
 {% from 'macros/auth/registro.html' import registro %}
+
+{% from 'macros/preguntas/contenedor_preguntas.html' import contenedor_preguntas %}
+
 {% block title %} Inicio {% endblock %}
 
 {% block contentheading %}
@@ -16,7 +18,7 @@
         
         <div id="pregutas">
             <h2>Preguntas recientes</h2>
-            {{ preguntas() }}
+            {{ contenedor_preguntas(preguntas) }}
         </div>
     </div>
 {% endblock %}

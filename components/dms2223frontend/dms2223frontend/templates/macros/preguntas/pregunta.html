@@ -1,17 +1,16 @@
 <!--Imports de los botones de votacion-->
-{% from 'macros/buttons.html' import voteUp_button %}
-{% from 'macros/buttons.html' import voteDown_button %}
+{% from 'macros/buttons.html' import voteUp_button, voteDown_button %}
 
 <!--Pregunta en formato de titulo-->
-{% macro tituloPregunta(titulo) %}
-<h2 class="questiontext">{{titulo}}</h2>
+{% macro tituloPregunta(titulo,id_pregunta) %}
+<h2 class="questiontext"><a href="/pregunta/{{id_pregunta}}">{{titulo}}</a></h2>
 {% endmacro %}
 
 <!--Macro de los datos de pregunta(quien pregunto, fecha...)-->
-{% macro datosPregunta(usuario,fecha) %}
+{% macro datosPregunta(usuario,fecha_creacion) %}
 <div class="datosPregunta">
     <p>Preguntado por:{{usuario}}</p>
-    <p>Fecha de la pregunta:{{fecha}}</p>
+    <p>Fecha de la pregunta:{{ fecha_creacion.strftime('%d-%m-%Y') }}</p>
 </div>
 {% endmacro %}
 
@@ -29,8 +28,16 @@
 <!--Macro de la pregunta completa-->
 {% macro pregunta(pregunta) %}
 <div class="questiondiv">
-    {{tituloPregunta(pregunta.titulo)}}
-    {{datosPregunta(pregunta.autor,pregunta.fecha)}}
+    {{tituloPregunta(pregunta.tituloPregunta,pregunta.id)}}
+    {{datosPregunta(pregunta.autor,pregunta.fecha_creacion)}}
     {{cuepoPregunta(pregunta.contenidoPregunta)}}
+</div>
+{% endmacro %}
+
+<!--Macro de la pregunta completa-->
+{% macro pregunta_simple(pregunta) %}
+<div class="questiondiv">
+    {{tituloPregunta(pregunta.tituloPregunta,pregunta.id)}}
+    {{datosPregunta(pregunta.autor,pregunta.fecha_creacion)}}
 </div>
 {% endmacro %}

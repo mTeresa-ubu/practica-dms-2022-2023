@@ -23,6 +23,6 @@ import time
     <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
 
     {{ respuesta.usuarioQueResponde }}
-    {{ respuesta.fechaHoraRespondidas }}
+    {{ respuesta.fecha.strftime('%Y-%m-%d') }}
 </div>
 {% endmacro %}

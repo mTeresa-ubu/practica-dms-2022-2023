@@ -1,0 +1,9 @@
+{% from 'macros/preguntas/pregunta.html' import pregunta_simple %}
+
+{% macro contenedor_preguntas(preguntas) %}
+<div id="contenedor_preguntas">
+{% for pregunta in preguntas %}
+    {{ pregunta_simple(pregunta) }}
+{% endfor %}
+</div>
+{% endmacro %}
