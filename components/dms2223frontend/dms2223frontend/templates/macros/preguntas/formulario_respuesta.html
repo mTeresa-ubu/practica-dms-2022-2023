@@ -1,5 +1,6 @@
 {% macro form_respuesta(pregunta_anterior) %}
 {% from "macros/buttons.html" import submit_button, button %}
+<script src="/static/scripts/editor_texto.js" ></script>
 
 <div class="contenedor_respuesta">
     <form action="comentario" method="post">
@@ -9,7 +10,7 @@
             <!-- Convertir en macro? -->
             <div id="controles_texto">
                 <!-- Botones de negrita, cursiva etc.. -->
-                {{ button("yellowbg","","Negrita") }}
+                {{ button("yellowbg","","Negrita","boton1()") }}
                 {{ button("yellowbg","","Cursiva") }}
                 {{ button("yellowbg","","Subrallado") }}
                 {{ button("yellowbg","","Imagen") }}
