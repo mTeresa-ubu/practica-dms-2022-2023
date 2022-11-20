@@ -10,5 +10,7 @@ from .commonendpoints import CommonEndpoints
 from .sessionendpoints import SessionEndpoints
 from .discussionendpoints import DiscussionEndpoints
 from .moderatorendpoints import ModeratorEndpoints
+
 # RespuestasEndpoints
-#from .respuestasendpoints import RespuestasEndpoints
+from .respuestasendpoints import RespuestasEndpoints
+from .preguntasendpoints import PreguntasEndpoints

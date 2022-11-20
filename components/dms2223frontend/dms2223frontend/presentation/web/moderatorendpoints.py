@@ -1,6 +1,6 @@
 """ ModeratorEndpoints class module.
 """
-
+    
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response

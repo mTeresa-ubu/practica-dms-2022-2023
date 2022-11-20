@@ -162,6 +162,15 @@ table th {
     box-shadow: 0 0.3em 0.1em inset rgb(0 0 0 / 20%);
 }
 
+.greenbg {
+    background-color: #1cbd4c;
+    color: #fff;
+}
+
+.greenbg a {
+    color: #fff;
+}
+
 .bluebg {
     background-color: #253aa7;
     color: #fff;
@@ -189,6 +198,24 @@ table th {
     color: #000;
 }
 
+.greenbg {
+    background-color: #167c24;
+    color: #fff;
+}
+
+.greenbg a {
+    color: #fff;
+}
+
+.graybg {
+    background-color: #444444;
+    color: #fff;
+}
+
+.graybg a {
+    color: #fff;
+}
+
 .questiondiv {
     margin: 10px;
     padding: 5px;
@@ -203,4 +230,41 @@ table th {
 .questionscore {
     font-size: smaller;
     color: #777;
+}
+
+/* Pagina de inico 
+*  Alvar [14/11/2022]
+*/
+
+.container2cols {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* Editor de respuestas
+*  Alvar [14/11/2022]
+*/
+
+textarea {
+    padding: .2em;
+    border: 0em;
+}
+
+textarea:focus {
+    outline: .2em;
+}
+
+.marco_texto{
+    padding: .5em .1em 0em .1em;
+    /* border-radius: .5em; */
+    border: .1em solid #777;
+    width: fit-content;
+    margin: 0;
+}
+
+#editor_respuesta {
+    width: fit-content;
+    border-radius: .5em;
+    border-style: solid;
 }
