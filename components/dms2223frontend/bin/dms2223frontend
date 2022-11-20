@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-
-from flask import Flask
+from dms2223frontend.data.clases.pregunta import Pregunta
+from flask import Flask, request
 import inspect
 import os
 from typing import Dict
@@ -8,16 +8,19 @@ import dms2223frontend
 from dms2223frontend.data.config import FrontendConfiguration
 from dms2223frontend.data.rest import AuthService, BackendService
 from dms2223frontend.presentation.web import \
-    AdminEndpoints, CommonEndpoints, SessionEndpoints, DiscussionEndpoints, ModeratorEndpoints #, VotosEndpoints
-#from dms2223frontend.data.claseVotos.votos import Voto
+    AdminEndpoints, CommonEndpoints, SessionEndpoints, \
+    DiscussionEndpoints, ModeratorEndpoints, PreguntasEndpoints
+
 cfg: FrontendConfiguration = FrontendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
+
 auth_service_cfg: Dict = cfg.get_auth_service()
 auth_service: AuthService = AuthService(
     auth_service_cfg['host'], auth_service_cfg['port'],
     apikey_header='X-ApiKey-Auth',
     apikey_secret=auth_service_cfg['apikey_secret']
 )
+
 backend_service_cfg: Dict = cfg.get_backend_service()
 backend_service: BackendService = BackendService(
     backend_service_cfg['host'], backend_service_cfg['port'],
@@ -32,8 +35,21 @@ app = Flask(
     template_folder=os.path.dirname(
         inspect.getfile(dms2223frontend)) + '/templates'
 )
+# Alvar [4/11/2022]
+app.config["TESTING"] = True
+app.testing=True
+app.config.update(
+    TEMPLATES_AUTO_RELOAD = True
+)
+
+
 app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 
+# Alvar [4/11/2022]
+@app.route("/", methods=['GET'])
+def get_default():
+    return CommonEndpoints.get_inicio()
+    #return CommonEndpoints.get_home(auth_service)
 
 @app.route("/login", methods=['GET'])
 def get_login():
@@ -82,6 +98,11 @@ def get_admin_users_edit():
 @app.route("/admin/users/edit", methods=['POST'])
 def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
+
+# Alvar [16/11/2022]
+@app.route("/pregunta/<id_preg>",methods=['GET'])
+def get_pregunta(id_preg):
+    return PreguntasEndpoints.get_pregunta(auth_service,id_preg)
 
 if __name__ == '__main__':
     app.run(
