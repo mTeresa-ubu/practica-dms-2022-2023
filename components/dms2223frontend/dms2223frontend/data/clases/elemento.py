@@ -1,9 +1,8 @@
 from datetime import datetime
 
-
 class Elemento:
     """
-    Elemento base, contiene la estructura común de los nodos de la aplicacion Pregunta-Comentario
+    Elemento base, contiene la estructura común de los nodos de la aplicacion Pregunta-Comentario\n
     Args:
         votos_positivos (Arr votos): Votos positivos que ha recibido el elemento
         votos_negativos (Arr votos): Votos positivos que ha recibido el elemento
@@ -13,12 +12,17 @@ class Elemento:
     Attributes:
         fecha (datetime): Fecha de creacion, se genrea automaticamente
     """
-    def __init__(self,iden,fecha,votos_positivos,votos_negativos,votos_neutros,autor) -> None:
+    def __init__(self,
+        iden,
+        fecha,
+        votos_positivos,
+        votos_negativos,
+        autor) -> None:
+
         self.id = iden
         self.fecha_creacion = fecha
         self.votos_positivos = votos_positivos
         self.votos_negativos = votos_negativos
-        self.votos_neutros = votos_neutros
         self.autor = autor
 
          

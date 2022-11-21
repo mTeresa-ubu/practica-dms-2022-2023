@@ -1,0 +1,9 @@
+{% from 'macros/respuestas/respuesta.html' import respuesta %}
+
+{% macro contenedor_respuestas(respuestas_env) %}
+<div class="contenedor_respuestas">
+{% for resp in respuestas_env %}
+    {{ respuesta(resp) }}
+{% endfor %}
+</div>
+{% endmacro %}
