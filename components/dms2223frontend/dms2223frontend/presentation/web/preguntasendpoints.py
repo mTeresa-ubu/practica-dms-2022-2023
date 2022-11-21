@@ -2,6 +2,7 @@
 """    
 
 from dms2223frontend.data.clases.pregunta import Pregunta
+from dms2223frontend.data.clases.respuesta import Respuesta
 from dms2223frontend.data.rest.authservice import AuthService
 
 from typing import Text, Union
@@ -14,18 +15,40 @@ from datetime import datetime
 
 class PreguntasEndpoints():
     @staticmethod
-    def get_pregunta(auth_service: AuthService, id_preg: int) -> Union[Response, Text]:
+    def get_pregunta(auth_service: AuthService, id_preg: str) -> Union[Response, Text]:
         preg = Pregunta(
             "Que dia es hoy",
             id_preg,
             datetime.now(),
             34,
             35,
-            12,
             "Yo",
             "Titulo"
         )
-        return render_template('pregunta.html', pregunta_env=preg)
+
+        resps = [
+            Respuesta(
+                autor="Persona1",
+                id_preg=id_preg,
+                id_resp="1",
+                contenido="Respuesta buena",
+                fecha=datetime.now(),
+                votos_negativos=30,
+                votos_positivos=2,
+                num_comentarios=1
+                ),
+            Respuesta(
+                autor="Persona1",
+                id_preg=id_preg,
+                id_resp="1",
+                contenido="Respuesta Mala",
+                fecha=datetime.now(),
+                votos_negativos=3,
+                votos_positivos=20,
+                num_comentarios=12
+                ),
+        ]
+        return render_template('pregunta.html', pregunta_env=preg, respuestas_env=resps)
      
     """ Monostate class responsible of handling the session web endpoint requests.
     """

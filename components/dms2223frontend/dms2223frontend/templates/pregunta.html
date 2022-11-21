@@ -2,6 +2,8 @@
 {% from 'macros/preguntas/contenedor_preguntas.html' import preguntas %}
 {% from 'macros/preguntas/pregunta.html' import pregunta %}
 {% from 'macros/auth/registro.html' import registro %}
+{% from "macros/respuestas/contenedor_respuestas.html" import contenedor_respuestas %}
+
 {% block title %} {{ pregunta_env.tituloPregunta }} {% endblock %}
 
 
@@ -12,5 +14,8 @@
 {% block maincontent %}
     <div>
         {{pregunta(pregunta_env)}}
+    </div>
+    <div>
+        {{contenedor_respuestas(respuestas_env)}}
     </div>
 {% endblock %}

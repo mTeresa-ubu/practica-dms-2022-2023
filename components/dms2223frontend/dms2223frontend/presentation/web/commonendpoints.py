@@ -32,10 +32,10 @@ class CommonEndpoints():
         #Lista de preguntas hardcodeada
         #Cambiar por una peticion que solicite la lista
         pregs=[
-            Pregunta("Contenido 1",1,datetime.now(),34,35,12,"Yo","Titulo 1"),
-            Pregunta("Contenido 2",2,datetime.now(),34,35,12,"Yo","Titulo 2"),
-            Pregunta("Contenido 3",3,datetime.now(),34,35,12,"Yo","Titulo 3"),
-            Pregunta("Contenido 4",4,datetime.now(),34,35,12,"Yo","Titulo 4")
+            Pregunta("Contenido 1","1",datetime.now(),34,35,"Yo","Titulo 1"),
+            Pregunta("Contenido 2","2",datetime.now(),34,35,"Yo","Titulo 2"),
+            Pregunta("Contenido 3","3",datetime.now(),34,35,"Yo","Titulo 3"),
+            Pregunta("Contenido 4","4",datetime.now(),34,35,"Yo","Titulo 4")
         ]
 
         return render_template('home.html', 
@@ -50,10 +50,10 @@ class CommonEndpoints():
         """
 
         pregs=[
-            Pregunta("Contenido 1",1,datetime.now(),34,35,12,"Yo","Titulo 1"),
-            Pregunta("Contenido 2",2,datetime.now(),34,35,12,"Yo","Titulo 2"),
-            Pregunta("Contenido 3",3,datetime.now(),34,35,12,"Yo","Titulo 3"),
-            Pregunta("Contenido 4",4,datetime.now(),34,35,12,"Yo","Titulo 4")
+            Pregunta("Contenido 1","1",datetime.now(),34,35,"Yo","Titulo 1"),
+            Pregunta("Contenido 2","2",datetime.now(),34,35,"Yo","Titulo 2"),
+            Pregunta("Contenido 3","3",datetime.now(),34,35,"Yo","Titulo 3"),
+            Pregunta("Contenido 4","4",datetime.now(),34,35,"Yo","Titulo 4")
         ]
 
         return render_template('inicio/inicio.html',

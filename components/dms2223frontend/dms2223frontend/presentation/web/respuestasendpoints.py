@@ -1,3 +1,6 @@
+""" RespuestasEndpoints class module.
+"""
+
 from dms2223frontend.data.clases.respuesta import Respuesta
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
@@ -12,12 +15,13 @@ class RespuestasEndpoints():
     @staticmethod
     def get_respuesta(auth_service: AuthService, id_respuesta: int) -> Union[Response, Text]:
         resp = Respuesta(
+            "1",
+            "20",
             "Hoy es dia 10",
-            id_respuesta,
             datetime.now(),
             34,
             35,
-            12,
-            "Yo"
+            "Yo",
+            15
         )
         return render_template('respuesta.html', respuesta_env=resp)
