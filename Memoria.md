@@ -64,6 +64,49 @@ La base de las aplicacion son las preguntas con respuestas a modo de resolucion 
   - Se sombrearan según la valoracion
   - Podran ser votados para resaltar los mas útiles
 
+#### 1.5 Respuesta
+Para responder a una pregunta realizada por un usuario, se ha creado una macro, llamada respuesta y que, como es de esperar, contiene la respuesta a una pregunta realizada por un usuario.
+En el fichero respuesta.html podemos encontrar:
+  -En primer lugar, los imports tanto de la macro input como de los botones y del contenedor de respuestas creado.
+  -Posteriormente, se visualizará "Respuesta" y, a continuación, el contenido concreto de la respuesta.
+  -Una vez visualizado este, el usuario visualizará por pantalla las acciones que puede realizar. Estas son: Votar, responder, añadir un comentario, dar feedback(positivo, negativo o neutro) y, por último, reportar la respuesta.
+  -Además, al final aparecerá el nombre del usuario que ha respondido junto con la fecha y la hora en la que lo hizo.
+  Estos datos se sacarán del backend.
+El acceso a la respuesta se realizará desde "/respuesta".
+Cuando deseemos implementar esta macro, lo primero que debemos de realizar es un import de ella.
+Y, cuando queramos ver el contenido de la respuesta lo llamaremos utilizando {{ respuesta.contenidoRespuesta }}.
+Por si además se desea crear una nueva respuesta, se ha implementado un botón "Crear respuesta", que se visualizará despues del contenido de la respuesta.
+
+
+#### 1.6 Respuesta (Votaciones)
+Para llevar a cabo las votaciones de las preguntas y las respuestas se han creado dos macros correspondientes con los botones para votos positivos y para votos negativos. Dichas macros se encuentran en el fichero "buttons.html", obteniendo cada una de ellas características especiales como el color de fondo (verde en caso de voto positivo y rojo en caso de voto negativo) y el texto que contiene (vote Up en caso de voto positivo y vote Down en caso de voto negativo), tambien se realiza una llamada en cada caso al método correspondiente cuando es pulsado (voteUp() en caso de voto positivo y voteDown() en caso de voto negativo). Los metodos a los que se llaman cuando se pulsa el boton se encuentran en el fichero votos.py, en el que se ha creado la clase Voto con cuatro metodos posibles: El primero "voteUp" hará que se sume un punto positivo a los votos de la pregunta/respuesta. El segundo "unvoteUp" se llamará en caso de querer anular el punto positivo de la pregunta/respuesta en caso de haber sumado previamente dicho punto. El tercero "voteDown" hara que se sume un punto negativo a los votos de la pregunta/respuesta. Por ultimo, el cuarto "unvoteDown" se llamará en caso de querer anular el punto negativo de la pregunta/respuesta en caso de haber sumado previamente dicho punto. Adicionalmente, se ha creado un Endpoint para actualizar las votaciones de las preguntas/respuestas, quedando tambien reflejado en el frontend.
+
+
+#### 1.7 Pregunta
+  Para la realización de este apartado se han creado distintos macros que suplen las necesidades de os requisitos.
+  
+  En primer lugar tenemos los imports corresipondientes a los botones de votacion. Estos botones tienen unos métodos definidos que cambiaran los datos posteriormente.
+  
+  A continuación, hemos creado un titulo de pregunta que recibirá el titulo de la pregunta por parametro y lo mostrara en la página. Este método se ha preparado para que posteriormente en la implemntación del backend sea fácil de utilizar.
+
+  Posteriormente, se han creado campos para el autor de la preunta y fecha de la realización de la misma. Este macro se ha realizado con el fin de que el sistema pase por parametro los datos necesarios(usuario y fecha) cuando el usuario envie la pregunta.
+
+  Finalmente se han llamdo a las funciones de votacion(up y down) y se ha creado un macro para el cuerpo de la pregunta, que recibe como parametro la descripción que sera el cuerpo de la pregunta.
+
+  La creación de estas macros van contenidas en una macro pregunta. Se ha planteado la posibilidad de no contenerlos en una macro superior, con el fin de reutilizar las macros de otra forma para la lista de preguntas pero hemos consensuado que es contraproducente. 
+
+
+#### 1.8 Creaccion de preguntas
+
+El usuario tendra la opcion de poder crear preguntas, para ello se ha creado un template (el cual extiende de "base.html") llamado crear_preguntas.html.
+En este archivo encontramos los siguientes componentes:
+  - Un import de la macro de los botones, en el cual agregamos "submit_button" y "reset_button", este ultimo se ha creado para poder vaciar los campos del formulario al crear la pregunta.
+  - Un formulario con sus respectivos labels (Titulo de la pregunta y Detalles de la pregunta), inputs ("titulo" de tipo text, "detalles" de tipo textarea) y buttons (Enviar Pregunta y Vaciar Campos).
+    - El boton "Enviar Pregunta" es de tipo "submit_button", su funcion sera gruardar: el nombre del usuario que ha realizado la pregunta, la fecha cuando se ha realizado la pregunta, el titulo de la pregunta y el detalle/descripcion de la pregunta.
+    - El boton "Vaciar Campos" es de tipo "reset_button", su función es resetear (vaciar) los campos del formulario.
+Para acceder a la creaccion de preguntas se hace desde "/crear_preguntas".
+
+
 ### 2. Consideraciones de para el desarrollo
 #### 2.1 Docker
 Por su simplicidad se han decidido modificar los ficheros de instalacion e inicio y asi permitir el desarrollo sin necesiadad de reinicios.
@@ -86,6 +129,4 @@ app.config.update(
 ```
 Esto permite la recarga automatica de templates y codigo de las peticiones del mismo archivo. 
 Es recomendable eliminar estas lineas en un futuro despliegue.
-
-
 
