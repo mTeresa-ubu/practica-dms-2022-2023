@@ -268,3 +268,32 @@ textarea:focus {
     border-radius: .5em;
     border-style: solid;
 }
+
+/* Respuesta
+*  Alvar [14/11/2022]
+*/
+
+.respuesta_div {
+    margin: .5em;
+    padding: 0em .2em;
+    border: #ddd 1px solid;
+    border-left: #ddd 5px solid;
+}
+
+.respuesta_texto {
+    width: 100%;
+}
+
+#votos {
+    width: 5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.respuesta_div .container2cols {
+    justify-content: flex-start;
+}
+
+.contenedor_respuestas {
+    margin: 0em 0em 0em 2em;
+}

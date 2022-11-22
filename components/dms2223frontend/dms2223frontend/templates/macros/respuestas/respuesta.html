@@ -1,27 +1,30 @@
-{% from 'macros/respuesta/inputs.html' import input %}
-{% from "macros/buttons.html" import button, submit_button %}
+{% from 'macros/respuestas/inputs.html' import input %}
+{% from "macros/buttons.html" import button, submit_button, voto_positivo_button, voto_negativo_button %}
 
 
 {% macro respuesta(respuesta) %}
-<div class="questiondiv">
-    <h2>Respuesta</h2>
-    {{ respuesta.contenidoRespuesta }}
+<div class="respuesta_div">
+    <div class="container2cols">
+        <div id="votos">
+            {{ voto_positivo_button(respuesta.votos_positivos) }}
+            {{ voto_negativo_button(respuesta.votos_negativos) }}
+        </div>
 
-    <p> {{ submit_button('greengb','Votar') }} </p><br>
+        <div id="question_text_container">   
+            <p class="respuesta_texto">{{ respuesta.contenidoRespuesta }}</p>
+        </div>
+    </div>
 
-    <p> {{ submit_button('greengb','Responder') }} </p>
-    <p> {{ input('Responder') }}</p><br>
+    <div class="controlesRespuesta"> 
+        {{ submit_button('greengb','Responder') }}
+        <a href="/respuesta/{{respuesta.id}}">Comentarios({{respuesta.num_comentarios}})</a>
+    </div>    
 
-    <p> {{ submit_button('greengb','Añadir comentario a esta respuesta') }} </p>
-    <p> {{ input('Comentario') }}</p><br>
-
-    <p> {{ submit_button('greengb','Voto positivo') }} </p><br>
-
-    <p> {{ submit_button('redgb','Voto negativo') }} </p><br>
-
-    <p> {{ submit_button('greengb','Reportar respuesta') }} </p>
-
-    {{ respuesta.autor }}
-    {{ respuesta.fecha_creacion.strftime('%Y-%m-%d') }}
+    <div class="metadatosRespuesta">
+        {{ respuesta.autor }}
+        {{ respuesta.fecha_creacion.strftime('%Y-%m-%d') }}
+        {{ submit_button('redgb','Reportar respuesta') }}
+    </div>
+    
 </div>
 {% endmacro %}

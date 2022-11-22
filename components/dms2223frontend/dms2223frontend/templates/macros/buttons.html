@@ -7,12 +7,14 @@
 {% endmacro %}
 
 <!--MACRO PARA CREAR BOTON DE VOTO POSITIVO (FALTA IMPLEMENTAR QUE DETECTE SI YA SE PULSÓ ANTERIORMENTE)-->
-{% macro voteUp_button() %}
-{{ button(greenbg, '#', "vote Up", 'this.voteUp()') }}
+{% macro voto_positivo_button(votos_positivos) %}
+{% set nombre = "👍 "+(votos_positivos|string) %}
+{{ button(greenbg, '#', nombre, 'this.voteUp()') }}
 {% endmacro %}
 
 <!--MACRO PARA CREAR BOTON DE VOTO NEGATIVO (FALTA IMPLEMENTAR QUE DETECTE SI YA SE PULSÓ ANTERIORMENTE)-->
-{% macro voteDown_button() %}
-{{ button(redbg, '#', "vote Down", 'this.voteDown()') }}
+{% macro voto_negativo_button(votos_negativos) %}
+{% set nombre = "👎 "+(votos_negativos|string) %}
+{{ button(redbg, '#', nombre, 'this.voteDown()') }}
 {% endmacro %}
 

@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Elemento:
     """
     Elemento base, contiene la estructura común de los nodos de la aplicacion Pregunta-Comentario\n
