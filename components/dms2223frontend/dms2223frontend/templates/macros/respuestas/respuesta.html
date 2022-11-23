@@ -15,15 +15,17 @@
         </div>
     </div>
 
-    <div class="controlesRespuesta"> 
-        {{ submit_button('greengb','Responder') }}
-        <a href="/respuesta/{{respuesta.id}}">Comentarios({{respuesta.num_comentarios}})</a>
-    </div>    
+    <div class="container2cols">
+        <div class="controlesRespuesta"> 
+            {{ submit_button('greengb','Responder') }}
+            <p><a href="/respuesta/{{respuesta.id}}">Comentarios({{respuesta.num_comentarios}})</a></p>
+            {{ submit_button('redgb','Reportar respuesta') }}
+        </div>    
 
-    <div class="metadatosRespuesta">
-        {{ respuesta.autor }}
-        {{ respuesta.fecha_creacion.strftime('%Y-%m-%d') }}
-        {{ submit_button('redgb','Reportar respuesta') }}
+        <div class="metadatosRespuesta">
+            {{ respuesta.autor }}
+            {{ respuesta.fecha_creacion.strftime('%Y-%m-%d') }}        
+        </div>
     </div>
     
 </div>

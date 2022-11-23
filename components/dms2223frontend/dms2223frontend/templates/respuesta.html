@@ -1,13 +1,14 @@
 {% extends "inicio/base_anon.html" %}
 {% from 'macros/respuestas/respuesta.html' import respuesta %}
 {% from 'macros/auth/registro.html' import registro %}
+{% from 'macros/comentarios/container_comentarios.html' import contenedor_comentarios %}
 {% block title %} Pregunta {% endblock %}
 
 
 {% block contentheading %}
-    <h1> Respuesta n</h1>
+    {{ respuesta(respuesta_env) }}
 {% endblock %}
 
 {% block maincontent %}
-    {{ respuesta(respuesta_env) }}
+    {{ contenedor_comentarios(comentarios_env) }}    
 {% endblock %}
