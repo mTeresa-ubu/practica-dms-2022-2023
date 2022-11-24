@@ -89,6 +89,14 @@ a {
     margin: 0.2em 0;
 }
 
+#contentheader p{
+    font-size: medium;
+}
+
+#contentheader a{
+    font-size: medium;
+}
+
 #contentheader h2 {
     color: #9b0015;
 }
@@ -296,4 +304,43 @@ textarea:focus {
 
 .contenedor_respuestas {
     margin: 0em 0em 0em 2em;
+}
+
+/* Comentario
+*  Alvar [14/11/2022]
+*/
+
+.contenido_comentario {
+    width: 100%;
+    height: 100%;
+}
+
+.contenido_comentario p{
+    height: 100%;
+    vertical-align: middle; 
+}
+
+
+.comentario_div {
+    margin: .5em;
+    border: #ddd 1px solid;
+    border-left: #ddd 5px solid;
+    padding: 0em .2em;
+}
+
+.metadatos_comentario {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.metadatos_comentario * {
+    margin: .2em .4em;
+}
+
+/* Contenedor de preguntas
+* Alvar [24/11/2022]
+*/
+
+#preguntas {
+    width: 45%;
 }
