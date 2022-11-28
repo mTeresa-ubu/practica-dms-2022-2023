@@ -2,6 +2,7 @@
 """
 
 from dms2223frontend.data.clases.respuesta import Respuesta
+from dms2223frontend.data.clases.comentario import Comentario
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response
@@ -24,4 +25,9 @@ class RespuestasEndpoints():
             "Yo",
             15
         )
-        return render_template('respuesta.html', respuesta_env=resp)
+
+        comentarios = [
+            Comentario("1","2","3","Me ha parecido bien",datetime.now(),13,2,"Usuario123","Positivo","verde"),
+            Comentario("1","2","3","Me ha parecido mal",datetime.now(),13,2,"Usuario321","Negativo","rojo")
+        ]
+        return render_template('respuesta.html', respuesta_env=resp, comentarios_env=comentarios)

@@ -16,6 +16,8 @@ services:
   backend:
     build:
       context: ../images/service
+    ports:
+      - "5000:5000"
     image: dms2223-service
     container_name: dms2223backend
     volumes:

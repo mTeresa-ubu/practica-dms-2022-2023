@@ -15,13 +15,13 @@ Ya tenemos :
 
 ### Requisitos Funcionales:
 1. Creacion de preguntas, respuestas y reportes
-   1. [] Las preguntas tienen un **titulo** y un **cuerpo**
+   1. [x] Las preguntas tienen un **titulo** y un **cuerpo**
    2. [] Solo los usuarios con rol de **discusion** podra crear preguntas y responder a las existentes
    3. [] Las respuestas tienen un **feedback** positivo, negativo o neutro asociado sobre la respuesta
-   4. [] Las preguntas y respuestas tienen **votos**
+   4. [x] Las preguntas y respuestas (y comentarios) tienen **votos**
    5. [] Se puede **reportar** todo, con una razón asociada
-   6. [] Todos los elementos anteriores tienen un **propietario**, el creador
-   7. [] Todos los elementos tienen un **timestamp** de su creación
+   6. [x] Todos los elementos anteriores tienen un **propietario**, el creador
+   7. [x] Todos los elementos tienen un **timestamp** de su creación
    
 2. Moderacion
    1. [] Al usuario moderador le **llegan los reportes**
@@ -50,4 +50,14 @@ Ya tenemos :
 - [ ] Rellenar la memoria
 
 ## Entrega 2 - 4 Diciembre 2022 - 10pt
+
+Pendiente de la entrega 1
+- [ ] La memoria: Hablar sobre la arquitectura de la aplicacion y de los patrones a usar en cada componente
+- [ ] La pantalla de moderacion
+
+A hacer en la entrega 2, todo lo relativo al backend:
+- _Dentro del backend_ (API) se hacen las consultas a la base de datos devolviendo lo que se considere necesario segun la direccion por la que se entra.
+- _En el fontend_ se hacen las llamadas al backend que se consideren oportunas para obtener los datos
+
+
 ## Entrega 3 - 18 Diciembre 2022 - 20pt

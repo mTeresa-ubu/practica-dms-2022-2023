@@ -8,13 +8,12 @@
 
 
 {% block contentheading %}
-    <h1> Pregunta {{pregunta_env.id}}</h1>
-{% endblock %}
-
-{% block maincontent %}
     <div>
         {{pregunta(pregunta_env)}}
     </div>
+{% endblock %}
+
+{% block maincontent %}
     <div>
         {{contenedor_respuestas(respuestas_env)}}
     </div>

@@ -28,7 +28,7 @@ paths:
       summary: Health test for the service
       operationId: dms2223auth.presentation.rest.server.health_test
       responses:
-        '204':
+        '200':
           $ref: '#/components/responses/Empty'
       tags:
         - server
