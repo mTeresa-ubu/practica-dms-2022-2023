@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: DMS backend service REST API
+  version: '1.0'
+  description: |
+    API REST para el servicio de backend de un trabajo del grado de Ingenieria Informatica.
+
+    Diseño y Mantenimiento del Software.
+    Grado en Ingeniería Informática, Universidad de Burgos, 2022-2023.
+  contact:
+    name: Universidad de Burgos
+tags:
+  - name: discusion
+    description: Operaciones relativas a la discusion de preguntas y respuestas.
+  - name: moderacion
+    description: Oeraciones de moderacion de los elementos subidos por los usuarios.
+  - name: preguntas
+    description: Question-related operations.
+  - name: respuestas
+    description: Answer-related operations.
+  - name: comentarios
+    description: Comment-related operations.
+  - name: votos
+    description: Vote-related operations.
+  - name: reportes
+    description: Report-related operations.
+  - name: servidor
+    description: |
+      Operations about the server itself (e.g., server status querying)
+servers:
+  - url: /api/v1
+paths:
+  '/':
+    head:
+      summary: Health test for the service
+      operationId: dms2223backend.presentation.rest.inicio.test_inicio
+      description: Use this operation to verify the server is running successfully and the API is reachable.
+      responses:
+        '200':
+          description: Mensaje "¡Hola, Mundo!"
+          content:
+            'text/plain':
+              schema:
+                type: string
+                example: '¡Hola, Mundo!'
+  #/preguntas:
+  #/pregunta/{id_pregunta}:
+  #/pregunta/{id_pregunta}/respuestas:
+  #/pregunta/{id_pregunta}/reportes:
+  #/preguntas/reportes:
+  #/preguntas/reportes/{id_reporte}:
+  #/respuestas/{id_respuesta}/votos: # Peticion para ENVIAR un voto
+  #/respuestas/{id_respuesta}/reportes: 
+  #/respuestas/reportes: 
+  #/respuestas/resporte/{id_reporte}:
+  #/comentarios/{id_comentario}/votos:
+  #/comentarios/{id_comentario}/reportes:
+  #/comentarios/reportes:
+  #/comentarios/reportes/{id_reporte}:
+
+  
+  
