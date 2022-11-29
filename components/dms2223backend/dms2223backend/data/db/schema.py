@@ -6,7 +6,7 @@ from sqlalchemy.engine import Engine  # type: ignore
 from sqlalchemy.orm import sessionmaker, scoped_session, registry  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
-# from dms2223backend.data.db.results import User, UserRole
+from dms2223backend.data.db.Usuario.usuario import Usuario
 
 
 # Required for SQLite to enforce FK integrity when supported
@@ -46,8 +46,7 @@ class Schema():
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
 
-        User.map(self.__registry)
-        UserRole.map(self.__registry)
+        Usuario.map(self.__registry)
         self.__registry.metadata.create_all(self.__create_engine)
 
     def new_session(self) -> Session:

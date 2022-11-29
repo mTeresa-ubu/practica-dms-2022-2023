@@ -2,7 +2,7 @@
 """
 
 from typing import Dict
-from dms2223common.data.config import ServiceConfiguration
+from dms2223common.dms2223common.data.config import ServiceConfiguration
 
 class BackendConfiguration(ServiceConfiguration):
     """ Class responsible of storing a backend authentication service configuration.
