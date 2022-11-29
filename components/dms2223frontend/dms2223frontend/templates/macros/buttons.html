@@ -12,6 +12,7 @@
 {{ button(greenbg, '#', nombre, 'this.voteUp()') }}
 {% endmacro %}
 
+
 <!--MACRO PARA CREAR BOTON DE VOTO NEGATIVO (FALTA IMPLEMENTAR QUE DETECTE SI YA SE PULSÓ ANTERIORMENTE)-->
 {% macro voto_negativo_button(votos_negativos) %}
 {% set nombre = "👎 "+(votos_negativos|string) %}
