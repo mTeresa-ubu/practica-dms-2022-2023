@@ -7,6 +7,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session, registry  # type: ignor
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db.Usuario.usuario import Usuario
+from dms2223backend.data.db.Elemento.elemento import Elemento 
+from dms2223backend.data.db.Elemento.respuesta import  Respuesta
+from dms2223backend.data.db.Elemento.comentario import Comentario
+from dms2223backend.data.db.Elemento.pregunta import Pregunta
+from dms2223backend.data.db.Feedback.feedback import Feedback
 
 
 # Required for SQLite to enforce FK integrity when supported
@@ -45,8 +50,13 @@ class Schema():
         db_connection_string: str = config.get_db_connection_string() or ''
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
-
+        #Modificaciones y adiciones: Bilal 30/11/2022
         Usuario.map(self.__registry)
+        Elemento.map(self.__registry)
+        Respuesta.map(self.__registry)
+        Comentario.map(self.__registry)
+        Pregunta.map(self.__registry)
+        Feedback.map(self.__registry)
         self.__registry.metadata.create_all(self.__create_engine)
 
     def new_session(self) -> Session:
