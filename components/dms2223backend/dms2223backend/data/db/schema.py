@@ -1,5 +1,6 @@
 """ Schema class module.
 """
+from datetime import datetime
 
 from sqlalchemy import create_engine, event  # type: ignore
 from sqlalchemy.engine import Engine  # type: ignore
@@ -69,8 +70,18 @@ class Schema():
         base.metadata.create_all(bind=self.__create_engine)
 
         session = self.new_session()
-        stmt = select(Usuario)
-        result = session.execute(stmt)
+
+        Pregunta1 = Pregunta()
+        Pregunta1.id_elemento = 2
+        Pregunta1.contenido = "asdaasdasd"
+        Pregunta1.fecha = datetime.now()
+
+        session.add(Pregunta1)
+        result = session.commit()
+
+        st = select(Pregunta)
+        result = session.execute(st).all()
+
         print("### Probando base de datos ###")
         print(result)
 
