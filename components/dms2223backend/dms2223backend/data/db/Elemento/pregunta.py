@@ -1,4 +1,4 @@
-from sqlalchemy import Column,String,Text,Boolean,DateTime,ForeignKey
+from sqlalchemy import Column,String,Text,Boolean,DateTime,ForeignKey,Integer
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
@@ -6,15 +6,11 @@ from dms2223backend.data.db.Elemento.elemento import Elemento
 
 Base = declarative_base()
 
-class Pregunta(Base):
+class Pregunta(Elemento):
     __tablename__='pregunta'
+    id_pregunta = Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
+    titulo = Column(String(200))
 
-    id_pregunta = Column(String(50), primary_key=True)
-    id_elemento = Column(String(50), ForeignKey(Elemento.id_elemento))
-    titulo = Column(String(100))
-
-    def __init__(self,id_pregunta,id_elemento,titulo):
-        self.id_pregunta = id_pregunta
-        self.id_elemento = id_elemento
-        self.titulo = titulo
-    
+    __mapper_args__ = {
+        "polymorphic_identity": "pregunta",
+    }
