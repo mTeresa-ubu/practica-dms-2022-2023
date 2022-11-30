@@ -71,19 +71,19 @@ class Schema():
 
         session = self.new_session()
 
-        Pregunta1 = Pregunta()
-        Pregunta1.id_elemento = 2
-        Pregunta1.contenido = "asdaasdasd"
-        Pregunta1.fecha = datetime.now()
+        #Pregunta1 = Pregunta()
+        #Pregunta1.id_elemento = 2
+        #Pregunta1.contenido = "asdaasdasd"
+        #Pregunta1.fecha = datetime.now()
 
-        session.add(Pregunta1)
-        result = session.commit()
+        #session.add(Pregunta1)
+        #result = session.commit()
 
-        st = select(Pregunta)
-        result = session.execute(st).all()
+        #st = select(Pregunta)
+        #result = session.execute(st).all()
 
-        print("### Probando base de datos ###")
-        print(result)
+        #print("### Probando base de datos ###")
+        #print(result)
 
     def new_session(self) -> Session:
         """ Constructs a new session.
