@@ -1,8 +1,7 @@
 from sqlalchemy import Column,String,Text,Boolean,DateTime,ForeignKey,Integer
 from sqlalchemy.ext.declarative import declarative_base
 from dms2223backend.data.db.Usuario.usuario import Usuario
-
-Base = declarative_base()
+from ..base import Base #Base declarativa
 
 class Elemento(Base):
     __tablename__ = 'elemento'
@@ -12,6 +11,7 @@ class Elemento(Base):
     autor = Column(Integer, ForeignKey(Usuario.id_usuario))
     contenido = Column(Text)
     visibilidad = Column(Boolean) #En caso de true es visible en caso de false esta oculto
+    type = Column(String(50)) #Especifica el tipo de elemento que es
 
     __mapper_args__ = {
         "polymorphic_identity": "elemento",

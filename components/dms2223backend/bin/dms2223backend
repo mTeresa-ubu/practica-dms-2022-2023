@@ -8,6 +8,8 @@ from flask import current_app
 from flask.logging import default_handler
 from dms2223backend.data.db.schema import Schema
 
+
+
 # from authlib.jose import JsonWebSignature
 
 from typing import Dict
@@ -15,12 +17,15 @@ from typing import Dict
 import dms2223backend
 
 from dms2223backend.data.config import BackendConfiguration
+from dms2223backend.data.db import Base
+
+from dms2223backend.data.db import Pregunta
 
 
 if __name__ == '__main__':
     cfg: BackendConfiguration = BackendConfiguration()
     cfg.load_from_file(cfg.default_config_file())
-    db: Schema = Schema(cfg)
+    db: Schema = Schema(base=Base,config=cfg)
     #jws: JsonWebSignature = JsonWebSignature()
 
     specification_dir = os.path.dirname(
@@ -35,8 +40,6 @@ if __name__ == '__main__':
         }
     )
 
-    print("##### INFO ####")
-    print("#####"+str(cfg))
 
     app.add_api("spec_rev.yml", strict_validation=True)
 

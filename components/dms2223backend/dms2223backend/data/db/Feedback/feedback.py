@@ -3,8 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
-
-Base = declarative_base()
+from ..base import Base #Base declarativa
 
 class Feedback(Base):
     __tablename__='feedback'
