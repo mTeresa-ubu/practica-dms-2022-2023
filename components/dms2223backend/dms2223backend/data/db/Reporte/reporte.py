@@ -1,4 +1,6 @@
-from sqlalchemy import Column,String,Text,Boolean,DateTime,ForeignKey
+import enum
+from sqlalchemy import Column,String,Text,Boolean,DateTime, \
+    ForeignKey, Integer, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
@@ -7,24 +9,21 @@ from dms2223backend.data.db.Elemento.elemento import Elemento
 
 Base = declarative_base()
 
+class estado_moderacion(enum.Enum):
+    pendiente = 0
+    aceptado = 1
+    rechazado = 2
+    descartado = 3 # Ni se ha leido
+
 class Reporte(Base):
     __tablename__= 'reporte'
 
-    id_reporte = Column(String(50), primary_key=True)
-    tipo = Column(String(40))
-    autor = Column(String(50), ForeignKey(Usuario.id_usuario))
+    id_reporte = Column(Integer, primary_key=True)
+    autor = Column(Integer, ForeignKey("usuario.id_usuario"))
+    moderador = Column(Integer , ForeignKey("usuario.id_usuario"))
+    id_elemento = Column(Integer, ForeignKey("elemento.id_elemento"))
+    
+    tipo = Column(String(100))
     razon_reporte = Column(Text)
-    moderador = Column(String(50), ForeignKey(Usuario.id_usuario))
-    resultado_moderacion = Column(String(20))
-    id_elemento = Column(String(50), ForeignKey(Elemento.id_elemento))
-    estado = Column(String(20))
-
-    def __init__(self,id_reporte,tipo,autor,razon_reporte,moderador,resultado_moderacion,id_elemento,estado):
-        self.id_reporte = id_reporte
-        self.tipo = tipo
-        self.autor = autor
-        self.razon_reporte = razon_reporte
-        self.moderador = moderador
-        self.resultado_moderacion =  resultado_moderacion
-        self.id_elemento = id_elemento
-        self.estado = estado
+    resultado_moderacion = Column(String(100))  
+    estado = Column(Enum(estado_moderacion), default=estado_moderacion.pendiente)
