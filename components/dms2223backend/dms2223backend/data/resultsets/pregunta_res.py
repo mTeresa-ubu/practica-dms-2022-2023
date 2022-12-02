@@ -38,9 +38,9 @@ class PreguntaFuncs():
         stmt = select(Pregunta)
 
         if (max):
-            stmt = stmt.limit(max)
+            stmt = stmt.limit(max)        
 
-        for preg in session.scalars(stmt):
+        for preg in session.query(Pregunta).all():
             print(preg)
 
         pass

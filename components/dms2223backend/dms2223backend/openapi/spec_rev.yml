@@ -31,8 +31,8 @@ servers:
   - url: /api/v1
 paths:
   '/':
-    head:
-      summary: Health test for the service
+    get:
+      summary: Entrada de prueba
       operationId: dms2223backend.presentation.rest.inicio.test_inicio
       description: Use this operation to verify the server is running successfully and the API is reachable.
       responses:

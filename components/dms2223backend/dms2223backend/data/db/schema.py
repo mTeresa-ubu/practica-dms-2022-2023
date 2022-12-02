@@ -15,7 +15,7 @@ from dms2223backend.data.db.Elemento.pregunta import Pregunta
 from dms2223backend.data.db.Feedback.feedback import Feedback
 
 from dms2223backend.data.db import Base
-from sqlalchemy import select
+from sqlalchemy import select, MetaData
 
 
 # Required for SQLite to enforce FK integrity when supported
@@ -50,6 +50,8 @@ class Schema():
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
         base.metadata.create_all(bind=self.__create_engine)
+        self.__metadata: MetaData = MetaData()
+        self.__dec_base: Base = base 
 
 
     def new_session(self) -> Session:
@@ -64,3 +66,10 @@ class Schema():
         """ Frees the existing thread-local session.
         """
         self.__session_maker.remove()
+
+    def clear_database(self, cfg:BackendConfiguration) -> None:
+        """ !! ELIMINA TODOS LOS DATOS DE LA BASE DE DATOS
+            !! SOLO PARA PRUEBAS
+        """ 
+        
+        self.__dec_base.metadata.drop_all(bind=self.__create_engine)
