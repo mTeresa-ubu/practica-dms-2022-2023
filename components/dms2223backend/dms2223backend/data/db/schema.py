@@ -46,44 +46,11 @@ class Schema():
         Raises:
             - RuntimeError: When the connection cannot be created/established.
         """
-        """
-        self.__registry = registry()
-        if config.get_db_connection_string() is None:
-            raise RuntimeError(
-                'A value for the configuration parameter `db_connection_string` is needed.'
-            )
-        db_connection_string: str = config.get_db_connection_string() or ''
-        self.__create_engine = create_engine(db_connection_string)
-        self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
-        #Modificaciones y adiciones: Bilal 30/11/2022
-        Usuario.map(self.__registry)
-        Elemento.map(self.__registry)
-        Respuesta.map(self.__registry)
-        Comentario.map(self.__registry)
-        Pregunta.map(self.__registry)
-        Feedback.map(self.__registry)
-        self.__registry.metadata.create_all(self.__create_engine)
-        """
         db_connection_string: str = config.get_db_connection_string() or ''
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
         base.metadata.create_all(bind=self.__create_engine)
 
-        session = self.new_session()
-
-        #Pregunta1 = Pregunta()
-        #Pregunta1.id_elemento = 2
-        #Pregunta1.contenido = "asdaasdasd"
-        #Pregunta1.fecha = datetime.now()
-
-        #session.add(Pregunta1)
-        #result = session.commit()
-
-        #st = select(Pregunta)
-        #result = session.execute(st).all()
-
-        #print("### Probando base de datos ###")
-        #print(result)
 
     def new_session(self) -> Session:
         """ Constructs a new session.

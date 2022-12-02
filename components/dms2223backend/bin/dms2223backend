@@ -8,8 +8,6 @@ from flask import current_app
 from flask.logging import default_handler
 from dms2223backend.data.db.schema import Schema
 
-
-
 # from authlib.jose import JsonWebSignature
 
 from typing import Dict
@@ -46,7 +44,7 @@ if __name__ == '__main__':
     flask_app = app.app
 
     with flask_app.app_context():
-        #current_app.db = db
+        current_app.db = db
         current_app.cfg = cfg
         #current_app.jws = jws
 

@@ -14,3 +14,5 @@ class Pregunta(Elemento):
     __mapper_args__ = {
         "polymorphic_identity": "pregunta",
     }
+    
+    

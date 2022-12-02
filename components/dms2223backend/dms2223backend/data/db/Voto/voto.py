@@ -16,7 +16,7 @@ class Voto(Base):
 
     id_voto = Column(Integer, primary_key=True)
     id_elemento = Column(Integer, ForeignKey("elemento.id_elemento"))
-    autor = Column(Integer, ForeignKey("elemento.id_usuario"))
+    autor = Column(Integer, ForeignKey("usuario.id_usuario"))
 
     tipo = Column(Enum(tipo_voto))
 
