@@ -22,7 +22,7 @@ class Respuesta(Elemento):
         super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
     
     def __repr__(self) -> str:        
-        return  f"Pregunta(id_pregunta={self.id_pregunta!r}, \
+        return  f"Pregunta(id_respuesta={self.id_respuesta!r}, \
         contenido={self.contenido!r}, \
         fecha={self.fecha!r}, \
         autor={self.autor!r},\

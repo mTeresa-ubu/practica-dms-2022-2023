@@ -11,3 +11,16 @@ class Feedback(Base):
     id_feedback = Column(Integer, primary_key=True)
     descripcion = Column(Text)
     color_asociado = Column(String(100))
+
+    def __init__(self,
+        descripcion:str,
+        color_asociado:str,
+    ):
+        self.descripcion = descripcion
+        self.color_asociado = color_asociado
+
+    def __repr__(self) -> str:
+        return f"Feedback(\
+            id_feedback={self.id_feedback!r}\
+            color_asociado={self.color_asociado!r}\
+            descripcion={self.descripcion!r})"

@@ -2,7 +2,7 @@
 
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db import Base, Schema
-from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto
+from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
 
 from sqlalchemy.orm.session import Session  # type: ignore
 from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
@@ -46,22 +46,60 @@ session.add(p2)
 session.commit()
 
 r1 = Respuesta(
-        contenido="X significa algo",
-        fecha=datetime.now(),
-        autor=2,
-        visibilidad=True
-    )
+    contenido="X significa algo",
+    fecha=datetime.now(),
+    autor=2,
+    visibilidad=True
+)
 
 r2 = Respuesta(
-        contenido="Y significa algo",
-        fecha=datetime.now(),
-        autor=1,
-        visibilidad=True
-    )
+    contenido="Y significa algo",
+    fecha=datetime.now(),
+    autor=1,
+    visibilidad=True
+)
 
 session.add(r1)
 session.add(r2)
 session.commit()
+
+fpos = Feedback(
+    descripcion="Bueno",
+    color_asociado="#00FF00"
+)
+
+fneg = Feedback(
+    descripcion="Malo",
+    color_asociado="#FF0000"
+)
+
+fneu = Feedback(
+    descripcion="Neutro",
+    color_asociado="#aaaaaa"
+)
+
+session.add(fpos)
+session.add(fneg)
+session.add(fneu)
+session.commit()
+
+c1 = Comentario(
+    contenido="Hmmm bien hecho",
+    fecha=datetime.now(),
+    autor=1,
+    visibilidad=True,
+    feedback=2
+)
+
+c2 = Comentario(
+    contenido="Hmmm bien hecho",
+    fecha=datetime.now(),
+    autor=1,
+    visibilidad=True,
+    feedback=1
+)
+
+
 
 def print_tabla(tabla):
     stmt = select('*').select_from(tabla)

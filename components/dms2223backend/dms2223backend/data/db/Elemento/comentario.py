@@ -28,7 +28,7 @@ class Comentario(Elemento):
         self.feedback = feedback
 
     def __repr__(self) -> str:        
-        return  f"Comentario(id_pregunta={self.id_pregunta!r}, \
+        return  f"Comentario(id_comentario={self.id_comentario!r}, \
         contenido={self.contenido!r}, \
         fecha={self.fecha!r}, \
         autor={self.autor!r},\
