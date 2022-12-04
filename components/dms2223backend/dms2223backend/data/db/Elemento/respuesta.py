@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
+from dms2223backend.data.db.Elemento.elemento import Pregunta
 
 
 class Respuesta(Elemento):
