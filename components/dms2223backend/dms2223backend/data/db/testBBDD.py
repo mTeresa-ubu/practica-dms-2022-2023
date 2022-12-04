@@ -34,14 +34,14 @@ if __name__ =='__main__':
     session.add(feedback2)
     session.commit()
 
-    pregunta1 = Pregunta(1,"Titulo1")
-    pregunta2 = Pregunta(2,"Titulo2")
+    pregunta1 = Pregunta(5,"Titulo1")
+    pregunta2 = Pregunta(6,"Titulo2")
     session.add(pregunta1) 
     session.add(pregunta2)
     session.commit()
 
-    respuesta1 = Respuesta(1,1)
-    respuesta2 = Respuesta(1,2)
+    respuesta1 = Respuesta(1,5)
+    respuesta2 = Respuesta(1,6)
     session.add(respuesta1) 
     session.add(respuesta2)
     session.commit()

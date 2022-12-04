@@ -11,7 +11,7 @@ class Comentario(Elemento):
     __tablename__='comentario'
 
     id_comentario= Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
-    id_respuesta = Column(Integer, ForeignKey("respuesta.id_respuesta") ,primary_key=True)
+    id_respuesta = Column(Integer, ForeignKey("respuesta.id_respuesta"))
     feedback = Column(Integer,ForeignKey("feedback.id_feedback"))
 
     __mapper_args__ = {

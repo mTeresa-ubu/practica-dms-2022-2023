@@ -4,6 +4,7 @@ from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
 
+
 Base = declarative_base()
 
 class Pregunta(Elemento):

@@ -3,13 +3,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
-from dms2223backend.data.db.Elemento.elemento import Pregunta
+from dms2223backend.data.db.Elemento.pregunta import Pregunta
 
 
 class Respuesta(Elemento):
     __tablename__='respuesta'
     id_respuesta = Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
-    id_pregunta = Column(Integer, ForeignKey("pregunta.id_pregunta") ,primary_key=True)
+    id_pregunta = Column(Integer, ForeignKey("pregunta.id_pregunta"))
 
     __mapper_args__ = {
         "polymorphic_identity": "respuesta",
