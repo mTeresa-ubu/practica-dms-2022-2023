@@ -3,6 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from ..base import Base #Base declarativa
 
+from datetime import datetime
+
 class Elemento(Base):
     __tablename__ = 'elemento'
 
@@ -17,3 +19,14 @@ class Elemento(Base):
         "polymorphic_identity": "elemento",
         "polymorphic_on": type,
     }
+
+    def __init__(self,
+        contenido:str,
+        fecha:datetime,
+        autor:int,
+        visibilidad:bool
+        ):
+        self.contenido = contenido
+        self.fecha = fecha
+        self.autor = autor
+        self.visibilidad = visibilidad

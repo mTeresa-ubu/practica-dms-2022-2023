@@ -16,3 +16,22 @@ class Comentario(Elemento):
     __mapper_args__ = {
         "polymorphic_identity": "comentario",
     }
+
+    def __init__(self,
+        contenido:str,
+        fecha:datetime,
+        autor:int,
+        visibilidad:bool,
+        feedback:int
+        ):
+        super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
+        self.feedback = feedback
+
+    def __repr__(self) -> str:        
+        return  f"Comentario(id_pregunta={self.id_pregunta!r}, \
+        contenido={self.contenido!r}, \
+        fecha={self.fecha!r}, \
+        autor={self.autor!r},\
+        visibilidad={str(self.visibilidad)!r} \
+        feedback={self.feedback} \
+        )"

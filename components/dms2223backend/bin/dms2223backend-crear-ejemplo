@@ -2,11 +2,78 @@
 
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db import Base, Schema
+from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto
+
+from sqlalchemy.orm.session import Session  # type: ignore
+from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
+
+from datetime import datetime
 
 cfg: BackendConfiguration = BackendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
 db: Schema = Schema(base=Base,config=cfg)
 
 db.clear_database(cfg)
+session:Session = db.new_session()
+
+
+us1 = Usuario(nombre="Alvar")
+us2 = Usuario(nombre="Bilal")
+
+session.add(us1)
+session.add(us2)
+
+session.commit()
+
+p1 = Pregunta(
+    titulo="Pregunta de Alvar",
+    contenido="Que significa X?",
+    fecha=datetime.now(),
+    autor=1,
+    visibilidad=True
+)
+
+p2 = Pregunta(
+    titulo="Pregunta de Bilal",
+    contenido="Que significa Y?",
+    fecha=datetime.now(),
+    autor=2,
+    visibilidad=True
+)
+
+session.add(p1)
+session.add(p2)
+session.commit()
+
+r1 = Respuesta(
+        contenido="X significa algo",
+        fecha=datetime.now(),
+        autor=2,
+        visibilidad=True
+    )
+
+r2 = Respuesta(
+        contenido="Y significa algo",
+        fecha=datetime.now(),
+        autor=1,
+        visibilidad=True
+    )
+
+session.add(r1)
+session.add(r2)
+session.commit()
+
+def print_tabla(tabla):
+    stmt = select('*').select_from(tabla)
+    result = session.execute(stmt).fetchall()
+
+    print("tabla: "+tabla.__tablename__)
+    for p in result:
+        print(p)
+
+print_tabla(Pregunta)
+print_tabla(Usuario)
+print_tabla(Respuesta)
+
 
 

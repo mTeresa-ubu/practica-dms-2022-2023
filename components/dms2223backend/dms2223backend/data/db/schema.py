@@ -73,3 +73,4 @@ class Schema():
         """ 
         
         self.__dec_base.metadata.drop_all(bind=self.__create_engine)
+        self.__dec_base.metadata.create_all(bind=self.__create_engine)
