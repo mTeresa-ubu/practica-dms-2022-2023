@@ -17,89 +17,50 @@ db.clear_database(cfg)
 session:Session = db.new_session()
 
 
-us1 = Usuario(nombre="Alvar")
-us2 = Usuario(nombre="Bilal")
+usuario1 = Usuario(1,"María")
+usuario2 = Usuario(2,"Álvar")
+session.add(usuario1) #Guardamos datos
+session.add(usuario2)
+session.commit() #Commit
 
-session.add(us1)
-session.add(us2)
-
+voto1 = Voto(1,1,1,positivo)
+voto2 = Voto(2,2,1,negativo)
+session.add(voto1) 
+session.add(voto2)
 session.commit()
 
-p1 = Pregunta(
-    titulo="Pregunta de Alvar",
-    contenido="Que significa X?",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True
-)
-
-p2 = Pregunta(
-    titulo="Pregunta de Bilal",
-    contenido="Que significa Y?",
-    fecha=datetime.now(),
-    autor=2,
-    visibilidad=True
-)
-
-session.add(p1)
-session.add(p2)
+reporte1 = Reporte(1,1,2,3, "No es correcto","No está de acuerdo","Se rechaza",rechazado)
+reporte2 = Reporte(2,1,2,4, "Es correcto","De acuerdo","Se acepta", aceptado)
+session.add(reporte1) 
+session.add(reporte2)
 session.commit()
 
-r1 = Respuesta(
-    contenido="X significa algo",
-    fecha=datetime.now(),
-    autor=2,
-    visibilidad=True
-)
-
-r2 = Respuesta(
-    contenido="Y significa algo",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True
-)
-
-session.add(r1)
-session.add(r2)
+feedback1 = Feedback(1, verde, "Feedback de ejemplo 1" )
+feedback2 = Feedback(2,rojo, "Feedback de ejemplo 2" )
+session.add(feedback1) 
+session.add(feedback2)
 session.commit()
 
-fpos = Feedback(
-    descripcion="Bueno",
-    color_asociado="#00FF00"
-)
-
-fneg = Feedback(
-    descripcion="Malo",
-    color_asociado="#FF0000"
-)
-
-fneu = Feedback(
-    descripcion="Neutro",
-    color_asociado="#aaaaaa"
-)
-
-session.add(fpos)
-session.add(fneg)
-session.add(fneu)
+pregunta1 = Pregunta(5,"Titulo1")
+pregunta2 = Pregunta(6,"Titulo2")
+session.add(pregunta1) 
+session.add(pregunta2)
 session.commit()
 
-c1 = Comentario(
-    contenido="Hmmm bien hecho",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True,
-    feedback=2
-)
+respuesta1 = Respuesta(1,5)
+respuesta2 = Respuesta(1,6)
+session.add(respuesta1) 
+session.add(respuesta2)
+session.commit()
 
-c2 = Comentario(
-    contenido="Hmmm bien hecho",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True,
-    feedback=1
-)
+comentario1 = Comentario(1,1,2)
+comentario2 = Comentario(2,1,1)
+session.add(comentario1) 
+session.add(comentario2)
+session.commit()
 
-
+session.commit()
+session.close() #Cerramos la sesión
 
 def print_tabla(tabla):
     stmt = select('*').select_from(tabla)
