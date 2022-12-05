@@ -9,3 +9,6 @@ pip3 install .
 popd
 
 rm -R "${TEMP_DIR}"
+
+# Elimina la base de datos cuando se ejecuta
+dms2223backend-crear-ejemplo

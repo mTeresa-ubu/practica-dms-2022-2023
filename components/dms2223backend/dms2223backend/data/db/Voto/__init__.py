@@ -1,3 +1,4 @@
 """ Backend database-related modules.
 """
-from .feedback import Feedback
+
+from .voto import Voto

@@ -14,3 +14,22 @@ class Pregunta(Elemento):
     __mapper_args__ = {
         "polymorphic_identity": "pregunta",
     }
+    
+    def __init__(self,
+        titulo:str,
+        contenido:str,
+        fecha:datetime,
+        autor:int,
+        visibilidad:bool
+        ):
+        super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
+        self.titulo = titulo
+
+    def __repr__(self) -> str:        
+        return  f"Pregunta(id_pregunta={self.id_pregunta!r}, \
+        titulo={self.titulo!r}, \
+        contenido={self.contenido!r}, \
+        fecha={self.fecha!r}, \
+        autor={self.autor!r},\
+        visibilidad={str(self.visibilidad)!r} \
+        )"

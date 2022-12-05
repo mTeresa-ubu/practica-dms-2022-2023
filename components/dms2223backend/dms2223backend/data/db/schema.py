@@ -15,7 +15,7 @@ from dms2223backend.data.db.Elemento.pregunta import Pregunta
 from dms2223backend.data.db.Feedback.feedback import Feedback
 
 from dms2223backend.data.db import Base
-from sqlalchemy import select
+from sqlalchemy import select, MetaData
 
 
 # Required for SQLite to enforce FK integrity when supported
@@ -46,44 +46,13 @@ class Schema():
         Raises:
             - RuntimeError: When the connection cannot be created/established.
         """
-        """
-        self.__registry = registry()
-        if config.get_db_connection_string() is None:
-            raise RuntimeError(
-                'A value for the configuration parameter `db_connection_string` is needed.'
-            )
-        db_connection_string: str = config.get_db_connection_string() or ''
-        self.__create_engine = create_engine(db_connection_string)
-        self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
-        #Modificaciones y adiciones: Bilal 30/11/2022
-        Usuario.map(self.__registry)
-        Elemento.map(self.__registry)
-        Respuesta.map(self.__registry)
-        Comentario.map(self.__registry)
-        Pregunta.map(self.__registry)
-        Feedback.map(self.__registry)
-        self.__registry.metadata.create_all(self.__create_engine)
-        """
         db_connection_string: str = config.get_db_connection_string() or ''
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
         base.metadata.create_all(bind=self.__create_engine)
+        self.__metadata: MetaData = MetaData()
+        self.__dec_base: Base = base 
 
-        session = self.new_session()
-
-        #Pregunta1 = Pregunta()
-        #Pregunta1.id_elemento = 2
-        #Pregunta1.contenido = "asdaasdasd"
-        #Pregunta1.fecha = datetime.now()
-
-        #session.add(Pregunta1)
-        #result = session.commit()
-
-        #st = select(Pregunta)
-        #result = session.execute(st).all()
-
-        #print("### Probando base de datos ###")
-        #print(result)
 
     def new_session(self) -> Session:
         """ Constructs a new session.
@@ -97,3 +66,11 @@ class Schema():
         """ Frees the existing thread-local session.
         """
         self.__session_maker.remove()
+
+    def clear_database(self, cfg:BackendConfiguration) -> None:
+        """ !! ELIMINA TODOS LOS DATOS DE LA BASE DE DATOS
+            !! SOLO PARA PRUEBAS
+        """ 
+        
+        self.__dec_base.metadata.drop_all(bind=self.__create_engine)
+        self.__dec_base.metadata.create_all(bind=self.__create_engine)
