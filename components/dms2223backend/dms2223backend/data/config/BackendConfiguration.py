@@ -31,6 +31,17 @@ class BackendConfiguration(ServiceConfiguration):
         self.set_jws_secret('Cambiar tambien')
         self.set_jws_ttl(3600)
         self.set_authorized_api_keys([])
+        self.set_auth_service({
+            'host': '127.0.0.1',
+            'port': 4000,
+            'apikey_secret': 'This should be the frontend API key'
+        })
+        self.set_backend_service({
+            'host': '127.0.0.1',
+            'port': 5000,
+            'apikey_secret': 'This is another frontend API key'
+        })
+        
 
     def _set_values(self, values: Dict) -> None:
         """Sets/merges a collection of configuration values.
@@ -128,3 +139,43 @@ class BackendConfiguration(ServiceConfiguration):
         """
 
         return int(self._values['jws_ttl'])
+
+    def set_auth_service(self, auth_service: Dict) -> None:
+        """Sets the connection parameters for the authentication service.
+
+        Args:
+            auth_service (Dict): Parameters to connect to the authentication service.
+
+        Raises:
+            - ValueError: If validation is not passed.
+        """
+        self._values['auth_service'] = auth_service
+    
+    def get_auth_service(self) -> Dict:
+        """ Gets the authentication service configuration value.
+
+        Returns:
+            - Dict: A dictionary with the value of auth_service.
+        """
+
+        return self._values['auth_service']
+
+    def set_backend_service(self, backend_service: Dict) -> None:
+        """Sets the connection parameters for the backend service.
+
+        Args:
+            backend_service (Dict): Parameters to connect to the backend service.
+
+        Raises:
+            - ValueError: If validation is not passed.
+        """
+        self._values['backend_service'] = backend_service
+
+    def get_backend_service(self) -> Dict:
+        """ Gets the backend service configuration value.
+
+        Returns:
+            - Dict: A dictionary with the value of backend_service.
+        """
+
+        return self._values['backend_service']

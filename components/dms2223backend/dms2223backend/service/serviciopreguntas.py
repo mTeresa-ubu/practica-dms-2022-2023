@@ -11,11 +11,15 @@ from dms2223backend.data.resultsets.pregunta_res import PreguntaFuncs
 
 from sqlalchemy import select
 
+from .authservice import AuthService
+
 class PreguntasServicio():
     """ Clase "estatica" que permite el acceso a las operaciones de creacion o consulta
         derivados de pregunta
     """
-    @staticmethod
+    def __init__(self):
+        self.auth_service = AuthService(apikey_secret='This should be the backend API key')
+
     def get_pregunta(schema:Schema, id:int) -> Pregunta:
         """Obtiene los datos de una pregunta se debe usar para la visualizacion
             en lista de pregunta, no contiene los votos de las respuestas 
@@ -26,7 +30,6 @@ class PreguntasServicio():
         schema.remove_session()
         return preg
 
-    @staticmethod
     def get_preguntas(schema:Schema): # -> Dict[Pregunta,List[Respuesta],List[Voto]]:
         """Obtiene los datos de una pregunta se debe usar para la visualizacion
             en lista de pregunta, no contiene los votos de las respuestas 
