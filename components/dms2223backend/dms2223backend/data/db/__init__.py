@@ -6,3 +6,4 @@ from .Feedback import Feedback
 from .base import Base
 from .Voto import Voto
 from .schema import Schema
+from .Reporte import Reporte
