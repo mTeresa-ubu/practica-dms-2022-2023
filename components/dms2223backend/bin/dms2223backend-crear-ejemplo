@@ -48,6 +48,7 @@ session.commit()
 r1 = Respuesta(
     contenido="X significa algo",
     fecha=datetime.now(),
+    id_pregunta=1,
     autor=2,
     visibilidad=True
 )
@@ -55,6 +56,7 @@ r1 = Respuesta(
 r2 = Respuesta(
     contenido="Y significa algo",
     fecha=datetime.now(),
+    id_pregunta=2,
     autor=1,
     visibilidad=True
 )
@@ -88,7 +90,8 @@ c1 = Comentario(
     fecha=datetime.now(),
     autor=1,
     visibilidad=True,
-    feedback=2
+    feedback=2,
+    id_respuesta=3
 )
 
 c2 = Comentario(
@@ -96,10 +99,13 @@ c2 = Comentario(
     fecha=datetime.now(),
     autor=1,
     visibilidad=True,
-    feedback=1
+    feedback=1,
+    id_respuesta=4
 )
 
-
+session.add(c1)
+session.add(c2)
+session.commit()
 
 def print_tabla(tabla):
     stmt = select('*').select_from(tabla)
@@ -112,6 +118,7 @@ def print_tabla(tabla):
 print_tabla(Pregunta)
 print_tabla(Usuario)
 print_tabla(Respuesta)
-
+print_tabla(Feedback)
+print_tabla(Comentario)
 
 

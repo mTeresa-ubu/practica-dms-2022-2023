@@ -19,9 +19,11 @@ class Respuesta(Elemento):
         contenido:str,
         fecha:datetime,
         autor:int,
-        visibilidad:bool
+        visibilidad:bool,
+        id_pregunta:int
         ):
         super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
+        self.id_pregunta = id_pregunta
     
     def __repr__(self) -> str:        
         return  f"Pregunta(id_respuesta={self.id_respuesta!r}, \

@@ -43,6 +43,112 @@ paths:
               schema:
                 type: string
                 example: '¡Hola, Mundo!'
+  /preguntas/{idusu}:
+    get:
+      summary: Se obtienen las preguntas de un usuario
+      description: Se obtienen todos los datos de las preguntas de un usuario
+      operationId: dms2223backend.presentation.rest.inicio.preguntas_usuario
+      parameters:
+        - $ref: '#/components/parameters/IdentificadorPregunta'
+      responses:
+        '200':
+          description: Lista de preguntas
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/PreguntaModelo'
+              example:
+                id_pregunta: 123
+                titulo: 'Titulo de la pregunta'
+                contenido: 'Texto mas extenso de la pregunta'
+                autor: 123
+                fecha: 131289798312
+                visibilidad: true
+      tags:
+        - pregunta
+      security:
+        - user_token: []
+        - api_key: []
+components:
+  schemas:
+    PreguntaModelo:
+      type: object
+      properties:
+        idpreg:
+          type: integer
+        titulo:
+          type: string
+        contenido:
+          type: string
+        fecha:
+          type: integer
+        autor:
+          type: integer
+        visibilidad:
+          type: boolean
+      required:
+        - idpreg
+        - titulo
+        - fecha
+        - autor
+  parameters:
+    IdentificadorPregunta:
+      name: idpreg
+      description: Identificador de una pregunta.
+      in: path
+      schema:
+        type: integer
+      required: true
+    IdentificadorRespuesta:
+      name: idresp
+      description: Identificador de una respuesta.
+      in: path
+      schema:
+        type: integer
+      required: true
+    IdentificadorComentario:
+      name: idcom
+      description: Identificador de un comentario.
+      in: path
+      schema:
+        type: integer
+      required: true
+    IdentificadorUsuario:
+      name: idusu
+      description: Identificar de un usuario.
+      in: path
+      schema:
+        type: integer
+      required: true
+    IdentificadorReporte:
+      name: idrep
+      description: Identificar de un reporte.
+      in: path
+      schema:
+        type: integer
+      required: true
+
+  securitySchemes:
+    user_token:
+      description: |
+        JWS token sent in the `Authorization` header as bearer.
+
+        Contains, among other things, the user doing the requests.
+
+        It is intended to be handed to the authorization service to obtain
+        useful information, rather than trying to decode it in the backend.
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      # x-bearerInfoFunc: TODO: Set to the fully-qualified name of the function handling the verification
+    api_key:
+      description: |
+        Secret shared between both the requestor and the service.
+      type: apiKey
+      name: X-ApiKey-Auth
+      in: header
+      # x-apikeyInfoFunc: TODO: Set to the fully-qualified name of the function handling the verification
+
   #/preguntas:
   #/pregunta/{id_pregunta}:
   #/pregunta/{id_pregunta}/respuestas:
@@ -57,6 +163,5 @@ paths:
   #/comentarios/{id_comentario}/reportes:
   #/comentarios/reportes:
   #/comentarios/reportes/{id_reporte}:
-
   
   
