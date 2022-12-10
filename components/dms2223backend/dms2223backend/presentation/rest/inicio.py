@@ -24,3 +24,14 @@ def preguntas_usuario(idusu:int) -> Tuple[List[Pregunta],Optional[int]]:
         preguntas = PreguntasServicio.get_preguntas_filtro(current_app.db,campo=Pregunta.autor,valor=idusu)
         print(preguntas)
     return ('Hola', HTTPStatus.OK)
+
+
+def list_preguntas() -> Tuple[List[Dict],Optional[int]]:
+    with current_app.app_context():
+        s_preguntas:PreguntasServicio = PreguntasServicio()
+        list_quest:List = s_preguntas.get_preguntas(current_app.db)
+        print(list_quest)
+    return (list_quest,HTTPStatus.OK)
+
+def create_preg():
+    pass

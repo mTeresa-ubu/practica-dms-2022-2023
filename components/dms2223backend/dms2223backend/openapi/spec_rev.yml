@@ -10,21 +10,21 @@ info:
   contact:
     name: Universidad de Burgos
 tags:
-  - name: discusion
-    description: Operaciones relativas a la discusion de preguntas y respuestas.
-  - name: moderacion
-    description: Oeraciones de moderacion de los elementos subidos por los usuarios.
-  - name: preguntas
+  - name: discussion
+    description: Operations regarding the questions and answers.
+  - name: moderation
+    description: Moderation operations.
+  - name: questions
     description: Question-related operations.
-  - name: respuestas
+  - name: answers
     description: Answer-related operations.
-  - name: comentarios
+  - name: comments
     description: Comment-related operations.
-  - name: votos
+  - name: votes
     description: Vote-related operations.
-  - name: reportes
+  - name: reports
     description: Report-related operations.
-  - name: servidor
+  - name: server
     description: |
       Operations about the server itself (e.g., server status querying)
 servers:
@@ -43,8 +43,8 @@ paths:
               schema:
                 type: string
                 example: '¡Hola, Mundo!'
-  /preguntas/{idusu}:
-    get:
+  /questions/{idusu}:
+    get: 
       summary: Se obtienen las preguntas de un usuario
       description: Se obtienen todos los datos de las preguntas de un usuario
       operationId: dms2223backend.presentation.rest.inicio.preguntas_usuario
@@ -68,9 +68,346 @@ paths:
         - pregunta
       security:
         - user_token: []
+          api_key: []
+  /questions:
+    get:
+      summary: Gets the existing questions
+      description: |
+        Queries the storage to fetch the questions.
+
+        Only question stubs are returned. Full information for each question
+        should be fetched separately.
+      operationId: dms2223backend.presentation.rest.inicio.list_preguntas
+      responses:
+        '200':
+          description: A list of questions.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/QuestionsListModel'
+              example:
+                - qid: 1
+                  title: 'Recommended size for the work groups?'
+                  timestamp: 1665574089.0
+                - qid: 2
+                  title: 'Separate report or READMEs?'
+                  timestamp: 1665693009.12
+      tags:
+        - discussion
+        - questions
+      security:
         - api_key: []
+    post:
+      summary: Creates a new question
+      description: |
+        This operation creates a new question.
+
+        The owner of the question will be automatically retrieved from the
+        user token against the authorization server.
+      operationId: dms2223backend.presentation.rest.inicio.create_preg
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/QuestionCreationModel'
+            example:
+              title: 'Recommended size for the work groups?'
+              body: 'Which is the recommended size for the work groups in your opinion?'
+      responses:
+        '201':
+          description: Question created.
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/QuestionFullModel'
+              example:
+                qid: 1
+                title: 'Recommended size for the work groups?'
+                body: 'Which is the recommended size for the work groups in your opinion?'
+                owner:
+                  username: 'user1'
+                timestamp: 1665574089.0
+      tags:
+        - discussion
+        - questions
+      security:
+        - user_token: []
+          api_key: []
 components:
   schemas:
+    QuestionCoreModel:
+      type: object
+      properties:
+        qid:
+          type: integer
+        title:
+          type: string
+        timestamp:
+          type: number
+        pos_votes:
+          type: integer
+        neg_votes:
+          type: integer
+      required:
+        - qid
+        - title
+        - timestamp
+    QuestionStubModel:
+      allOf:
+        - $ref: '#/components/schemas/QuestionCoreModel'
+    QuestionFullModel:
+      allOf:
+        - $ref: '#/components/schemas/QuestionCoreModel'
+        - type: object
+          properties:
+            body:
+              type: string
+            owner:
+              $ref: '#/components/schemas/UserCoreModel'
+          required:
+            - body
+    QuestionCreationModel:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+      required:
+        - title
+        - body
+    QuestionsListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuestionStubModel'
+    UserCoreModel:
+      type: object
+      properties:
+        username:
+          type: string
+      required:
+        - username
+    AnswerFullModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        qid:
+          type: integer
+        timestamp:
+          type: number
+        body:
+          type: string
+        owner:
+          $ref: '#/components/schemas/UserCoreModel'
+        votes:
+          type: integer
+          minimum: 0
+          default: 0
+          nullable: false
+        user_votes:
+          type: object
+          additionalProperties:
+            type: boolean
+        comments:
+          $ref: '#/components/schemas/CommentsListModel'
+      required:
+        - id
+        - qid
+        - timestamp
+        - body
+        - owner
+    AnswerCreationModel:
+      type: object
+      properties:
+        body:
+          type: string
+      required:
+        - body
+    AnswersListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnswerFullModel'
+    CommentFullModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        aid:
+          type: integer
+        timestamp:
+          type: number
+        body:
+          type: string
+        sentiment:
+          type: string
+          enum:
+            - POSITIVE
+            - NEUTRAL
+            - NEGATIVE
+        owner:
+          $ref: '#/components/schemas/UserCoreModel'
+        votes:
+          type: integer
+          minimum: 0
+          default: 0
+          nullable: false
+        user_votes:
+          type: object
+          additionalProperties:
+            type: boolean
+      required:
+        - id
+        - aid
+        - timestamp
+        - body
+        - sentiment
+        - owner
+    CommentCreationModel:
+      type: object
+      properties:
+        body:
+          type: string
+        sentiment:
+          type: string
+          enum:
+            - POSITIVE
+            - NEUTRAL
+            - NEGATIVE
+          default: NEUTRAL
+      required:
+        - body
+        - sentiment
+    CommentsListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/CommentFullModel'
+    QuestionReportFullModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        qid:
+          type: integer
+        reason:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+        owner:
+          $ref: '#/components/schemas/UserCoreModel'
+        timestamp:
+          type: number
+      required:
+        - id
+        - qid
+        - reason
+        - status
+        - owner
+        - timestamp
+    QuestionReportCreationModel:
+      type: object
+      properties:
+        reason:
+          type: string
+      required:
+        - reason
+    QuestionReportsListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuestionReportFullModel'
+    AnswerReportFullModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        aid:
+          type: integer
+        reason:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+        owner:
+          $ref: '#/components/schemas/UserCoreModel'
+        timestamp:
+          type: number
+      required:
+        - id
+        - aid
+        - reason
+        - status
+        - owner
+        - timestamp
+    AnswerReportCreationModel:
+      type: object
+      properties:
+        reason:
+          type: string
+      required:
+        - reason
+    AnswerReportsListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnswerReportFullModel'
+    CommentReportFullModel:
+      type: object
+      properties:
+        id:
+          type: integer
+        cid:
+          type: integer
+        reason:
+          type: string
+        status:
+          type: string
+          enum:
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+        owner:
+          $ref: '#/components/schemas/UserCoreModel'
+        timestamp:
+          type: number
+      required:
+        - id
+        - cid
+        - reason
+        - status
+        - owner
+        - timestamp
+    CommentReportCreationModel:
+      type: object
+      properties:
+        reason:
+          type: string
+      required:
+        - reason
+    CommentReportsListModel:
+      type: array
+      items:
+        $ref: '#/components/schemas/CommentReportFullModel'
+    ReportStatusChangeModel:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - PENDING
+            - ACCEPTED
+            - REJECTED
+      required:
+        - status
+    EmptyContentModel:
+      type: string
+      nullable: true
+    # Pregunta completa para devolver [Alvar]
     PreguntaModelo:
       type: object
       properties:
@@ -91,6 +428,21 @@ components:
         - titulo
         - fecha
         - autor
+    # Modelo de voto para devolver de forma individual [Alvar]
+    VoteModel:
+      type: object
+      properties:
+        idvote:
+          type: integer
+        idelement:
+          type: integer
+        author:
+          $ref: '#/components/schemas/UserCoreModel'
+        type:
+          type: string
+          enum:
+            - POSITIVE
+            - NEGATIVE
   parameters:
     IdentificadorPregunta:
       name: idpreg
@@ -127,7 +479,6 @@ components:
       schema:
         type: integer
       required: true
-
   securitySchemes:
     user_token:
       description: |
@@ -140,28 +491,15 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      # x-bearerInfoFunc: TODO: Set to the fully-qualified name of the function handling the verification
+      x-bearerInfoFunc: dms2223backend.presentation.rest.security.verify_token
     api_key:
       description: |
         Secret shared between both the requestor and the service.
       type: apiKey
       name: X-ApiKey-Auth
       in: header
-      # x-apikeyInfoFunc: TODO: Set to the fully-qualified name of the function handling the verification
+      x-apikeyInfoFunc: dms2223backend.presentation.rest.security.verify_api_key
 
-  #/preguntas:
-  #/pregunta/{id_pregunta}:
-  #/pregunta/{id_pregunta}/respuestas:
-  #/pregunta/{id_pregunta}/reportes:
-  #/preguntas/reportes:
-  #/preguntas/reportes/{id_reporte}:
-  #/respuestas/{id_respuesta}/votos: # Peticion para ENVIAR un voto
-  #/respuestas/{id_respuesta}/reportes: 
-  #/respuestas/reportes: 
-  #/respuestas/resporte/{id_reporte}:
-  #/comentarios/{id_comentario}/votos:
-  #/comentarios/{id_comentario}/reportes:
-  #/comentarios/reportes:
-  #/comentarios/reportes/{id_reporte}:
+
   
   
