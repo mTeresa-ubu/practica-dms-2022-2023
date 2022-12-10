@@ -32,7 +32,7 @@ class BackendConfiguration(ServiceConfiguration):
         self.set_jws_ttl(3600)
         self.set_authorized_api_keys(["1234"]) # Hardcodeado
         self.set_auth_service({
-            'host': '127.0.0.1',
+            'host': '172.10.1.10',
             'port': 4000,
             'apikey_secret': 'This should be the frontend API key'
         })

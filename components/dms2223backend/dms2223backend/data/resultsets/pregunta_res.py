@@ -49,3 +49,16 @@ class PreguntaFuncs():
 
         # Esto tiene que devolver la lista bien formateada
         return listaPreguntas
+
+    @staticmethod
+    def create(
+        session:Session,
+        title:str,
+        body:str
+        ) -> Pregunta:
+        preg:Pregunta = Pregunta(
+            titulo=title,
+            contenido=body,
+            autor=session
+        )
+        return preg

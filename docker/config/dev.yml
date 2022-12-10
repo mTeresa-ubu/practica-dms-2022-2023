@@ -3,6 +3,8 @@ services:
   auth:
     build:
       context: ../images/service
+    ports:
+      - "4000:4000"
     image: dms2223-service
     container_name: dms2223auth
     volumes:

@@ -15,6 +15,8 @@ from dms2223auth.data.db import Schema
 if __name__ == '__main__':
     cfg: AuthConfiguration = AuthConfiguration()
     cfg.load_from_file(cfg.default_config_file())
+    print("@@@@ [KEYS]")
+    print(cfg.get_authorized_api_keys())
     db: Schema = Schema(cfg)
     jws: JsonWebSignature = JsonWebSignature()
 

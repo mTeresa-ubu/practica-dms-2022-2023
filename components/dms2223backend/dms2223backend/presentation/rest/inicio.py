@@ -13,6 +13,8 @@ from dms2223backend.data.resultsets.pregunta_res import PreguntaRes, PreguntaFun
 from dms2223backend.service.serviciopreguntas import PreguntasServicio
 from dms2223backend.data.db import Pregunta
 
+import requests
+
 def test_inicio() -> Tuple[str,Optional[int]]:
     with current_app.app_context():
         p = PreguntasServicio.get_pregunta(current_app.db,1)
@@ -33,5 +35,5 @@ def list_preguntas() -> Tuple[List[Dict],Optional[int]]:
         print(list_quest)
     return (list_quest,HTTPStatus.OK)
 
-def create_preg():
-    pass
+def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
+    return (token_info, HTTPStatus.OK)
