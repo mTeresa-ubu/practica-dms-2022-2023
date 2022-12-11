@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
-
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -11,6 +11,8 @@ class Pregunta(Elemento):
     __tablename__='pregunta'
     id_pregunta = Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
     titulo = Column(String(200))
+
+    respuestas = relationship("Respuesta", primaryjoin="Pregunta.id_pregunta == Respuesta.id_pregunta")
 
     __mapper_args__ = {
         "polymorphic_identity": "pregunta",

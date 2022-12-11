@@ -9,6 +9,8 @@ from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: 
 
 from datetime import datetime
 
+import json
+
 cfg: BackendConfiguration = BackendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
 db: Schema = Schema(base=Base,config=cfg)
@@ -40,27 +42,24 @@ p2 = Pregunta(
 session.add(p1)
 session.add(p2)
 session.commit()
-"""
+
 r1 = Respuesta(
     contenido="X significa algo",
-    fecha=datetime.now(),
-    id_pregunta=1,
-    autor=2,
-    visibilidad=True
+    pregunta=p1,
+    autor=us1
 )
 
 r2 = Respuesta(
     contenido="Y significa algo",
-    fecha=datetime.now(),
-    id_pregunta=2,
-    autor=1,
-    visibilidad=True
+    pregunta=p2,
+    autor=us2
 )
 
 session.add(r1)
 session.add(r2)
 session.commit()
 
+"""
 fpos = Feedback(
     descripcion="Bueno",
     color_asociado="#00FF00"
@@ -114,7 +113,10 @@ def print_tabla(tabla):
 
 print_tabla(Pregunta)
 print_tabla(Usuario)
-# print_tabla(Respuesta)
+print_tabla(Respuesta)
+
+session.refresh(us1)
+
 # print_tabla(Feedback)
 # print_tabla(Comentario)
 

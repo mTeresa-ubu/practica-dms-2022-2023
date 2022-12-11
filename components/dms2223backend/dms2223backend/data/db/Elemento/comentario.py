@@ -5,7 +5,7 @@ from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
 from dms2223backend.data.db.Elemento.respuesta import Respuesta
 from dms2223backend.data.db.Feedback.feedback import Feedback
-
+from sqlalchemy.orm import relationship
 
 class Comentario(Elemento):
     __tablename__='comentario'
@@ -14,6 +14,8 @@ class Comentario(Elemento):
 
     id_respuesta = Column(Integer, ForeignKey("respuesta.id_respuesta"))
     feedback = Column(Integer,ForeignKey("feedback.id_feedback"))
+
+    respuesta = relationship("Respuesta", back_populates="comentarios", foreign_keys=[id_respuesta])
 
     __mapper_args__ = {
         "polymorphic_identity": "comentario",

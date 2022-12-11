@@ -13,7 +13,9 @@ class Elemento(Base):
     fecha = Column(DateTime, default=datetime.now())
     
     id_autor = Column(Integer, ForeignKey(Usuario.id_usuario))
-    autor = relationship("Usuario",back_populates="preguntas")
+
+    autor = relationship("Usuario",back_populates="elementos")
+    votos = relationship("Voto",back_populates="elemento")
 
     contenido = Column(Text)
     visibilidad = Column(Boolean, default=True) #En caso de true es visible en caso de false esta oculto

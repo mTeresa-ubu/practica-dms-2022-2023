@@ -4,12 +4,17 @@ from datetime import datetime
 from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
 from dms2223backend.data.db.Elemento.pregunta import Pregunta
+from sqlalchemy.orm import relationship
 
 
 class Respuesta(Elemento):
     __tablename__='respuesta'
+
     id_respuesta = Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
     id_pregunta = Column(Integer, ForeignKey("pregunta.id_pregunta"))
+
+    pregunta = relationship("Pregunta", back_populates="respuestas", foreign_keys=[id_pregunta])
+    comentarios = relationship("Comentario", primaryjoin="Respuesta.id_respuesta == Comentario.id_respuesta")
 
     __mapper_args__ = {
         "polymorphic_identity": "respuesta",
@@ -17,13 +22,11 @@ class Respuesta(Elemento):
 
     def __init__(self,
         contenido:str,
-        fecha:datetime,
         autor:int,
-        visibilidad:bool,
-        id_pregunta:int
+        pregunta:Pregunta
         ):
-        super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
-        self.id_pregunta = id_pregunta
+        super().__init__(contenido=contenido,autor=autor)
+        self.pregunta = pregunta
     
     def __repr__(self) -> str:        
         return  f"Pregunta(id_respuesta={self.id_respuesta!r}, \

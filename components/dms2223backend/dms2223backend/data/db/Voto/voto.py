@@ -7,6 +7,8 @@ from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
 from ..base import Base #Base declarativa
 
+from sqlalchemy.orm import relationship
+
 class tipo_voto(enum.Enum):
     positivo = 1
     negativo = 0
@@ -19,5 +21,6 @@ class Voto(Base):
     autor = Column(Integer, ForeignKey("usuario.id_usuario"))
 
     tipo = Column(Enum(tipo_voto))
-
+    
+    elemento = relationship("Elemento", back_populates="votos")
 
