@@ -22,25 +22,48 @@ class PreguntaRes():
     votos = List[Voto]
     respuestas = List[Respuesta]
 
-    def create():
-        """ Se crea con los datos del objeto
-            Sin votos ni respuestas
-        """
-        pass
 
 class PreguntaFuncs():
+    """ Calase apra acceder a los datos
+    """
     @staticmethod
-    def list_all(max:Optional[int], session: Session) -> List[PreguntaRes]:
+    def list_all(max:Optional[int], session: Session) -> List[Dict]:
         """ Se obtienen todos los registros de pregunta, con un limite si se especifica
         """
 
-        listaPreguntas: List[PreguntaRes]
+        listaPreguntas: List[PreguntaRes] = []
         stmt = select(Pregunta)
 
         if (max):
             stmt = stmt.limit(max)        
 
-        for preg in session.query(Pregunta).all():
-            print(preg)
+        for preg in session.execute(stmt):
+            p = {
+                "qid": preg[0].id_pregunta,
+                "title": preg[0].titulo,
+                "timestamp": preg[0].fecha,
+                "autor" : preg[0].autor.nombre,
+                "pos_votes": 0,
+                "neg_votes": 0
+            }
+            listaPreguntas.append(p)
 
-        pass
+        # Esto tiene que devolver la lista bien formateada
+        return listaPreguntas
+
+    @staticmethod
+    def create(session:Session,pregunta:Pregunta) -> Pregunta:
+        """ Inserta una pregunta en la bdd
+        """
+        session.add(pregunta)
+        session.commit()
+        # ! Importante, se recuperoa la pregunta creada, con id fecha y demas datos
+        session.refresh(pregunta)
+
+        return pregunta
+
+    @staticmethod
+    def get(session:Session,qid:int) -> Pregunta:
+        stmt = select(Pregunta).where(Pregunta.id_pregunta == qid)
+        preg = session.execute(stmt).first()
+        return preg[0]

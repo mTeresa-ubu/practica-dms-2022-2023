@@ -2,12 +2,14 @@
 
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db import Base, Schema
-from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
+from dms2223backend.data.db import Usuario, Pregunta, Reporte, ReportePregunta, Respuesta, Comentario, Voto, Feedback
 
 from sqlalchemy.orm.session import Session  # type: ignore
 from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
 
 from datetime import datetime
+
+import json
 
 cfg: BackendConfiguration = BackendConfiguration()
 cfg.load_from_file(cfg.default_config_file())
@@ -28,17 +30,13 @@ session.commit()
 p1 = Pregunta(
     titulo="Pregunta de Alvar",
     contenido="Que significa X?",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True
+    autor=us1
 )
 
 p2 = Pregunta(
     titulo="Pregunta de Bilal",
     contenido="Que significa Y?",
-    fecha=datetime.now(),
-    autor=2,
-    visibilidad=True
+    autor=us2
 )
 
 session.add(p1)
@@ -47,23 +45,20 @@ session.commit()
 
 r1 = Respuesta(
     contenido="X significa algo",
-    fecha=datetime.now(),
-    id_pregunta=1,
-    autor=2,
-    visibilidad=True
+    pregunta=p1,
+    autor=us1
 )
 
 r2 = Respuesta(
     contenido="Y significa algo",
-    fecha=datetime.now(),
-    id_pregunta=2,
-    autor=1,
-    visibilidad=True
+    pregunta=p1,
+    autor=us2
 )
 
 session.add(r1)
 session.add(r2)
 session.commit()
+
 
 fpos = Feedback(
     descripcion="Bueno",
@@ -87,24 +82,29 @@ session.commit()
 
 c1 = Comentario(
     contenido="Hmmm bien hecho",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True,
+    autor=us1,
     feedback=2,
-    id_respuesta=3
+    respuesta=r1
 )
 
 c2 = Comentario(
     contenido="Hmmm bien hecho",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True,
+    autor=us1,
     feedback=1,
-    id_respuesta=4
+    respuesta=r1
 )
 
 session.add(c1)
 session.add(c2)
+session.commit()
+
+r1 = ReportePregunta(
+    pregunta=p1,
+    autor=us1,
+    razon_reporte="no me gusta"
+)
+
+session.add(r1)
 session.commit()
 
 def print_tabla(tabla):
@@ -115,10 +115,10 @@ def print_tabla(tabla):
     for p in result:
         print(p)
 
+
 print_tabla(Pregunta)
 print_tabla(Usuario)
 print_tabla(Respuesta)
-print_tabla(Feedback)
 print_tabla(Comentario)
-
+print_tabla(ReportePregunta)
 

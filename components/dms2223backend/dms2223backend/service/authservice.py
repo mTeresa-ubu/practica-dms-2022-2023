@@ -128,91 +128,20 @@ class AuthService():
             response_data.set_content([])
         return response_data
 
-    def grant_user_role(self,
-                        token: Optional[str], username: str, role: Union[Role, str]
-                        ) -> ResponseData:
-        """ Requests to grant a role to a user.
-
-        Args:
-            - token (Optional[str]): The user session token.
-            - username (str): The user to be granted the role.
-            - role (Union[Role, str]): The role to be granted.
-
-        Returns:
-            - ResponseData: Useful to know whether the operation succeeded and its messages.
-        """
-        if isinstance(role, Role):
-            role = role.name
+    def get_user(self) -> str:
         response_data: ResponseData = ResponseData()
-        response: requests.Response = requests.post(
-            self.__base_url() + f'/users/{username}/roles/{role}',
+        response: requests.Response = requests.get(
+            self.__base_url() + '/auth',
             headers={
-                'Authorization': f'Bearer {token}',
                 self.__apikey_header: self.__apikey_secret
             },
             timeout=60
         )
+
         response_data.set_successful(response.ok)
-        if not response_data.is_successful():
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
             response_data.add_message(response.content.decode('ascii'))
+            response_data.set_content([])
         return response_data
-
-    def revoke_user_role(self,
-                         token: Optional[str], username: str, role: Union[Role, str]
-                         ) -> ResponseData:
-        """ Requests to revoke a role from a user.
-
-        Args:
-            - token (Optional[str]): The user session token.
-            - username (str): The user to be revoked the role.
-            - role (Union[Role, str]): The role to be revoked.
-
-        Returns:
-            - ResponseData: Useful to know whether the operation succeeded and its messages.
-        """
-        if isinstance(role, Role):
-            role = role.name
-        response_data: ResponseData = ResponseData()
-        response: requests.Response = requests.delete(
-            self.__base_url() + f'/users/{username}/roles/{role}',
-            headers={
-                'Authorization': f'Bearer {token}',
-                self.__apikey_header: self.__apikey_secret
-            },
-            timeout=60
-        )
-        response_data.set_successful(response.ok)
-        if not response_data.is_successful():
-            response_data.add_message(response.content.decode('ascii'))
-        return response_data
-
-    def update_user_roles(self,
-                          token: Optional[str], username: str, new_roles: List
-                          ) -> ResponseData:
-        """ Requests to update several roles on a user at once.
-
-        This is an utility method. If at least one of them fails, all of them are considered failed,
-        though some of the changes may have taken effect. The messages should describe the failure
-        reasons.
-
-        Args:
-            - token (Optional[str]): The user session token.
-            - username (str): The user to have their roles updated.
-            - new_roles (List): A list of roles to update. If present in the list, will be granted;
-              otherwise, they will be revoked.
-
-        Returns:
-            - ResponseData: Useful to know whether the operation succeeded and its messages.
-        """
-        aggregated_response: ResponseData = ResponseData()
-        aggregated_response.set_successful(True)
-        for role in Role:
-            response: ResponseData
-            if role.name in new_roles:
-                response = self.grant_user_role(token, username, role)
-            else:
-                response = self.revoke_user_role(token, username, role)
-            aggregated_response.add_messages(response.get_messages())
-            aggregated_response.set_successful(
-                aggregated_response.is_successful() & response.is_successful())
-        return aggregated_response

@@ -5,7 +5,7 @@ from dms2223backend.data.db.Usuario.usuario import Usuario
 from dms2223backend.data.db.Elemento.elemento import Elemento
 from dms2223backend.data.db.Elemento.respuesta import Respuesta
 from dms2223backend.data.db.Feedback.feedback import Feedback
-
+from sqlalchemy.orm import relationship
 
 class Comentario(Elemento):
     __tablename__='comentario'
@@ -15,21 +15,25 @@ class Comentario(Elemento):
     id_respuesta = Column(Integer, ForeignKey("respuesta.id_respuesta"))
     feedback = Column(Integer,ForeignKey("feedback.id_feedback"))
 
+    respuesta = relationship("Respuesta", back_populates="comentarios", foreign_keys=[id_respuesta])
+
+    reportes = relationship("ReporteComentario",
+        primaryjoin="Comentario.id_comentario == ReporteComentario.id_comentario"
+        )
+
     __mapper_args__ = {
         "polymorphic_identity": "comentario",
     }
 
     def __init__(self,
         contenido:str,
-        fecha:datetime,
         autor:int,
-        visibilidad:bool,
         feedback:int,
-        id_respuesta: int
+        respuesta: Respuesta
         ):
-        super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
+        super().__init__(contenido=contenido,autor=autor)
         self.feedback = feedback
-        self.id_respuesta = id_respuesta
+        self.respuesta = respuesta
 
     def __repr__(self) -> str:        
         return  f"Comentario(id_comentario={self.id_comentario!r}, \
