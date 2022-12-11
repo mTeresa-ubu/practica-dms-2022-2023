@@ -23,78 +23,76 @@ class Reporte(Base):
     id_reporte = Column(Integer, primary_key=True)
     id_autor = Column(Integer, ForeignKey("usuario.id_usuario"))
     moderador = Column(Integer , ForeignKey("usuario.id_usuario"))
-    
-    autor = relationship("Usuario",
-        back_populates="reportes",
-        primaryjoin="Reporte.id_autor == Usuario.id_usuario")
+    fecha = Column(DateTime, default=datetime.now())
 
-    tipo = Column(String(100))
     razon_reporte = Column(Text)
     resultado_moderacion = Column(String(100))  
     estado = Column(Enum(estado_moderacion), default=estado_moderacion.pendiente)
 
-    def __init__(
-        self,
+    def __init__(self,
         autor:Usuario,
-        tipo:str,
-        razon:str
+        razon_reporte:str
         ):
         self.autor = autor
-        self.elemento = Elemento
-        self.tipo = tipo
-        self.razon = razon
+        self.razon_reporte = razon_reporte
 
 class ReportePregunta(Reporte):
     id_pregunta = Column(Integer, ForeignKey("pregunta.id_pregunta"))
     pregunta = relationship("Pregunta",
         back_populates="reportes")
     
+    autor = relationship("Usuario",
+        back_populates="reportesPregs",
+        primaryjoin="Reporte.id_autor == Usuario.id_usuario")
+    
     def __init__(
         self,
         autor:Usuario,
-        tipo:str,
-        razon:str,
+        razon_reporte:str,
         pregunta: Pregunta
         ):
-        self.autor = autor
-        self.elemento = Elemento
-        self.tipo = tipo
-        self.razon = razon
+        super().__init__(
+            autor=autor,
+            razon_reporte=razon_reporte)
         self.pregunta = pregunta
 
 class ReporteRespuesta(Reporte):
     id_respuesta = Column(Integer, ForeignKey("respuesta.id_respuesta"))
-    pregunta = relationship("Pregunta",
+    respuesta = relationship("Respuesta",
         back_populates="reportes")
-    
+    autor = relationship("Usuario",
+        back_populates="reportesResps",
+        primaryjoin="Reporte.id_autor == Usuario.id_usuario")
+
     def __init__(
         self,
         autor:Usuario,
         tipo:str,
-        razon:str,
+        razon_reporte:str,
         respuesta: Respuesta
         ):
-        self.autor = autor
-        self.elemento = Elemento
-        self.tipo = tipo
-        self.razon = razon
+        super().__init__(
+            autor=autor,
+            razon_reporte=razon_reporte)
         self.respuesta = respuesta
 
 class ReporteComentario(Reporte):
     id_comentario = Column(Integer, ForeignKey("comentario.id_comentario"))
-    pregunta = relationship("Pregunta",
+    comentario = relationship("Comentario",
         back_populates="reportes")
+
+    autor = relationship("Usuario",
+        back_populates="reportesComs",
+        primaryjoin="Reporte.id_autor == Usuario.id_usuario")
     
     def __init__(
         self,
         autor:Usuario,
-        tipo:str,
-        razon:str,
+        razon_reporte:str,
         comentario: Comentario
         ):
-        self.autor = autor
-        self.elemento = Elemento
-        self.tipo = tipo
-        self.razon = razon
+        super().__init__(
+            autor=autor,
+            razon_reporte=razon_reporte)
         self.comentario = comentario
     

@@ -15,7 +15,10 @@ class Usuario(Base):
     respuestas = relationship('Respuesta',  primaryjoin="Usuario.id_usuario == Respuesta.id_autor")
     comentarios = relationship('Comentario',  primaryjoin="Usuario.id_usuario == Comentario.id_autor")
 
-    reportes = relationship('Reporte',  primaryjoin="Usuario.id_usuario == Reporte.id_autor")
+    reportesPregs = relationship('ReportePregunta',  primaryjoin="Usuario.id_usuario == ReportePregunta.id_autor")
+    reportesResps = relationship('ReporteRespuesta',  primaryjoin="Usuario.id_usuario == ReporteRespuesta.id_autor")
+    reportesComs = relationship('ReporteComentario',  primaryjoin="Usuario.id_usuario == ReporteComentario.id_autor")
+
 
     def __init__(self,nombre:str):
         self.nombre = nombre

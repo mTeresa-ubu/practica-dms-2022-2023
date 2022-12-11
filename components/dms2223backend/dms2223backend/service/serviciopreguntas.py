@@ -6,8 +6,9 @@ from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.db import Schema
 
 from dms2223backend.data.db.Elemento import Pregunta, Respuesta, Comentario
-from dms2223backend.data.db import Usuario, Voto
+from dms2223backend.data.db import Usuario, Voto, ReportePregunta
 from dms2223backend.data.resultsets.pregunta_res import PreguntaFuncs
+from dms2223backend.data.resultsets.usuario_res import UsuarioFuncs
 
 from sqlalchemy import select
 
@@ -62,11 +63,19 @@ class PreguntasServicio():
         """ Construye el objeto Pregunta que se insertara en la BDD
         """
         session: Session = schema.new_session()
+
+        usu = UsuarioFuncs.get_or_create(
+            session=session,
+            nombre=datos["autor"])
+        session.refresh(usu)
+
         preg:Pregunta = Pregunta(
             titulo=datos["titulo"],
             contenido=datos["contenido"],
-            autor=Usuario(nombre=datos["autor"])
+            autor=usu
         )
+        
+
         res = PreguntaFuncs.create(session,preg)
         resp:Dict = {
             "qid":res.id_pregunta,
@@ -85,7 +94,7 @@ class PreguntasServicio():
         """ Construye la lista de respuestas (y comentarios) a una pregunta
         """
         session: Session = schema.new_session()
-        res = PreguntaFuncs.get(session=session,qid=qid)[0]
+        res = PreguntaFuncs.get(session=session,qid=qid)
         
         session.refresh(res)
 
@@ -119,6 +128,8 @@ class PreguntasServicio():
         return answers
 
     def get_all_reports(schema:Schema) -> list[Dict]:
+        """ Transforma los reportes en una lista
+        """
         session: Session = schema.new_session()
         reports:List = []
         res = ReporteFuncs.get_question_reps(session)
@@ -126,9 +137,37 @@ class PreguntasServicio():
             reports.append({
                 "id":rep.id_reporte,
                 "qid":rep.id_pregunta,
-                "reason":rep.razon_repote,
-                "status":rep.estado,
+                "reason":rep.razon_reporte,
+                "status":rep.estado.name,
                 "owner":{"username":rep.autor.nombre},
+                "timestamp":rep.fecha
             })
         schema.remove_session()  
-        pass
+        return reports
+
+    def set_report(schema:Schema,reporte:Dict) -> Dict:
+        session: Session = schema.new_session()
+
+        p = PreguntaFuncs.get(session,reporte["qid"])
+        usu = UsuarioFuncs.get_or_create(
+            session=session,
+            nombre=reporte["autor"])
+        session.refresh(usu)
+
+        rep:ReportePregunta = ReportePregunta(
+            pregunta=p,
+            razon_reporte=reporte["razon_reporte"],
+            autor=usu
+        )
+
+        rep = ReporteFuncs.create_question_reps(session,rep)
+        resp:Dict = {
+            "id":rep.id_reporte,
+            "qid":rep.id_pregunta,
+            "reason":rep.razon_reporte,
+            "status":rep.estado.name,
+            "owner":{"username":rep.autor.nombre},
+            "timestamp":rep.fecha
+        }
+        schema.remove_session()
+        return resp

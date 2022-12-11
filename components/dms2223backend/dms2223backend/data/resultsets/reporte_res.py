@@ -17,3 +17,10 @@ class ReporteFuncs():
         for rep in session.execute(stmt):
             reps.append(rep[0])
         return reps
+    
+    @staticmethod
+    def create_question_reps(session:Session,reporte:ReportePregunta)->ReportePregunta:
+        session.add(reporte)
+        session.commit()
+        session.refresh(reporte)
+        return reporte

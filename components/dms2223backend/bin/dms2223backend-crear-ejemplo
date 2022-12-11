@@ -99,10 +99,9 @@ session.add(c2)
 session.commit()
 
 r1 = ReportePregunta(
-    autor=us1,
     pregunta=p1,
-    tipo="mal hecha",
-    razon="no me gusta"
+    autor=us1,
+    razon_reporte="no me gusta"
 )
 
 session.add(r1)

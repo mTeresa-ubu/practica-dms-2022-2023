@@ -62,7 +62,8 @@ class PreguntaFuncs():
 
         return pregunta
 
+    @staticmethod
     def get(session:Session,qid:int) -> Pregunta:
         stmt = select(Pregunta).where(Pregunta.id_pregunta == qid)
         preg = session.execute(stmt).first()
-        return preg
+        return preg[0]

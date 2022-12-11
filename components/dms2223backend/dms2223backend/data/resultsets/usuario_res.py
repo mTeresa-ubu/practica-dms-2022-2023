@@ -11,8 +11,22 @@ class UsuarioFuncs():
     def get_by_nombre(session:Session, nombre:str) -> Usuario:
         """  Se obtiene el id de un usuario mediante su nombre
         """
-        stmt = select(Usuario).where(Usuario.nombre == nombre).first()
-        usu:Usuario = session.scalars(stmt).one()
+        stmt = select(Usuario).where(Usuario.nombre == nombre)
+        usu:Usuario = session.execute(stmt).first()
+
+        return usu[0]
+    
+    @staticmethod
+    def get_or_create(session:Session, nombre:str) -> Usuario:
+        """  Se obtiene el id de un usuario mediante su nombre
+        """
+        stmt = select(Usuario).where(Usuario.nombre == nombre)
+        usu:Usuario = session.execute(stmt).first()
+
+        if usu is None:
+            usu = UsuarioFuncs.create(session=session,usu=Usuario(nombre=nombre))
+        else:
+            usu = usu[0]
         return usu
 
     @staticmethod

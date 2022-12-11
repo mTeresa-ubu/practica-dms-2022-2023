@@ -56,14 +56,27 @@ def set_preg_answer(qid:int) -> Tuple[Dict,Optional[int]]:
         resp:Dict = PreguntasServicio.get_answers(qid)
     return (resp, HTTPStatus.OK)
 
-def set_preg_report(qid:int) -> Tuple[Dict,Optional[int]]:
+def set_preg_report(qid:int,body: Dict, token_info: Dict) -> Tuple[Dict,Optional[int]]:
     with current_app.app_context():
-        resp:Dict = PreguntasServicio.get_pregunta(qid)
-    return (resp, HTTPStatus.OK)
+        rep:Dict = {
+            "razon_reporte":body["reason"],
+            "qid":qid,
+            "autor":token_info["user_token"]["username"]
+        }
+
+        report = PreguntasServicio.set_report(
+            schema=current_app.db,
+            reporte=rep
+        )
+    return (report, HTTPStatus.OK)
 
 def get_all_reports() -> Tuple[List[Dict],Optional[int]]:
+    """ Devuelve todos los reportes que se han hecho a las preguntas
+    """
     with current_app.app_context():
-        resp:Dict = PreguntasServicio.get_pregunta(qid)
+        resp:Dict = PreguntasServicio.get_all_reports(
+            schema=current_app.db
+        )
     return (resp, HTTPStatus.OK)
 
 def put_preg_report(qrid:int) -> Tuple[Dict,Optional[int]]:
