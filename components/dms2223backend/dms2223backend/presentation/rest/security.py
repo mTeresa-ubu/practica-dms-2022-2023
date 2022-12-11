@@ -6,6 +6,7 @@ from flask import current_app
 import requests
 from connexion.exceptions import Unauthorized  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
+from dms2223backend.service import UsuariosServicio
 
 def verify_api_key(token: str) -> Dict:
     """Callback testing the received API key.
@@ -48,5 +49,8 @@ def verify_token(token: str) -> Dict:
 
         if not response.ok:
             raise Unauthorized("Invalid user token")
+        # else:
+            # with current_app.app_context():
+                # UsuariosServicio.get_or_create(current_app.db,response["user_token"]["username"])
 
         return response.json()

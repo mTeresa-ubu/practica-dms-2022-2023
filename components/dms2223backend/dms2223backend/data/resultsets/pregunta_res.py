@@ -42,6 +42,7 @@ class PreguntaFuncs():
                 "qid": preg[0].id_pregunta,
                 "title": preg[0].titulo,
                 "timestamp": preg[0].fecha,
+                "autor" : preg[0].autor.nombre,
                 "pos_votes": 0,
                 "neg_votes": 0
             }
@@ -54,11 +55,7 @@ class PreguntaFuncs():
     def create(session:Session,pregunta:Pregunta) -> Pregunta:
         """ Inserta una pregunta en la bdd
         """
-        
-        sql = session.add(pregunta)
-        print("###################")
-        print(sql)
-        print("###################")
+        session.add(pregunta)
         session.commit()
         # ! Importante, se recuperoa la pregunta creada, con id fecha y demas datos
         session.refresh(pregunta)

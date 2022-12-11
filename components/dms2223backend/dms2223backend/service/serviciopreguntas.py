@@ -47,7 +47,7 @@ class PreguntasServicio():
         return preguntas
 
     @staticmethod
-    def create_pregunta(schema:Schema,datos:Dict) -> Pregunta:
+    def create_pregunta(schema:Schema,datos:Dict) -> Dict:
         """ Construye el objeto Pregunta que se insertara en la BDD
         """
         session: Session = schema.new_session()
@@ -57,5 +57,14 @@ class PreguntasServicio():
             autor=Usuario(nombre=datos["autor"])
         )
         res = PreguntaFuncs.create(session,preg)
-        return res
+        resp:Dict = {
+            "qid":res.id_pregunta,
+            "title":res.titulo,
+            "tiemstamp":res.fecha,
+            "pos_votes":-1,
+            "neg_votes":-1,
+            "body":res.contenido,
+            "owner":{"username":res.autor.nombre}
+        }
+        return resp
 

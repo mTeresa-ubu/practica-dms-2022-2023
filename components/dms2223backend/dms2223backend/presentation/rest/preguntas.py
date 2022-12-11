@@ -31,4 +31,32 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
 
         res:Pregunta = PreguntasServicio.create_pregunta(
             schema=current_app.db,datos=preg)
-    return (res.titulo, HTTPStatus.OK)
+    return (res, HTTPStatus.OK)
+
+def get_preg_id(qid:int) -> Tuple[Dict,Optional[int]]:
+    with current_app.app_context():
+        resp:Dict = {
+            "qid":1,
+            "title":"tit",
+            "tiemstamp":1234,
+            "pos_votes":3,
+            "neg_votes":4,
+            "body":"asd",
+            "owner":{"username":"nombre"}
+        }
+    return (resp, HTTPStatus.OK)
+
+def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
+    pass
+
+def set_preg_answer(qid:int) -> Tuple[Dict,Optional[int]]:
+    pass
+
+def set_preg_report(qid:int) -> Tuple[Dict,Optional[int]]:
+    pass
+
+def get_all_reports() -> Tuple[List[Dict],Optional[int]]:
+    pass
+
+def put_preg_report(qrid:int) -> Tuple[Dict,Optional[int]]:
+    pass
