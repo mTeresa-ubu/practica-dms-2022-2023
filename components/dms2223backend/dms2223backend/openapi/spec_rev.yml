@@ -104,7 +104,7 @@ paths:
 
         The owner of the question will be automatically retrieved from the
         user token against the authorization server.
-      operationId: dms2223backend.presentation.rest.inicio.create_preg
+      operationId: dms2223backend.presentation.rest.preguntas.create_preg
       requestBody:
         content:
           'application/json':

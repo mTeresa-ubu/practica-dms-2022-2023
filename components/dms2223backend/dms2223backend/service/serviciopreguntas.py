@@ -6,7 +6,7 @@ from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.db import Schema
 
 from dms2223backend.data.db.Elemento import Pregunta, Respuesta, Comentario
-from dms2223backend.data.db.Voto import Voto
+from dms2223backend.data.db import Usuario, Voto
 from dms2223backend.data.resultsets.pregunta_res import PreguntaFuncs
 
 from sqlalchemy import select
@@ -18,6 +18,7 @@ class PreguntasServicio():
         derivados de pregunta
     """
     def __init__(self):
+        #TODO: Hardcodeado, hay que cambiarlo
         self.auth_service = AuthService(apikey_secret='1234',host="172.10.1.10",port=4000)
 
     def get_pregunta(schema:Schema, id:int) -> Pregunta:
@@ -44,3 +45,17 @@ class PreguntasServicio():
         preguntas = session.execute(stmt).all()
         schema.remove_session()
         return preguntas
+
+    @staticmethod
+    def create_pregunta(schema:Schema,datos:Dict) -> Pregunta:
+        """ Construye el objeto Pregunta que se insertara en la BDD
+        """
+        session: Session = schema.new_session()
+        preg:Pregunta = Pregunta(
+            titulo=datos["titulo"],
+            contenido=datos["contenido"],
+            autor=Usuario(nombre=datos["autor"])
+        )
+        res = PreguntaFuncs.create(session,preg)
+        return res
+

@@ -51,14 +51,16 @@ class PreguntaFuncs():
         return listaPreguntas
 
     @staticmethod
-    def create(
-        session:Session,
-        title:str,
-        body:str
-        ) -> Pregunta:
-        preg:Pregunta = Pregunta(
-            titulo=title,
-            contenido=body,
-            autor=session
-        )
-        return preg
+    def create(session:Session,pregunta:Pregunta) -> Pregunta:
+        """ Inserta una pregunta en la bdd
+        """
+        
+        sql = session.add(pregunta)
+        print("###################")
+        print(sql)
+        print("###################")
+        session.commit()
+        # ! Importante, se recuperoa la pregunta creada, con id fecha y demas datos
+        session.refresh(pregunta)
+
+        return pregunta

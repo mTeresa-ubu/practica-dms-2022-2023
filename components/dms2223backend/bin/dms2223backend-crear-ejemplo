@@ -28,23 +28,19 @@ session.commit()
 p1 = Pregunta(
     titulo="Pregunta de Alvar",
     contenido="Que significa X?",
-    fecha=datetime.now(),
-    autor=1,
-    visibilidad=True
+    autor=us1
 )
 
 p2 = Pregunta(
     titulo="Pregunta de Bilal",
     contenido="Que significa Y?",
-    fecha=datetime.now(),
-    autor=2,
-    visibilidad=True
+    autor=us2
 )
 
 session.add(p1)
 session.add(p2)
 session.commit()
-
+"""
 r1 = Respuesta(
     contenido="X significa algo",
     fecha=datetime.now(),
@@ -106,7 +102,7 @@ c2 = Comentario(
 session.add(c1)
 session.add(c2)
 session.commit()
-
+"""
 def print_tabla(tabla):
     stmt = select('*').select_from(tabla)
     result = session.execute(stmt).fetchall()
@@ -115,10 +111,11 @@ def print_tabla(tabla):
     for p in result:
         print(p)
 
+
 print_tabla(Pregunta)
 print_tabla(Usuario)
-print_tabla(Respuesta)
-print_tabla(Feedback)
-print_tabla(Comentario)
+# print_tabla(Respuesta)
+# print_tabla(Feedback)
+# print_tabla(Comentario)
 
 

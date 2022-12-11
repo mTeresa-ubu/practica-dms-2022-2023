@@ -19,11 +19,9 @@ class Pregunta(Elemento):
     def __init__(self,
         titulo:str,
         contenido:str,
-        fecha:datetime,
-        autor:int,
-        visibilidad:bool
+        autor:Usuario,
         ):
-        super().__init__(contenido=contenido,fecha=fecha,autor=autor,visibilidad=visibilidad)
+        super().__init__(contenido=contenido,autor=autor)
         self.titulo = titulo
 
     def __repr__(self) -> str:        
