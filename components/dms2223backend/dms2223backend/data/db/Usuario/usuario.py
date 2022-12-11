@@ -15,5 +15,7 @@ class Usuario(Base):
     respuestas = relationship('Respuesta',  primaryjoin="Usuario.id_usuario == Respuesta.id_autor")
     comentarios = relationship('Comentario',  primaryjoin="Usuario.id_usuario == Comentario.id_autor")
 
+    reportes = relationship('Reporte',  primaryjoin="Usuario.id_usuario == Reporte.id_autor")
+
     def __init__(self,nombre:str):
         self.nombre = nombre

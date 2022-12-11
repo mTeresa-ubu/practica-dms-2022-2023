@@ -13,8 +13,16 @@ class Respuesta(Elemento):
     id_respuesta = Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
     id_pregunta = Column(Integer, ForeignKey("pregunta.id_pregunta"))
 
-    pregunta = relationship("Pregunta", back_populates="respuestas", foreign_keys=[id_pregunta])
-    comentarios = relationship("Comentario", primaryjoin="Respuesta.id_respuesta == Comentario.id_respuesta")
+    pregunta = relationship("Pregunta", 
+        back_populates="respuestas", 
+        primaryjoin="Respuesta.id_pregunta == Pregunta.id_pregunta")
+
+    comentarios = relationship("Comentario", 
+        primaryjoin="Respuesta.id_respuesta == Comentario.id_respuesta")
+
+    reportes = relationship("ReporteRespuesta",
+        primaryjoin="Respuesta.id_respuesta == ReporteRespuesta.id_respuesta"
+        )
 
     __mapper_args__ = {
         "polymorphic_identity": "respuesta",

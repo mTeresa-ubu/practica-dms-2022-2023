@@ -61,3 +61,8 @@ class PreguntaFuncs():
         session.refresh(pregunta)
 
         return pregunta
+
+    def get(session:Session,qid:int) -> Pregunta:
+        stmt = select(Pregunta).where(Pregunta.id_pregunta == qid)
+        preg = session.execute(stmt).first()
+        return preg

@@ -11,7 +11,7 @@ from sqlalchemy import select
 from .authservice import AuthService
 
 class UsuariosServicio():
-    
+    @staticmethod
     def get_or_create(schema:Schema,nombre:str) -> Usuario:
         """ Pide un usuario, si no existe lo crea 
         """
@@ -30,6 +30,7 @@ class UsuariosServicio():
         schema.remove_session()
         return usu
 
+    @staticmethod
     def get_all(schema:Schema) -> List[Dict]:
         """ Obtiene todos los usuarios existentes
         """

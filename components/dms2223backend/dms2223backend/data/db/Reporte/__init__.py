@@ -1,3 +1,3 @@
 """ Backend database-related modules.
 """
-from .reporte import Reporte
+from .reporte import Reporte, ReportePregunta, ReporteRespuesta, ReporteComentario

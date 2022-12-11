@@ -34,29 +34,39 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
     return (res, HTTPStatus.OK)
 
 def get_preg_id(qid:int) -> Tuple[Dict,Optional[int]]:
+    """ Devuelve una pregunta sabiendo la id
+    """
     with current_app.app_context():
-        resp:Dict = {
-            "qid":1,
-            "title":"tit",
-            "tiemstamp":1234,
-            "pos_votes":3,
-            "neg_votes":4,
-            "body":"asd",
-            "owner":{"username":"nombre"}
-        }
+        resp:Dict = PreguntasServicio.get_pregunta(
+            schema=current_app.db,qid=qid)
     return (resp, HTTPStatus.OK)
 
 def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
-    pass
+    """ Devuelve una lista de respuestas a una pregunta
+    """
+    with current_app.app_context():
+        resp:Dict = PreguntasServicio.get_answers(
+            schema=current_app.db,qid=qid)
+    return (resp, HTTPStatus.OK)
 
 def set_preg_answer(qid:int) -> Tuple[Dict,Optional[int]]:
-    pass
+    """ Crea una respuesta a unn comentario !TODO delegar a respuesta
+    """
+    with current_app.app_context():
+        resp:Dict = PreguntasServicio.get_answers(qid)
+    return (resp, HTTPStatus.OK)
 
 def set_preg_report(qid:int) -> Tuple[Dict,Optional[int]]:
-    pass
+    with current_app.app_context():
+        resp:Dict = PreguntasServicio.get_pregunta(qid)
+    return (resp, HTTPStatus.OK)
 
 def get_all_reports() -> Tuple[List[Dict],Optional[int]]:
-    pass
+    with current_app.app_context():
+        resp:Dict = PreguntasServicio.get_pregunta(qid)
+    return (resp, HTTPStatus.OK)
 
 def put_preg_report(qrid:int) -> Tuple[Dict,Optional[int]]:
-    pass
+    with current_app.app_context():
+        resp:Dict = PreguntasServicio.get_pregunta(qrid)
+    return (resp, HTTPStatus.OK)
