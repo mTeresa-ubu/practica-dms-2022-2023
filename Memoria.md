@@ -107,14 +107,121 @@ En este archivo encontramos los siguientes componentes:
 Para acceder a la creaccion de preguntas se hace desde "/crear_preguntas".
 
 
-### 2. Consideraciones de para el desarrollo
-#### 2.1 Docker
+### 2. Diseño del backend
+Durante todo el desarrollo del backend se han tenido en cuenta los principios SOLID vistos en clase, como al tratar de no repetir código, etc...
+
+#### 2.1 Diseño de la base de datos
+Una vez comenzamos con el backend, lo primero que realizamos fue el diseño de la base de datos.
+Para ello, identificamos los siguientes elementos:
+
+    - Reporte
+    - Usuario
+    - Elemento
+    - Voto
+    - Comentario
+    - Respuesta
+    - Pregunta
+    - Feedback
+Lo importante de este diseño fue reconocer cuales son las claves primarias y foráneas y sus relaciones.
+El diseño final, tras varias modificaciones es el siguiente:
+
+![alt text](https://github.com/AlvarSML/practica-dms-2022-2023/blob//diagramaBBDD/diagramaBBDD.jpeg?raw=true)
+
+Por eso, para el diseño del backend, dentro de la carpeta dms2223backend/dms2223backend/data/db se han creado las correspondientes carpetas y ficheros:
+
+    - Reporte
+      - reporte.py
+    - Usuario
+      - usuario.py
+    - Voto
+      - voto.py
+    - Elemento
+      - elemento.py
+      - comentario.py
+      - respuesta.py
+      - pregunta.py
+    - Feedback
+      - feedback.py
+
+Y dentro de estos .py se han generado las clases que hemos visto en el diagrama de arriba.
+*En todas estas carpetas se ha creado también su _init_.py, necesario para el buen funcionamiento.
+
+#### 2.2 Comprobación del funcionamiento de la base de datos
+La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado dos ficheros: dms2223backend-crear-ejemplo y dms2223backend-mTeresa.
+
+En ellos, la idea principal para testear fue:
+  1. Crear una nueva sesión de la base de datos.
+  2. Crear usuarios, votos, preguntas, respuestas, comentaros, feedbacks y reportes de ejemplo con las estructuras adecuadas.
+  3. Añadir estos elementos a la sesión anteriormente creada.
+  4. Realizar commit de esta sesión.
+  5. Cerrar la sesión.
+
+  De forma adicional, hemos impreso por pantalla todas las tablas creadas para comprobar que lo han hecho de la forma que queríamos.
+
+#### 2.3 API para obtener comentario por id
+Para realizar la API:
+  - En la carpeta dms2223backend/dms2223backend/service se ha creado el fichero servicioComentario.py, donde se han implementado dos métodos, uno para obtener el comentario dado el id y, adicionalmente, otro para obtener todos los comentarios en una lista.
+  -  En la carpeta dms2223backend/dms2223backend/data/resultsets se ha creado el fichero comentario_rset.py, donde, primero, se han incluido todos los atributos que tiene un comentario en la clase principal y, posteriormente, se ha creado otra clase con un método estático cuya finalidad es devolver una lista con los comentarios que se han generado en esa sesión de la base de datos.
+#### 2.4 API para obtener pregunta por id
+#### 2.5 API para la creación y obtención de respuestas
+Para la realización de esta API se han seguido varios pasos:
+
+    - En primer lugar se han creado las tablas y valores necesarios, en este caso se han usado las tablas de Elemento, la cual contiene la fecha de creación, el autor, el contenido(diferirá dependiendo del tipo de elemento), visibilidad(tendra dos valores, por defecto; True), y el identificador del elemento que se genera automáticamente. Por otro lado tenemos la tabla de Respuesta, esta tabla hereda los valores del Elemento e incluye el identificador de la pregunta a la que corresponde y el identificador porpio. 
+
+    - A continuación, se ha creado una clase Respuestas ,creada en el archivo answerSets.py en dms2223backend/dms2223backend/data/resultsets, que servirá para obtener listas y diccionarios de estos valores con el fin de facilitar el uso del servicio y desacoplar el codigo.
+
+    - Con los elementos anteriores creados y testados pasamos a crear la clase de servicio: ServicioRespusta. Esta clase contiene los siguientes métodos :
+
+      -crea_Respuesta: Este método recibe ciertos parametros correspondientes a la tabla de respuesta y añade la respuesta a la base de datos.
+
+      -obtenerRespuestasPorPregunta: Este méotdo recibe el identificador de una pregunta y encuentra las respuestas correspondientes a esa pregunta, añade las respuestas a un diccionario y devuelve el diccionario en cuestión.
+
+      -ocultarRespuesta: cambia el atributo de visibilidad del elemento respuesta por el valor de visibilidad pasado por parametro.
+
+    
+    - Finalmente se ha creado el fichero que contiene las funciones que sirven de controlador para las operaciones que realiza el cliente. Este es el respuestaRest.py situado en dms2223backend/dms2223backend/presentation/rest. Aqui se han creado dos métodos: 
+
+    -lista_Respuestas: Con el id_Pregunta pasado por parametro se llama a la función creada en el servicio y con la lista de diccionarios de vuelve se devuelve el estado HTTP correspondinte.
+
+    -crea_respuesta: con los parametro pasados, correspondientes a los valores de la tabla de la base de datos, se llama al servicio y se devuelve el estado HTTP correspondiente.
+
+#### 2.6 API para crear nueva pregunta
+#### 2.7 API para crear nuevo comentario
+#### 2.8 API para crear un reporte
+Para la realización de esta API, ha sido necesario crear los siguientes ficheros:
+  - En la carpeta dms2223backend/dms2223backend/service se ha creado el fichero servicioReportes.py, donde se ha implementado la clase ServicioReporte con los métodos: list_reportes para obtener una lista con todos los reportes, y create_reporte que crea un nuevo reporte y devuelve un diccionario con el reporte en cuestión.
+  - En la carpeta dms2223backend/dms2223backend/data/resultsets se ha creado el fichero reporte_res.py, donde, primero, se han incluido todos los atributos que tiene un reporte en la clase principal y, posteriormente, se ha creado otra clase con un método estático cuya finalidad es devolver una lista con los reportes que se han generado en esa sesión de la base de datos.
+  - En la carpeta dms2223backend/dms2223backend/presentation/rest se ha creado el fichero reportes.py, en el cual se ha generado el metodo list_reportes que devuelve una lista con los reportes existentes, y el metodo create_rep que recoge los datos de la peticion y los manda al servicio de reportes.
+#### 2.9 API para votar
+Para la realizacion de la API hemos construido tres archivos en tres rutas diferentes:
+
+- votoElemento.py en la ruta: /practica-dms-2022-2023/components/dms2223backend/dms2223backend/data/resultsets/votoElemento.py
+- votarCualquierElemento.py en la ruta: /practica-dms-2022-2023/components/dms2223backend/dms2223backend/service/votarCualquierElemento.py
+- votos.py en la ruta: /practica-dms-2022-2023/components/dms2223backend/dms2223backend/presentation/rest/votos.py
+
+En el archivo votarCualquierElemento.py se ha implementado la clase votosElemento con los métodos: 
+- get_votos_positivos: para obtener el numero de votos de positivos del elemento pasando su id.
+- get_votos_negativos: para obtener el numero de votos de negativos del elemento pasando su id.
+- post_votos_positivos: para votar positivamente al elemento pasando su id.
+- post_votos_negativos: para votar negativamente al elemento pasando su id.
+	
+En el archivo votoElemento.py, se han implementado dos clases:
+- class Votos(): Se incluyen todos los atributos que tiene un voto.
+- class VotosFuncs():Clase con un método estático cuya finalidad es devolver una lista con los votos que se han generado en esa sesión de la base de datos.
+	
+En el archivo votos.py se han implementado los metodos:
+- post_votosPositivos_id: Envia un voto positivo al elemento pasando su id.
+- post_votosNegativos_id: Envia un voto negativo al elemento pasando su id.
+- get_votosPositivos_id: Devuelve el numero de votos positivos del elemento pasando su id.
+- get_votosNegativos_id: Devuelve el numero de votos negativos del elemento pasando su id.
+### 3. Consideraciones de para el desarrollo
+#### 3.1 Docker
 Por su simplicidad se han decidido modificar los ficheros de instalacion e inicio y asi permitir el desarrollo sin necesiadad de reinicios.
 Se ha asumido que los desarrolladores actuales han instalado las imagenes, por lo que se ha comentado las lineas de *"/practica-dms-2022-2023/components/dms2223auth/bin/dms2223auth-create-admin"* para que no se intente volver a crear el usuario admin.
 Si se requiriese reinstalar la maquina habria que desomentarlas o no sera posible loguearse en la aplicacion.
 
 Ademas para permitir la compatibilidad con WSL2 se ha editado *" practica-dms-2022-2023/docker/config/dev.yml" liena 33* para enlazar el puerto 8080 de Docker con el 8080 de Windows.
-#### 2.2 Modo debug
+#### 3.2 Modo debug
 Para agilizar el desarrollo se ha configurado Jinja/Flask para actualizarsa cada vez que se produce un cambio en el frontend, asi no sera necesario reiniciar el servicio o la maquina docker cada vez que haga un cambio a la web. 
 Para ello se ha modificado:
 
@@ -129,4 +236,3 @@ app.config.update(
 ```
 Esto permite la recarga automatica de templates y codigo de las peticiones del mismo archivo. 
 Es recomendable eliminar estas lineas en un futuro despliegue.
-
