@@ -125,7 +125,7 @@ Para ello, identificamos los siguientes elementos:
 Lo importante de este diseño fue reconocer cuales son las claves primarias y foráneas y sus relaciones.
 El diseño final, tras varias modificaciones es el siguiente:
 
-![alt text](https://github.com/AlvarSML/practica-dms-2022-2023/blob//diagramaBBDD/diagramaBBDD.jpeg?raw=true)
+![alt text](https://github.com/mTeresa-ubu/practica-dms-2022-2023/blob/diagramaBBDD/diagramaBBDD.jpeg?raw=true)
 
 Por eso, para el diseño del backend, dentro de la carpeta dms2223backend/dms2223backend/data/db se han creado las correspondientes carpetas y ficheros:
 
