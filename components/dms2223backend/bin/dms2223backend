@@ -45,7 +45,7 @@ if __name__ == '__main__':
         }
     )
 
-    app.add_api("spec_rev.yml", strict_validation=True)
+    app.add_api("spec.yml", strict_validation=True)
 
     flask_app = app.app
 
