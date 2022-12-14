@@ -126,7 +126,7 @@ Lo importante de este diseño fue reconocer cuales son las claves primarias y fo
 El diseño final, tras varias modificaciones es el siguiente:
 
 https://raw.githubusercontent.com/mTeresa-ubu/practica-dms-2022-2023/main/diagramaBBDD/diagramaBBDD.jpeg
-![alt text](https://github.com/mTeresa-ubu/practica-dms-2022-2023/main/diagramaBBDD/diagramaBBDD.jpeg)
+
 
 Por eso, para el diseño del backend, dentro de la carpeta dms2223backend/dms2223backend/data/db se han creado las correspondientes carpetas y ficheros:
 
