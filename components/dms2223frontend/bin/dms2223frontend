@@ -117,6 +117,7 @@ def get_pregunta(id_preg):
     return PreguntasEndpoints.get_pregunta(auth_service,id_preg)
 
 
+
 if __name__ == '__main__':
     app.run(
         host=cfg.get_service_host(),
