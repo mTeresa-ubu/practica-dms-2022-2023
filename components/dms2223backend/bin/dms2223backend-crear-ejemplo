@@ -2,7 +2,7 @@
 
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db import Base, Schema
-from dms2223backend.data.db import Usuario, Pregunta, Reporte, ReportePregunta, Respuesta, Comentario, Voto, Feedback
+from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
 
 from sqlalchemy.orm.session import Session  # type: ignore
 from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
@@ -98,14 +98,7 @@ session.add(c1)
 session.add(c2)
 session.commit()
 
-r1 = ReportePregunta(
-    pregunta=p1,
-    autor=us1,
-    razon_reporte="no me gusta"
-)
 
-session.add(r1)
-session.commit()
 
 def print_tabla(tabla):
     stmt = select('*').select_from(tabla)
@@ -120,5 +113,4 @@ print_tabla(Pregunta)
 print_tabla(Usuario)
 print_tabla(Respuesta)
 print_tabla(Comentario)
-print_tabla(ReportePregunta)
 
