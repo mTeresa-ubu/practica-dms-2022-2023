@@ -23,11 +23,11 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
     """ Recoge los datos de la peticion y los manda al servicio de preguntas
     """
     with current_app.app_context():
-        preg:Dict = {
-            "titulo":body["title"],
-            "contenido":body["body"],
-            "autor":token_info["user_token"]["username"]
-        }
+        # preg:Dict = {
+        #     "titulo":body["title"],
+        #     "contenido":body["body"],
+        #     "autor":token_info["user_token"]["username"]
+        # }
 
         res:Pregunta = PreguntasServicio.create_pregunta(
             schema=current_app.db,datos=preg)
