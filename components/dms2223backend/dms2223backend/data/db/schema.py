@@ -7,7 +7,7 @@ from sqlalchemy.engine import Engine  # type: ignore
 from sqlalchemy.orm import sessionmaker, scoped_session, registry  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
-from dms2223backend.data.db.results import Respuesta
+from dms2223backend.data.db.results.respuesta import Respuesta
 from sqlalchemy.ext.declarative import declarative_base
 from dms2223backend.data.db import Base
 from sqlalchemy import select, MetaData

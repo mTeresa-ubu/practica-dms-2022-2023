@@ -34,3 +34,6 @@ class ComentarioFuncs():
 
         
         return listaComentarios
+
+
+        # get numero de votos y hacer .count

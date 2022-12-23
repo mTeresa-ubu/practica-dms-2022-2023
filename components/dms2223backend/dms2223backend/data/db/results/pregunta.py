@@ -10,19 +10,18 @@ from sqlalchemy import Integer
 
 from datetime import datetime
 
+from dms2223backend.data.db.results.respuesta import Respuesta
 from dms2223backend.data.db.results.reporte import Reporte
-from dms2223backend.data.db.results.voto import Voto
-from dms2223backend.data.db.results.comentario import Comentario
 
+class Pregunta(ResultBase):
+      
 
-class Respuesta(ResultBase):
-
-    def __init__(self, username: str, body: str, qid: int):
+    def __init__(self, username: str, body: str, title: str):
 
         self.username: str = username
         self.body: str = body
-        self.qid: int = qid
-        self.id: int 
+        self.title: str = title
+        self.qid: int
         self.timestamp: DateTime  = datetime.timestamp(datetime.now())
         self.oculto: bool
         
@@ -38,15 +37,14 @@ class Respuesta(ResultBase):
               - Table: A `Table` object with the table definition.
         """
         return Table(
-              'answers',
+              'questions',
               metadata,
               Column('username', String(32)),
               Column('body', String(350), nullable=False), #Nunca puede ser null
-              Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
-              Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
+              Column('title', String(100), nullable=False),
+              Column('qid', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False),
               Column('oculto', Boolean, default=False)
-
         )
 
     @staticmethod
@@ -57,10 +55,8 @@ class Respuesta(ResultBase):
               - Dict: A dictionary with the mapping properties.
         """
         return {
-             'rel_comentarios': relationship(Comentario, backref='answers'),
-             'rel_reportes': relationship(Reporte, backref='answers'),
-             'rel_votos': relationship(Voto, backref='answers')
-             
+             'rel_respuestas': relationship(Respuesta, backref='questions'),
+             'rel_reportes2': relationship(Reporte, backref='questions')   
         }
 
        

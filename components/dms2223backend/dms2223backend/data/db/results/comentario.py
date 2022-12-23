@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
@@ -9,22 +10,22 @@ from dms2223backend.data.db.results.resultbase import ResultBase
 from sqlalchemy import Integer
 
 from datetime import datetime
+from dms2223backend.data.sentiment import Sentiment
 
-from dms2223backend.data.db.results.reporte import Reporte
 from dms2223backend.data.db.results.voto import Voto
-from dms2223backend.data.db.results.comentario import Comentario
+from dms2223backend.data.db.results.reporte import Reporte
 
+class Comentario(ResultBase):
 
-class Respuesta(ResultBase):
-
-    def __init__(self, username: str, body: str, qid: int):
+    def __init__(self, username: str, body: str, aid: int, sentiment: Sentiment):
 
         self.username: str = username
         self.body: str = body
-        self.qid: int = qid
+        self.aid: int = aid
         self.id: int 
         self.timestamp: DateTime  = datetime.timestamp(datetime.now())
         self.oculto: bool
+        self.sentiment: Sentiment = sentiment
         
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -38,14 +39,15 @@ class Respuesta(ResultBase):
               - Table: A `Table` object with the table definition.
         """
         return Table(
-              'answers',
+              'comments',
               metadata,
               Column('username', String(32)),
               Column('body', String(350), nullable=False), #Nunca puede ser null
-              Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
+              Column('aid', Integer, ForeignKey('answers.id'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False),
-              Column('oculto', Boolean, default=False)
+              Column('oculto', Boolean, default=False),
+              Column('sentiment', Enum(Sentiment))
 
         )
 
@@ -57,9 +59,8 @@ class Respuesta(ResultBase):
               - Dict: A dictionary with the mapping properties.
         """
         return {
-             'rel_comentarios': relationship(Comentario, backref='answers'),
-             'rel_reportes': relationship(Reporte, backref='answers'),
-             'rel_votos': relationship(Voto, backref='answers')
+             'rel_reportes_2': relationship(Reporte, backref='comments'),
+             'rel_votos2': relationship(Voto, backref='comments')
              
         }
 
