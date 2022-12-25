@@ -16,7 +16,7 @@ from dms2223backend.data.db.results.reporte import Reporte
 class Pregunta(ResultBase):
       
 
-    def __init__(self, username: str, body: str, title: str):
+    def __init__(self, username: str, body: str, title: str, oculto: bool):
 
         self.username: str = username
         self.body: str = body

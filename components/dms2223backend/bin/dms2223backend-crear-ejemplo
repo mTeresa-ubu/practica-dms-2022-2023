@@ -1,22 +1,27 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-# from dms2223backend.data.config import BackendConfiguration
-# from dms2223backend.data.db import Base, Schema
-# from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
+from dms2223backend.data.config import BackendConfiguration
+from dms2223backend.data.db import Base, Schema
+from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
 
-# from sqlalchemy.orm.session import Session  # type: ignore
-# from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
+from sqlalchemy.orm.session import Session  # type: ignore
+from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
 
-# from datetime import datetime
+from datetime import datetime
 
-# import json
+import json
+##imports
 
-# cfg: BackendConfiguration = BackendConfiguration()
-# cfg.load_from_file(cfg.default_config_file())
-# db: Schema = Schema(cfg)
+#from dms2223backend.logic.pregunta import PreguntaService ...
 
-# db.clear_database(cfg)
-# session:Session = db.new_session()
+cfg: BackendConfiguration = BackendConfiguration()
+cfg.load_from_file(cfg.default_config_file())
+db: Schema = Schema(cfg)
+
+#db.clear_database(cfg)
+#session:Session = db.new_session()
+
+
 
 
 # us1 = Usuario(nombre="Alvar")
