@@ -1,4 +1,4 @@
-from enum import Enum
+from sqlalchemy import Enum
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
@@ -48,7 +48,7 @@ class Comentario(ResultBase):
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False),
               Column('oculto', Boolean, default=False),
-              Column('sentiment', Enum(Sentiment))
+              Column('sentiment', Enum(Sentiment)) 
 
         )
 

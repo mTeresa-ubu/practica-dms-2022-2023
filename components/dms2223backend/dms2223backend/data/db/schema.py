@@ -8,6 +8,13 @@ from sqlalchemy.orm import sessionmaker, scoped_session, registry  # type: ignor
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db.results.respuesta import Respuesta
+from dms2223backend.data.db.results.comentario import Comentario
+from dms2223backend.data.db.results.pregunta import Pregunta
+from dms2223backend.data.db.results.reporteCom import ReporteCom
+from dms2223backend.data.db.results.reportePreg import ReportePreg
+from dms2223backend.data.db.results.reporteRes import ReporteRes
+from dms2223backend.data.db.results.votoCom import VotoCom
+from dms2223backend.data.db.results.votoRes import VotoRes
 from sqlalchemy.ext.declarative import declarative_base
 from dms2223backend.data.db import Base
 from sqlalchemy import select, MetaData
@@ -55,11 +62,15 @@ class Schema():
 
         # Usuario.map(self.__registry)
         # Elemento.map(self.__registry)
-        # Comentario.map(self.__registry)
+        
         Respuesta.map(self.__registry)
-        # Pregunta.map(self.__registry)
-        # Reporte.map(self.__registry)
-        # Voto.map(self.__registry)
+        Pregunta.map(self.__registry)
+        Comentario.map(self.__registry)
+        ReporteRes.map(self.__registry)
+        VotoRes.map(self.__registry)
+        ReporteCom.map(self.__registry)
+        VotoCom.map(self.__registry)
+        ReportePreg.map(self.__registry)
         # Feedback.map(self.__registry)
         self.__registry.metadata.create_all(self.__create_engine)
 

@@ -1,4 +1,4 @@
-from enum import Enum
+from sqlalchemy import Enum
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
@@ -43,7 +43,7 @@ class ReportePreg(ResultBase):
               metadata,
               Column('username', String(32), nullable=False),
               Column('reason', String(350), nullable=False), #Nunca puede ser null
-              Column('aid', Integer, ForeignKey('questions.aid'), nullable=False),
+              Column('aid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False),
               Column('status', Enum(ReportStatus), nullable=False, default=ReportStatus.PENDING)

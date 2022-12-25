@@ -1,4 +1,4 @@
-from enum import Enum
+from sqlalchemy import Enum
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
