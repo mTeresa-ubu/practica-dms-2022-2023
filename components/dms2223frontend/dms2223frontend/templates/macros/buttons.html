@@ -19,3 +19,7 @@
 {{ button(redbg, '#', nombre, 'this.voteDown()') }}
 {% endmacro %}
 
+<!--ARREGLAR BOTON-->
+{% macro reset_button(color_class, content) %}
+{{ button(color_class, '#', content, 'this.closest(\'form\').submit();return false;') }}
+{% endmacro %}

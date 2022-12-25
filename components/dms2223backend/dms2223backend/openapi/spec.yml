@@ -41,7 +41,7 @@ paths:
       description: |
         Use this operation to verify the server is running successfully and the
         API is reachable.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.index.get_head
       responses:
         '204':
           $ref: '#/components/responses/Empty'
@@ -55,7 +55,8 @@ paths:
 
         Only question stubs are returned. Full information for each question
         should be fetched separately.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      ##CREO QUE ES ESTA
+      operationId: dms2223backend.presentation.rest.preguntas.get_preg_id
       responses:
         '200':
           description: A list of questions.
@@ -83,7 +84,8 @@ paths:
 
         The owner of the question will be automatically retrieved from the
         user token against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      ##CREO
+      operationId: dms2223backend.presentation.rest.preguntas.create_preg
       requestBody:
         content:
           'application/json':
@@ -1183,11 +1185,11 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      # x-bearerInfoFunc: TODO: Set to the fully-qualified name of the function handling the verification
+      x-bearerInfoFunc: dms2223backend.presentation.rest.security.verify_token
     api_key:
       description: |
         Secret shared between both the requestor and the service.
       type: apiKey
       name: X-ApiKey-Auth
       in: header
-      # x-apikeyInfoFunc: TODO: Set to the fully-qualified name of the function handling the verification
+      x-apikeyInfoFunc: dms2223backend.presentation.rest.security.verify_api_key

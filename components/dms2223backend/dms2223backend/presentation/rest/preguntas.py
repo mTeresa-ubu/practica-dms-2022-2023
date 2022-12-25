@@ -23,22 +23,22 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
     """ Recoge los datos de la peticion y los manda al servicio de preguntas
     """
     with current_app.app_context():
-        preg:Dict = {
-            "titulo":body["title"],
-            "contenido":body["body"],
-            "autor":token_info["user_token"]["username"]
-        }
+        # preg:Dict = {
+        #     "titulo":body["title"],
+        #     "contenido":body["body"],
+        #     "autor":token_info["user_token"]["username"]
+        # }
 
         res:Pregunta = PreguntasServicio.create_pregunta(
             schema=current_app.db,datos=preg)
     return (res, HTTPStatus.OK)
 
 def get_preg_id(qid:int) -> Tuple[Dict,Optional[int]]:
-    """ Devuelve una pregunta sabiendo la id
+    """ Devuelve una pregunta sabiendo el id
     """
     with current_app.app_context():
         resp:Dict = PreguntasServicio.get_pregunta(
-            schema=current_app.db,qid=qid)
+            current_app.db,qid)
     return (resp, HTTPStatus.OK)
 
 def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:

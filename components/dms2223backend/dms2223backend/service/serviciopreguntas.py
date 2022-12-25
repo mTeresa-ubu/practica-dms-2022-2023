@@ -6,44 +6,39 @@ from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.db import Schema
 
 from dms2223backend.data.db.Elemento import Pregunta, Respuesta, Comentario
-from dms2223backend.data.db import Usuario, Voto, ReportePregunta
-from dms2223backend.data.resultsets.pregunta_res import PreguntaFuncs
-from dms2223backend.data.resultsets.usuario_res import UsuarioFuncs
+from dms2223backend.data.db import Usuario, Voto
+from dms2223backend.data.db.resultsets.pregunta_res import PreguntaFuncs
+#from dms2223backend.data.db.resultsets.usuario_res import UsuarioFuncs
+
 
 from sqlalchemy import select
 
-from dms2223backend.data.resultsets import ReporteFuncs
-
-from .authservice import AuthService
+#from dms2223backend.data.db.resultsets.reporte_res import ReporteFuncs
 
 class PreguntasServicio():
     """ Clase "estatica" que permite el acceso a las operaciones de creacion o consulta
         derivados de pregunta
     """
-
+##SINGLE RESPONSABILITY PRINCIPLE   
     @staticmethod
-    def get_pregunta(schema:Schema, id:int) -> Dict:
+    def get_pregunta(schema:Schema, qid:int) -> Dict:
         """Obtiene los datos de una pregunta se debe usar para la visualizacion
             en lista de pregunta, no contiene los votos de las respuestas 
         """
         session: Session = schema.new_session()
-        stmt = select(Pregunta).where(Pregunta.id_pregunta == id)
-        preg = session.execute(stmt).first()
-
+        preg: Pregunta = PreguntaFuncs.get_pregunta(session, qid)
+        
         resp:Dict = {
             "qid":preg.id_pregunta,
             "title":preg.titulo,
-            "tiemstamp":preg.fecha,
-            "pos_votes":-1,
-            "neg_votes":-1,
-            "body":preg.contenido,
-            "owner":{"username":preg.autor.nombre}
+            "timestamp":preg.fecha
         }
 
         schema.remove_session()
         return resp
+
     @staticmethod
-    def get_preguntas(self, schema:Schema) -> List[Pregunta]:
+    def get_preguntas(schema:Schema) -> List[Pregunta]:
         """ Devuleve una lista de todas las preguntas
         """
         session: Session = schema.new_session()
@@ -51,7 +46,7 @@ class PreguntasServicio():
         schema.remove_session()
         return preguntas
     
-    def get_preguntas_filtro(schema:Schema,campo:type,valor:str|int) -> List[Pregunta]:
+    def get_preguntas_filtro(schema:Schema,campo:type,valor:str) -> List[Pregunta]:
         session: Session = schema.new_session()
         stmt = select(Pregunta).where(campo == valor)
         preguntas = session.execute(stmt).all()
@@ -127,7 +122,7 @@ class PreguntasServicio():
         schema.remove_session()    
         return answers
 
-    def get_all_reports(schema:Schema) -> list[Dict]:
+    def get_all_reports(schema:Schema) -> list:
         """ Transforma los reportes en una lista
         """
         session: Session = schema.new_session()

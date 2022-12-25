@@ -7,13 +7,8 @@ from sqlalchemy.engine import Engine  # type: ignore
 from sqlalchemy.orm import sessionmaker, scoped_session, registry  # type: ignore
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
-from dms2223backend.data.db.Usuario.usuario import Usuario
-from dms2223backend.data.db.Elemento.elemento import Elemento 
-from dms2223backend.data.db.Elemento.respuesta import  Respuesta
-from dms2223backend.data.db.Elemento.comentario import Comentario
-from dms2223backend.data.db.Elemento.pregunta import Pregunta
-from dms2223backend.data.db.Feedback.feedback import Feedback
-
+from dms2223backend.data.db.results.respuesta import Respuesta
+from sqlalchemy.ext.declarative import declarative_base
 from dms2223backend.data.db import Base
 from sqlalchemy import select, MetaData
 
@@ -35,7 +30,7 @@ class Schema():
     """ Class responsible of the schema initialization and session generation.
     """
 
-    def __init__(self, base:Base, config: BackendConfiguration):
+    def __init__(self,config: BackendConfiguration):
         """ Constructor method.
 
         Initializes the schema, deploying it if necessary.
@@ -46,12 +41,27 @@ class Schema():
         Raises:
             - RuntimeError: When the connection cannot be created/established.
         """
+        self.__registry = registry()
+        if config.get_db_connection_string() is None:
+            raise RuntimeError(
+                'A value for the configuration parameter `db_connection_string` is needed.'
+            )
         db_connection_string: str = config.get_db_connection_string() or ''
         self.__create_engine = create_engine(db_connection_string)
         self.__session_maker = scoped_session(sessionmaker(bind=self.__create_engine))
-        base.metadata.create_all(bind=self.__create_engine)
-        self.__metadata: MetaData = MetaData()
-        self.__dec_base: Base = base 
+        #base.metadata.create_all(bind=self.__create_engine)
+        # self.__metadata: MetaData = MetaData()
+        # self.__dec_base: Base = base 
+
+        # Usuario.map(self.__registry)
+        # Elemento.map(self.__registry)
+        # Comentario.map(self.__registry)
+        Respuesta.map(self.__registry)
+        # Pregunta.map(self.__registry)
+        # Reporte.map(self.__registry)
+        # Voto.map(self.__registry)
+        # Feedback.map(self.__registry)
+        self.__registry.metadata.create_all(self.__create_engine)
 
 
     def new_session(self) -> Session:

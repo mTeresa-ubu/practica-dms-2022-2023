@@ -8,9 +8,14 @@ from sqlalchemy.orm import relationship
 Base = declarative_base()
 
 class Pregunta(Elemento):
+
+
+
     __tablename__='pregunta'
     id_pregunta = Column(Integer, ForeignKey("elemento.id_elemento") ,primary_key=True)
     titulo = Column(String(200))
+    # TODO: meter resto de atributos -> ver spec.yml (schema question full model)
+
 
     respuestas = relationship("Respuesta", 
         primaryjoin="Pregunta.id_pregunta == Respuesta.id_pregunta"
@@ -27,7 +32,8 @@ class Pregunta(Elemento):
     def __init__(self,
         titulo:str,
         contenido:str,
-        autor:Usuario,
+        autor:Usuario
+        # TODO: meter resto de atributos -> ver spec.yml (schema question new model)
         ):
         super().__init__(contenido=contenido,autor=autor)
         self.titulo = titulo
