@@ -19,7 +19,9 @@ from dms2223backend.service.authservice import AuthService
 if __name__ == '__main__':
     cfg: BackendConfiguration = BackendConfiguration()
     cfg.load_from_file(cfg.default_config_file())
-    db: Schema = Schema(base=Base,config=cfg)
+    #db: Schema = Schema(base=Base,config=cfg)
+    db: Schema = Schema(cfg)
+
     #jws: JsonWebSignature = JsonWebSignature()
     auth_service_cfg: Dict = cfg.get_auth_service()
     # auth_service: AuthService = AuthService(

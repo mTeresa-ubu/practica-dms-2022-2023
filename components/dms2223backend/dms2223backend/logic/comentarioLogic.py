@@ -1,6 +1,6 @@
 from sqlalchemy import Integer
 from dms2223backend.data.db.results import Comentario
-from dms2223backend.data.db.resultsets import comentario_res
+from dms2223backend.data.db.resultsets import ComentarioFuncs
 
 class comentarioLogic():
     def get_comentario() -> Comentario:
