@@ -5,8 +5,8 @@ from dms2223backend.data.db.results import Pregunta
 from dms2223backend.data.db.resultsets import pregunta_res
 
 
-from dms2223backend.logic.answerlogic import AnswerLogic
-from dms2223backend.logic.exc.forbiddenoperationerror import ForbiddenOperationError
+#from dms2223backend.logic.answerlogic import AnswerLogic
+#from dms2223backend.logic.exc.forbiddenoperationerror import ForbiddenOperationError
 
 
 class preguntaLogic():

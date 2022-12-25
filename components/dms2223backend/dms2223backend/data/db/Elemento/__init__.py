@@ -10,5 +10,5 @@ from .respuesta import Respuesta
 #from .Reporte import Reporte
 #from .Voto import Voto
 
-from .base import Base
-from .schema import Schema
+#from .base import Base
+#from .schema import Schema

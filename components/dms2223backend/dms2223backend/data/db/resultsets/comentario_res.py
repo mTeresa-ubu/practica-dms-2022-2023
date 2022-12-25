@@ -17,6 +17,7 @@ class ComentarioFuncs():
             raise ValueError('Campo sentimiento vacío.')
 
         nueva = Comentario(username,body,aid, sentiment, oculto=False) 
+        
 
         session.add(nueva)
         session.commit()

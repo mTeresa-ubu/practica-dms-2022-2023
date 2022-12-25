@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 from dms2223backend.data.config import BackendConfiguration
-from dms2223backend.data.db import Base, Schema
+from dms2223backend.data.db import Schema
 from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
+from dms2223backend.data import Sentiment     
 
 from sqlalchemy.orm.session import Session  # type: ignore
 from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
@@ -20,8 +21,6 @@ db: Schema = Schema(cfg)
 
 #db.clear_database(cfg)
 #session:Session = db.new_session()
-
-
 
 
 # us1 = Usuario(nombre="Alvar")
