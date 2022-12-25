@@ -8,12 +8,7 @@ from dms2223backend.data.db import Schema
 from dms2223backend.data.db.Elemento import Pregunta, Respuesta, Comentario
 from dms2223backend.data.db import Usuario, Voto
 from dms2223backend.data.db.resultsets.pregunta_res import PreguntaFuncs
-#from dms2223backend.data.db.resultsets.usuario_res import UsuarioFuncs
-
-
 from sqlalchemy import select
-
-#from dms2223backend.data.db.resultsets.reporte_res import ReporteFuncs
 
 class PreguntasServicio():
     """ Clase "estatica" que permite el acceso a las operaciones de creacion o consulta

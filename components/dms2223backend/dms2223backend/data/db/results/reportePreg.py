@@ -12,21 +12,20 @@ from sqlalchemy import Integer
 from datetime import datetime
 from dms2223backend.data.sentiment import Sentiment
 
-from dms2223backend.data.db.results.votoCom import VotoCom
-from dms2223backend.data.db.results.reporteCom import ReporteCom
+from dms2223backend.data.reportstatus import ReportStatus
 
 
-class Comentario(ResultBase):
 
-    def __init__(self, username: str, body: str, aid: int, sentiment: Sentiment):
+class ReportePreg(ResultBase):
+
+    def __init__(self, username: str, reason: str, aid: int, status: ReportStatus):
 
         self.username: str = username
-        self.body: str = body
-        self.aid: int = aid
-        self.id: int 
+        self.reason: str = reason
+        self.aid: int = aid 
+        self.id: int
         self.timestamp: DateTime  = datetime.timestamp(datetime.now())
-        self.oculto: bool
-        self.sentiment: Sentiment = sentiment
+        self.status: ReportStatus = status
         
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -40,29 +39,21 @@ class Comentario(ResultBase):
               - Table: A `Table` object with the table definition.
         """
         return Table(
-              'comments',
+              'reportsPreg',
               metadata,
-              Column('username', String(32)),
-              Column('body', String(350), nullable=False), #Nunca puede ser null
-              Column('aid', Integer, ForeignKey('answers.id'), nullable=False),
+              Column('username', String(32), nullable=False),
+              Column('reason', String(350), nullable=False), #Nunca puede ser null
+              Column('aid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False),
-              Column('oculto', Boolean, default=False),
-              Column('sentiment', Enum(Sentiment)) 
+              Column('status', Enum(ReportStatus), nullable=False, default=ReportStatus.PENDING)
 
         )
+    
+    __mapper_args__ = {
+        'polymorphic_identity': 'reportsPreg',
+    }
 
-    @staticmethod
-    def _mapping_properties() -> Dict:
-        """ Gets the mapping properties dictionary.
-
-          Returns:
-              - Dict: A dictionary with the mapping properties.
-        """
-        return {
-             'rel_reportes_2': relationship(ReporteCom, backref='comments'),
-             'rel_votos2': relationship(VotoCom, backref='comments')
-             
-        }
+    
 
        

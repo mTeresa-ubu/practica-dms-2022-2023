@@ -1,13 +1,11 @@
-from typing import List, Dict, ClassVar
+from typing import List, Dict
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.db import Schema
 from .authservice import AuthService
 from sqlalchemy import select, Column, String, Text, Boolean, DateTime, ForeignKey, Integer
-from dms2223backend.data.db.Elemento.respuesta import Respuesta 
-from dms2223backend.data.db.Elemento.pregunta import Pregunta
-from dms2223backend.data.db.Elemento.elemento import Elemento
+from dms2223backend.data.db.results import Comentario
 from dms2223backend.data.db.Elemento.comentario import Comentario
-from dms2223backend.data.resultsets.comentario_rset import ComentarioFuncs
+from dms2223backend.data.resultsets.comentario_res import ComentarioFuncs
 
 #MTeresa
 

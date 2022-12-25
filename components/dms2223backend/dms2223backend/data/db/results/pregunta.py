@@ -11,7 +11,7 @@ from sqlalchemy import Integer
 from datetime import datetime
 
 from dms2223backend.data.db.results.respuesta import Respuesta
-from dms2223backend.data.db.results.reporte import Reporte
+from dms2223backend.data.db.results.reporteRes import ReporteRes
 
 class Pregunta(ResultBase):
       
@@ -56,7 +56,7 @@ class Pregunta(ResultBase):
         """
         return {
              'rel_respuestas': relationship(Respuesta, backref='questions'),
-             'rel_reportes2': relationship(Reporte, backref='questions')   
+             'rel_reportes2': relationship(ReporteRes, backref='questions')   
         }
 
        

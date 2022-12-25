@@ -10,8 +10,8 @@ from sqlalchemy import Integer
 
 from datetime import datetime
 
-from dms2223backend.data.db.results.reporte import Reporte
-from dms2223backend.data.db.results.voto import Voto
+from dms2223backend.data.db.results.reporteRes import ReporteRes
+from dms2223backend.data.db.results.votoRes import VotoRes
 from dms2223backend.data.db.results.comentario import Comentario
 
 
@@ -58,8 +58,8 @@ class Respuesta(ResultBase):
         """
         return {
              'rel_comentarios': relationship(Comentario, backref='answers'),
-             'rel_reportes': relationship(Reporte, backref='answers'),
-             'rel_votos': relationship(Voto, backref='answers')
+             'rel_reportes': relationship(ReporteRes, backref='answers'),
+             'rel_votos': relationship(VotoRes, backref='answers')
              
         }
 

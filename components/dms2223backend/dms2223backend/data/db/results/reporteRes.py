@@ -1,4 +1,4 @@
-from enum import Enum
+from sqlalchemy import Enum
 from typing import Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
@@ -9,20 +9,22 @@ from dms2223backend.data.db.results.resultbase import ResultBase
 
 from sqlalchemy import Integer
 
+from datetime import datetime
+from dms2223backend.data.sentiment import Sentiment
 from dms2223backend.data.reportstatus import ReportStatus
 
 
-class Reporte(ResultBase):     
 
-    def __init__(self, username: str, reason: str, tipo: str, eid: int, status: ReportStatus):
+class ReporteRes(ResultBase):
+
+    def __init__(self, username: str, reason: str, aid: int, status: ReportStatus):
 
         self.username: str = username
         self.reason: str = reason
-        self.tipo: str = tipo
+        self.aid: int = aid 
         self.id: int
-        self.eid: int = eid
+        self.timestamp: DateTime  = datetime.timestamp(datetime.now())
         self.status: ReportStatus = status
-
         
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -36,22 +38,21 @@ class Reporte(ResultBase):
               - Table: A `Table` object with the table definition.
         """
         return Table(
-              'reports',
+              'reportsRes',
               metadata,
-              Column('username', String(32)),
+              Column('username', String(32), nullable=False),
               Column('reason', String(350), nullable=False), #Nunca puede ser null
-              Column('tipo', String(32), nullable=False),
+              Column('aid', Integer, ForeignKey('answers.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('eid', Integer, nullable=False),
-              Column('status', Enum(ReportStatus))
+              Column('timestamp', DateTime, nullable=False),
+              Column('status', Enum(ReportStatus), nullable=False, default=ReportStatus.PENDING)
+
         )
+    
+    __mapper_args__ = {
+        'polymorphic_identity': 'reportsRes',
+    }
 
-    """"
-    No lo necesitamos
-    @staticmethod
-    def _mapping_properties() -> Dict:
-
-    """
-
+    
 
        

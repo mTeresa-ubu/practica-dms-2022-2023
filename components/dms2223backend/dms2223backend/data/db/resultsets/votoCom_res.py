@@ -1,32 +1,34 @@
-# from typing import List, Dict, Optional
+from typing import List, Dict, Optional
+from dms2223backend.data.db.results import VotoCom
 
-# from dms2223backend.data.db.results import Respuesta
-
-# from sqlalchemy.orm.session import Session  # type: ignore
-# from sqlalchemy import select # type: ignore
+from sqlalchemy.orm.session import Session  # type: ignore
+from sqlalchemy import select # type: ignore
 
 
-# class VotoFuncs():
+class VotoComFuncs():
 
-#     @staticmethod
-#     def create(session:Session,username: str, body: str, qid: int) -> Respuesta: 
-#         if not body:
-#             raise ValueError('Campo contenido vacío.')
-#         nueva = Respuesta(username,body,qid, oculto=False) 
+    @staticmethod
+    def create(session:Session, username: str,aid: int) -> VotoCom: #Estaba mal, mirar desde el spec lo que necesitamos
+       
+        if not aid:
+            raise ValueError('Id voto comentario vacío.')
+       
+        nueva = VotoCom(username, aid) #En el orden del result
 
-#         session.add(nueva)
-#         session.commit()
-#         return nueva
+        session.add(nueva)
+        session.commit()
+        return nueva
         
-#     @staticmethod
-#     def get_respuesta(session:Session,qid:int) -> Respuesta:
-#         stmt = session.query(Respuesta).where(Respuesta.qid == qid).first()
-#         return stmt
+    @staticmethod
+    def get_votoCom(session:Session,aid:int) -> VotoCom:
+        stmt = session.query(VotoCom).where(VotoCom.aid == aid).first()
+        return stmt
 
-#     @staticmethod
-#     def list_all(session: Session,qid:int) -> List[Dict]:
-#         stmt = session.query(Respuesta).where(Respuesta.qid == qid).all()
-#         return stmt
+    @staticmethod
+    def list_all(session: Session) -> List[VotoCom]:
+       
+        stmt = session.query(VotoCom).all()
+        return stmt
 
     
 
