@@ -55,7 +55,7 @@ paths:
 
         Only question stubs are returned. Full information for each question
         should be fetched separately.
-      #operationId: dms2223backend.presentation.rest.preguntas.get_preg_id
+      operationId: dms2223backend.presentation.rest.preguntas.get_preg_id
       responses:
         '200':
           description: A list of questions.

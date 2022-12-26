@@ -3,7 +3,7 @@
 
 import json
 import time
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, Tuple, Optional, List, Union
 from http import HTTPStatus
 from flask import current_app
 
@@ -18,7 +18,11 @@ from flask import current_app
 
 import requests
 
-def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
+class preguntasPresentation():
+    def __init__(self) -> None:
+        pass
+
+def create_preg(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     """ Recoge los datos de la peticion y los manda al servicio de preguntas
     """
     with current_app.app_context():
@@ -26,7 +30,7 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
         res:Dict = PreguntasServicio.create_pregunta(current_app.db, username, body['body'], body['title'])
     return (res, HTTPStatus.OK)
 
-def get_preg_id(qid:int) -> Tuple[Dict,Optional[int]]:
+def get_preg_id(qid:int) -> Tuple[Dict,int]:
     """ Devuelve una pregunta sabiendo el id
     """
     with current_app.app_context():
