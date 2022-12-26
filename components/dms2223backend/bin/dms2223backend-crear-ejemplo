@@ -2,7 +2,6 @@
 
 # from dms2223backend.data.config import BackendConfiguration
 # from dms2223backend.data.db import Schema
-# from dms2223backend.data.db import Usuario, Pregunta, Reporte, Respuesta, Comentario, Voto, Feedback
 # from dms2223backend.data import Sentiment     
 
 # from sqlalchemy.orm.session import Session  # type: ignore
