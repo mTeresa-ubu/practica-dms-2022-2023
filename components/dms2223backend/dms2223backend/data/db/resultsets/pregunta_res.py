@@ -25,8 +25,7 @@ class PreguntaFuncs():
         return stmt
 
     @staticmethod
-    def list_all(max:Optional[int], session: Session) -> List[Dict]:
-       
+    def list_all(session: Session) -> List[Dict]:
         stmt = session.query(Pregunta).all()
         return stmt
 

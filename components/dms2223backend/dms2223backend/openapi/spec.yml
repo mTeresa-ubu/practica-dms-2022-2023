@@ -41,7 +41,7 @@ paths:
       description: |
         Use this operation to verify the server is running successfully and the
         API is reachable.
-      operationId: dms2223backend.presentation.index.get_head
+      operationId: dms2223backend.presentation.index.head
       responses:
         '204':
           $ref: '#/components/responses/Empty'

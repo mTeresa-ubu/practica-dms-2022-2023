@@ -9,13 +9,12 @@ from flask import current_app
 
 from sqlalchemy.orm.session import Session # type: ignore
 
-from dms2223backend.data.resultsets.pregunta_res import PreguntaRes, PreguntaFuncs
-from dms2223backend.service.serviciopreguntas import PreguntasServicio
-from dms2223backend.data.db import Pregunta
+from dms2223backend.logic.serviciopreguntas import PreguntasServicio
+from dms2223backend.logic.servicioRespuestas import RespuestasServicio
+
 
 from flask import current_app
 
-from dms2223backend.service import AuthService
 
 import requests
 
@@ -23,14 +22,8 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[str,Optional[int]]:
     """ Recoge los datos de la peticion y los manda al servicio de preguntas
     """
     with current_app.app_context():
-        # preg:Dict = {
-        #     "titulo":body["title"],
-        #     "contenido":body["body"],
-        #     "autor":token_info["user_token"]["username"]
-        # }
-
-        res:Pregunta = PreguntasServicio.create_pregunta(
-            schema=current_app.db,datos=preg)
+        username = token_info['user_token']['username']
+        res:Dict = PreguntasServicio.create_pregunta(current_app.db, username, body['body'], body['title'])
     return (res, HTTPStatus.OK)
 
 def get_preg_id(qid:int) -> Tuple[Dict,Optional[int]]:
@@ -45,41 +38,40 @@ def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
     """ Devuelve una lista de respuestas a una pregunta
     """
     with current_app.app_context():
-        resp:Dict = PreguntasServicio.get_answers(
-            schema=current_app.db,qid=qid)
+        resp:Dict = RespuestasServicio.get_answers(current_app.db,qid)
     return (resp, HTTPStatus.OK)
 
-def set_preg_answer(qid:int) -> Tuple[Dict,Optional[int]]:
-    """ Crea una respuesta a unn comentario !TODO delegar a respuesta
-    """
-    with current_app.app_context():
-        resp:Dict = PreguntasServicio.get_answers(qid)
-    return (resp, HTTPStatus.OK)
+# def set_preg_answer(qid:int) -> Tuple[Dict,Optional[int]]:
+#     """ Crea una respuesta a unn comentario !TODO delegar a respuesta
+#     """
+#     with current_app.app_context():
+#         resp:Dict = PreguntasServicio.get_answers(qid)
+#     return (resp, HTTPStatus.OK)
 
-def set_preg_report(qid:int,body: Dict, token_info: Dict) -> Tuple[Dict,Optional[int]]:
-    with current_app.app_context():
-        rep:Dict = {
-            "razon_reporte":body["reason"],
-            "qid":qid,
-            "autor":token_info["user_token"]["username"]
-        }
+# def set_preg_report(qid:int,body: Dict, token_info: Dict) -> Tuple[Dict,Optional[int]]:
+#     with current_app.app_context():
+#         rep:Dict = {
+#             "razon_reporte":body["reason"],
+#             "qid":qid,
+#             "autor":token_info["user_token"]["username"]
+#         }
 
-        report = PreguntasServicio.set_report(
-            schema=current_app.db,
-            reporte=rep
-        )
-    return (report, HTTPStatus.OK)
+#         report = PreguntasServicio.set_report(
+#             schema=current_app.db,
+#             reporte=rep
+#         )
+#     return (report, HTTPStatus.OK)
 
-def get_all_reports() -> Tuple[List[Dict],Optional[int]]:
-    """ Devuelve todos los reportes que se han hecho a las preguntas
-    """
-    with current_app.app_context():
-        resp:Dict = PreguntasServicio.get_all_reports(
-            schema=current_app.db
-        )
-    return (resp, HTTPStatus.OK)
+# def get_all_reports() -> Tuple[List[Dict],Optional[int]]:
+#     """ Devuelve todos los reportes que se han hecho a las preguntas
+#     """
+#     with current_app.app_context():
+#         resp:Dict = PreguntasServicio.get_all_reports(
+#             schema=current_app.db
+#         )
+#     return (resp, HTTPStatus.OK)
 
-def put_preg_report(qrid:int) -> Tuple[Dict,Optional[int]]:
-    with current_app.app_context():
-        resp:Dict = PreguntasServicio.get_pregunta(qrid)
-    return (resp, HTTPStatus.OK)
+# def put_preg_report(qrid:int) -> Tuple[Dict,Optional[int]]:
+#     with current_app.app_context():
+#         resp:Dict = PreguntasServicio.get_pregunta(qrid)
+#     return (resp, HTTPStatus.OK)
