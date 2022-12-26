@@ -34,12 +34,12 @@ def get_preg_id(qid:int) -> Tuple[Dict,Optional[int]]:
             current_app.db,qid)
     return (resp, HTTPStatus.OK)
 
-def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
-    """ Devuelve una lista de respuestas a una pregunta
-    """
-    with current_app.app_context():
-        resp:Dict = RespuestasServicio.get_answers(current_app.db,qid)
-    return (resp, HTTPStatus.OK)
+# def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
+#     """ Devuelve una lista de respuestas a una pregunta
+#     """
+#     with current_app.app_context():
+#         resp:Dict = RespuestasServicio.get_answers(current_app.db,qid)
+#     return (resp, HTTPStatus.OK)
 
 # def set_preg_answer(qid:int) -> Tuple[Dict,Optional[int]]:
 #     """ Crea una respuesta a unn comentario !TODO delegar a respuesta
