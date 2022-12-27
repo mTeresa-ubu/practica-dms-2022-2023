@@ -60,5 +60,5 @@ if __name__ == '__main__':
         host=cfg.get_service_host(),
         port=cfg.get_service_port(),
         debug=cfg.get_debug_flag(),
-        use_reloader=False # Originalmente flase
+        use_reloader=False
     )

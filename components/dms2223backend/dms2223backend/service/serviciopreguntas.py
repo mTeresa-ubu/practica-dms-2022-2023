@@ -7,6 +7,7 @@ from dms2223backend.data.db import Schema
 
 from dms2223backend.data.db.resultsets.pregunta_res import PreguntaFuncs
 from dms2223backend.data.db.resultsets.respuesta_res import RespuestaFuncs
+from dms2223backend.data.db.results.pregunta import Pregunta
 from sqlalchemy import select
 
 class PreguntasServicio():

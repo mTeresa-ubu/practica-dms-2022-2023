@@ -55,7 +55,7 @@ paths:
 
         Only question stubs are returned. Full information for each question
         should be fetched separately.
-      operationId: dms2223backend.presentation.rest.preguntas.get_preg_id
+      operationId: dms2223backend.presentation.rest.preguntas.get_pregs
       responses:
         '200':
           description: A list of questions.
@@ -151,7 +151,7 @@ paths:
       summary: Gets the answers for a question
       description: |
         Fetches the full answers for a given question.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.respuesta.lista_Respuestas
       parameters:
         - $ref: '#/components/parameters/QuestionIdPathParam'
       responses:
@@ -246,7 +246,7 @@ paths:
 
         The owner of the answer will be automatically retrieved from the
         user token against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.respuesta.crear_Respuesta
       parameters:
         - $ref: '#/components/parameters/QuestionIdPathParam'
       requestBody:
@@ -296,7 +296,7 @@ paths:
 
         The owner of the report will be automatically retrieved from the
         user token against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.list_reportsPreg
       parameters:
         - $ref: '#/components/parameters/QuestionIdPathParam'
       requestBody:
@@ -344,7 +344,7 @@ paths:
 
         Several parameters can be used to filter out the reports according to
         their status.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.create_repPreg
       parameters:
         - name: pending
           description: |
@@ -414,7 +414,7 @@ paths:
 
         When a report on a question is accepted, the linked question should be
         hidden so neither the question nor its answers and comments are visible.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.get_reportsPreg
       parameters:
         - $ref: '#/components/parameters/QuestionReportIdPathParam'
       requestBody:
@@ -449,7 +449,7 @@ paths:
 
         The user voting will be automatically retrieved from the user token
         against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.respuesta.vote_respuesta
       parameters:
         - $ref: '#/components/parameters/AnswerIdPathParam'
       responses:
@@ -479,7 +479,7 @@ paths:
 
         The owner of the comment will be automatically retrieved from the user
         token against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.comentario.create_comment
       parameters:
         - $ref: '#/components/parameters/AnswerIdPathParam'
       requestBody:
@@ -529,7 +529,7 @@ paths:
 
         The owner of the report will be automatically retrieved from the
         user token against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.get_reportsRes
       parameters:
         - $ref: '#/components/parameters/AnswerIdPathParam'
       requestBody:
@@ -577,7 +577,7 @@ paths:
 
         Several parameters can be used to filter out the reports according to
         their status.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.create_repRes
       parameters:
         - name: pending
           description: |
@@ -633,7 +633,7 @@ paths:
 
         When a report on an answer is accepted, the linked answer should be
         hidden so neither the answer nor its comments are visible.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.list_reportsRes
       parameters:
         - $ref: '#/components/parameters/AnswerReportIdPathParam'
       requestBody:
@@ -668,7 +668,7 @@ paths:
 
         The user voting will be automatically retrieved from the user token
         against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.comentario.vote_comment
       parameters:
         - $ref: '#/components/parameters/CommentIdPathParam'
       responses:
@@ -698,7 +698,7 @@ paths:
 
         The owner of the report will be automatically retrieved from the
         user token against the authorization server.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.comentario.report_comment #operationId: dms2223backend.presentation.rest.reporte.list_reportsCom
       parameters:
         - $ref: '#/components/parameters/CommentIdPathParam'
       requestBody:
@@ -746,7 +746,7 @@ paths:
 
         Several parameters can be used to filter out the reports according to
         their status.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.create_repCom
       parameters:
         - name: pending
           description: |
@@ -802,7 +802,7 @@ paths:
 
         When a report on a comment is accepted, the linked comment should be
         hidden so it will not be visible.
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.reporte.list_reportsCom
       parameters:
         - $ref: '#/components/parameters/CommentReportIdPathParam'
       requestBody:
