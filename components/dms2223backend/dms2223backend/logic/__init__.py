@@ -1,6 +1,6 @@
-""" Backend logic classes
+""" Backend service-layer classes
 """
-from comentarioLogic import comentarioLogic
-from preguntaLogic import preguntaLogic
-from reporteLogic import reporteLogic
-from respuestaLogic import respuestaLogic
+from .authservice import AuthService
+from .serviciopreguntas import PreguntasServicio
+#from .servicioComentario import 
+from .servicioRespuestas import RespuestasServicio

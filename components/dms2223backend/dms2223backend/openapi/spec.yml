@@ -41,7 +41,7 @@ paths:
       description: |
         Use this operation to verify the server is running successfully and the
         API is reachable.
-      operationId: dms2223backend.presentation.index.get_head
+      operationId: dms2223backend.presentation.index.head
       responses:
         '204':
           $ref: '#/components/responses/Empty'
@@ -55,7 +55,6 @@ paths:
 
         Only question stubs are returned. Full information for each question
         should be fetched separately.
-      ##CREO QUE ES ESTA
       operationId: dms2223backend.presentation.rest.preguntas.get_preg_id
       responses:
         '200':
@@ -84,7 +83,7 @@ paths:
 
         The owner of the question will be automatically retrieved from the
         user token against the authorization server.
-      ##CREO
+    
       operationId: dms2223backend.presentation.rest.preguntas.create_preg
       requestBody:
         content:
@@ -117,7 +116,7 @@ paths:
   /questions/{qid}:
     get:
       summary: Gets a single question
-      # operationId: TODO: Set to the fully-qualified name of the function handling the operation
+      operationId: dms2223backend.presentation.rest.preguntas.get_preg_id
       parameters:
         - $ref: '#/components/parameters/QuestionIdPathParam'
       responses:

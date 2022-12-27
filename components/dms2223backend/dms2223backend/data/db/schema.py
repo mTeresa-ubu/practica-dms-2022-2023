@@ -16,7 +16,7 @@ from dms2223backend.data.db.results.reporteRes import ReporteRes
 from dms2223backend.data.db.results.votoCom import VotoCom
 from dms2223backend.data.db.results.votoRes import VotoRes
 from sqlalchemy.ext.declarative import declarative_base
-from dms2223backend.data.db import Base
+#from dms2223backend.data.db import Base
 from sqlalchemy import select, MetaData
 
 

@@ -6,21 +6,22 @@ import logging
 import connexion
 from flask import current_app
 from flask.logging import default_handler
+from typing import Dict
 # from authlib.jose import JsonWebSignature
 import dms2223backend
 from dms2223backend.data.config import BackendConfiguration
 from dms2223backend.data.db.schema import Schema
-from dms2223backend.data.db import Base
+#from dms2223backend.data.db import Base
 
 from typing import Dict
-from dms2223backend.data.db import Pregunta
-from dms2223backend.service.authservice import AuthService
+
+# from dms2223backend.service.authservice import AuthService
 
 if __name__ == '__main__':
     cfg: BackendConfiguration = BackendConfiguration()
     cfg.load_from_file(cfg.default_config_file())
     #db: Schema = Schema(base=Base,config=cfg)
-    db: Schema = Schema(cfg)
+    
 
     #jws: JsonWebSignature = JsonWebSignature()
     auth_service_cfg: Dict = cfg.get_auth_service()
@@ -29,7 +30,7 @@ if __name__ == '__main__':
     #     apikey_header='X-ApiKey-Auth',
     #     apikey_secret=auth_service_cfg['apikey_secret']
     # )
-
+    db: Schema = Schema(cfg)
     specification_dir = os.path.dirname(
         inspect.getfile(dms2223backend)) + '/openapi'
 

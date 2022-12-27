@@ -6,7 +6,7 @@ from flask import current_app
 import requests
 from connexion.exceptions import Unauthorized  # type: ignore
 from dms2223backend.data.config import BackendConfiguration
-from dms2223backend.service import UsuariosServicio
+
 
 def verify_api_key(token: str) -> Dict:
     """Callback testing the received API key.
