@@ -24,7 +24,7 @@ def create_comment(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
 #    return (res, HTTPStatus.OK)
 #
 #
-def get_comments(qid:int) -> Tuple[Dict,int]:
+def get_comments(aid:int) -> Tuple[Dict,int]:
     pass
 #    """ Devuelve una pregunta sabiendo el id
 #    """
