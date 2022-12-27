@@ -62,9 +62,8 @@ class Schema():
 
         # Usuario.map(self.__registry)
         # Elemento.map(self.__registry)
-        
-        Respuesta.map(self.__registry)
         Pregunta.map(self.__registry)
+        Respuesta.map(self.__registry)
         Comentario.map(self.__registry)
         ReporteRes.map(self.__registry)
         VotoRes.map(self.__registry)

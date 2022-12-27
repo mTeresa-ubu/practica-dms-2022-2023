@@ -48,8 +48,8 @@ class BackendConfiguration(ServiceConfiguration):
         """
         ServiceConfiguration._set_values(self, values)
 
-        if 'db_connection_string' in values:
-            self.set_db_connection_string(values['db_connection_string'])
+        # if 'db_connection_string' in values:
+        #     self.set_db_connection_string(values['db_connection_string'])
         if 'auth_service' in values: #Añadido 19/12/2022
             self.set_auth_service(values['auth_service'])
         # if 'salt' in values:

@@ -5,29 +5,23 @@ import json
 import time
 from typing import Dict, Tuple, Optional, List, Union
 from http import HTTPStatus
-from flask import current_app
+
 
 from sqlalchemy.orm.session import Session # type: ignore
 
-from dms2223backend.logic.serviciopreguntas import PreguntasServicio
-from dms2223backend.logic.servicioRespuestas import RespuestasServicio
-
-
+from dms2223backend.service.serviciopreguntas import PreguntasServicio
 from flask import current_app
-
-
 import requests
 
-class preguntasPresentation():
-    def __init__(self) -> None:
-        pass
+def __init__(self) -> None:
+    pass
 
 def create_preg(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     """ Recoge los datos de la peticion y los manda al servicio de preguntas
     """
     with current_app.app_context():
         username = token_info['user_token']['username']
-        res:Dict = PreguntasServicio.create_pregunta(current_app.db, username, body['body'], body['title'])
+        res:Dict = PreguntasServicio.create_pregunta(current_app.db, body['body'], body['title'], username)
     return (res, HTTPStatus.OK)
 
 def get_preg_id(qid:int) -> Tuple[Dict,int]:
@@ -36,6 +30,14 @@ def get_preg_id(qid:int) -> Tuple[Dict,int]:
     with current_app.app_context():
         resp:Dict = PreguntasServicio.get_pregunta(
             current_app.db,qid)
+    return (resp, HTTPStatus.OK)
+
+def get_pregs() -> Tuple[Dict,int]:
+    """ Devuelve una pregunta sabiendo el id
+    """
+    with current_app.app_context():
+        resp:Dict = PreguntasServicio.get_preguntas(
+            current_app.db)
     return (resp, HTTPStatus.OK)
 
 # def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
