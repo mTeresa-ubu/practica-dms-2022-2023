@@ -58,8 +58,8 @@ class Respuesta(ResultBase):
         """
         return {
              'rel_comentarios': relationship(Comentario, backref='answers'),
-             'rel_reportes': relationship(ReporteRes, backref='answers'),
-             'rel_votos': relationship(VotoRes, backref='answers')
+             #'rel_reportes': relationship(ReporteRes, backref='answers'),
+             #'rel_votos': relationship(VotoRes, backref='answers')
              
         }
 
