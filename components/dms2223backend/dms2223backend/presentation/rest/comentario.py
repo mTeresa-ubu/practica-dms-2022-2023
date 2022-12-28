@@ -27,8 +27,8 @@ def get_comment(id:int) -> Tuple[Dict,int]:
         comentario:servicioComentario.get_comentario(current_app.db,id)
     return (comentario, HTTPStatus.OK)
 
-#def vote_comment(cid: int) -> Tuple[dict, int]:
-#    pass
-#
-#def report_comment(cid: int) -> Tuple[dict, int]:
-#    pass
+def vote_comment(cid: int) -> Tuple[dict, int]:
+    pass
+
+def report_comment(cid: int) -> Tuple[dict, int]:
+    pass
