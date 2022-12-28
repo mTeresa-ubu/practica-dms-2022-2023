@@ -11,7 +11,7 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     """
     with current_app.app_context():
         username = token_info['user_token']['username']
-        res:Dict = PreguntasServicio.create_pregunta(current_app.db, body['body'], body['title'], username)
+        res:Dict = PreguntasServicio.create_pregunta(current_app.db, username, body['body'], body['title'])
         if not res:
             return ("No se ha creado la pregunta correctaente", HTTPStatus.BAD_REQUEST)
     return (res, HTTPStatus.OK)
