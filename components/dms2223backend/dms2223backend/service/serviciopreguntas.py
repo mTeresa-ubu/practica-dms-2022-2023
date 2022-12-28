@@ -1,30 +1,26 @@
 """ UserServices class module.
 """
-
-from typing import List, Dict, ClassVar
+from typing import List
 from sqlalchemy.orm.session import Session  # type: ignore
 from dms2223backend.data.db import Schema
-
 from dms2223backend.data.db.resultsets.pregunta_res import PreguntaFuncs
-from dms2223backend.data.db.resultsets.respuesta_res import RespuestaFuncs
 from dms2223backend.data.db.results.pregunta import Pregunta
-from sqlalchemy import select
+from datetime import datetime
 
 class PreguntasServicio():
     """ Clase "estatica" que permite el acceso a las operaciones de creacion o consulta
         derivados de pregunta
     """
-##SINGLE RESPONSABILITY PRINCIPLE   
+##de esta forma sí respetamos el SINGLE RESPONSABILITY PRINCIPLE   
     @staticmethod
-    def get_pregunta(schema:Schema, qid:int) -> Dict:
+    def get_pregunta(schema:Schema, qid:int) -> dict:
         """Obtiene los datos de una pregunta se debe usar para la visualizacion
             en lista de pregunta, no contiene los votos de las respuestas 
         """
         session: Session = schema.new_session()
         preg: Pregunta = PreguntaFuncs.get_pregunta(session, qid)
         
-
-        preg:Dict = {
+        preg:dict = {
             "qid":preg.qid,
             "title":preg.title,
             "timestamp":preg.timestamp,
@@ -35,6 +31,7 @@ class PreguntasServicio():
 
         schema.remove_session()
         return preg
+        pass
 
     @staticmethod
     def get_preguntas(schema:Schema) -> List:
@@ -54,16 +51,16 @@ class PreguntasServicio():
 
         schema.remove_session()
         return list_preg
+        pass
     
-
     @staticmethod
-    def create_pregunta(schema:Schema, username:str, body: str, title:str) -> Dict:
+    def create_pregunta(schema:Schema, username:str, body: str, title:str) -> dict:
         """ Construye el objeto Pregunta que se insertara en la BDD
         """
         session: Session = schema.new_session() 
 
         res = PreguntaFuncs.create(session, body, title, username)
-        res:Dict = {
+        res:dict = {
             "qid":res.qid,
             "title":res.title,
             "timestamp":res.timestamp,

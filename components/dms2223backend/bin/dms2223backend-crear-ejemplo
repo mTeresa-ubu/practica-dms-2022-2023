@@ -1,122 +1,16 @@
-# #!/usr/bin/env python3
+#!/usr/bin/env python3
 
-# from dms2223backend.data.config import BackendConfiguration
-# from dms2223backend.data.db import Schema
-# from dms2223backend.data import Sentiment     
+from dms2223backend.data.config import BackendConfiguration
+from dms2223backend.data.db import Schema
 
-# from sqlalchemy.orm.session import Session  # type: ignore
-# from sqlalchemy import select, Table, Column, Integer, String, MetaData # type: ignore
+from datetime import datetime
 
-# from datetime import datetime
-# from dms2223backend.presentation.rest.preguntas import PreguntasServicio
-# import json
-#  ##imports
+from dms2223backend.service.serviciopreguntas import PreguntasServicio
 
 
-# cfg: BackendConfiguration = BackendConfiguration()
-# cfg.load_from_file(cfg.default_config_file())
-# db: Schema = Schema(cfg)
+cfg: BackendConfiguration = BackendConfiguration()
+cfg.load_from_file(cfg.default_config_file())
+db: Schema = Schema(cfg)
 
-# PreguntasServicio.create_pregunta(db, "Este es el cuerpo de la pregunta 1","Pregunta 1","Juan", )
-# PreguntasServicio.create_pregunta(db,"Este es el cuerpo de la pregunta 2","Pregunta 2" "María", )
-
-
-# # #db.clear_database(cfg)
-# # #session:Session = db.new_session()
-
-
-# # # us1 = Usuario(nombre="Alvar")
-# # # us2 = Usuario(nombre="Bilal")
-
-# # # session.add(us1)
-# # # session.add(us2)
-
-# # # session.commit()
-
-# # # p1 = Pregunta(
-# # #     titulo="Pregunta de Alvar",
-# # #     contenido="Que significa X?",
-# # #     autor=us1
-# # # )
-
-# # # p2 = Pregunta(
-# # #     titulo="Pregunta de Bilal",
-# # #     contenido="Que significa Y?",
-# # #     autor=us2
-# # # )
-
-# # # session.add(p1)
-# # # session.add(p2)
-# # # session.commit()
-
-# # # r1 = Respuesta(
-# # #     contenido="X significa algo",
-# # #     pregunta=p1,
-# # #     autor=us1
-# # # )
-
-# # # r2 = Respuesta(
-# # #     contenido="Y significa algo",
-# # #     pregunta=p1,
-# # #     autor=us2
-# # # )
-
-# # # session.add(r1)
-# # # session.add(r2)
-# # # session.commit()
-
-
-# # # fpos = Feedback(
-# # #     descripcion="Bueno",
-# # #     color_asociado="#00FF00"
-# # # )
-
-# # # fneg = Feedback(
-# # #     descripcion="Malo",
-# # #     color_asociado="#FF0000"
-# # # )
-
-# # # fneu = Feedback(
-# # #     descripcion="Neutro",
-# # #     color_asociado="#aaaaaa"
-# # # )
-
-# # # session.add(fpos)
-# # # session.add(fneg)
-# # # session.add(fneu)
-# # # session.commit()
-
-# # # c1 = Comentario(
-# # #     contenido="Hmmm bien hecho",
-# # #     autor=us1,
-# # #     feedback=2,
-# # #     respuesta=r1
-# # # )
-
-# # # c2 = Comentario(
-# # #     contenido="Hmmm bien hecho",
-# # #     autor=us1,
-# # #     feedback=1,
-# # #     respuesta=r1
-# # # )
-
-# # # session.add(c1)
-# # # session.add(c2)
-# # # session.commit()
-
-
-
-# # # def print_tabla(tabla):
-# # #     stmt = select('*').select_from(tabla)
-# # #     result = session.execute(stmt).fetchall()
-
-# # #     print("tabla: "+tabla.__tablename__)
-# # #     for p in result:
-# # #         print(p)
-
-
-# # # print_tabla(Pregunta)
-# # # print_tabla(Usuario)
-# # # print_tabla(Respuesta)
-# # # print_tabla(Comentario)
-
+PreguntasServicio.create_pregunta(db,"Juan","Este es el cuerpo de la pregunta 1","Pregunta 1")
+PreguntasServicio.create_pregunta(db,"María","Este es el cuerpo de la pregunta 2","Pregunta 2")
