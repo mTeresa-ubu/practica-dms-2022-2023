@@ -1,4 +1,4 @@
-from typing import Dict
+
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
 from sqlalchemy import Boolean, DateTime, ForeignKey
@@ -12,17 +12,18 @@ from datetime import datetime
 
 from dms2223backend.data.db.results.respuesta import Respuesta
 from dms2223backend.data.db.results.reporteRes import ReporteRes
+from sqlalchemy import func
 
 class Pregunta(ResultBase):
       
 
-    def __init__(self, username: str, body: str, title: str, oculto: bool):
+    def __init__(self, body: str, title: str, username: str,  oculto: bool):
 
         self.username: str = username
         self.body: str = body
         self.title: str = title
         self.qid: int
-        self.timestamp: DateTime  = datetime.timestamp(datetime.now())
+        self.timestamp: DateTime #= datetime.timestamp(datetime.now()) no funciona de esta forma, por defecto abajo
         self.oculto: bool
         
     @staticmethod
@@ -43,20 +44,20 @@ class Pregunta(ResultBase):
               Column('body', String(350), nullable=False), #Nunca puede ser null
               Column('title', String(100), nullable=False),
               Column('qid', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime, nullable=False),
+              Column('timestamp', DateTime, nullable=False, default=func.now()),
               Column('oculto', Boolean, default=False)
         )
 
     @staticmethod
-    def _mapping_properties() -> Dict:
+    def _mapping_properties() -> dict:
         """ Gets the mapping properties dictionary.
 
           Returns:
               - Dict: A dictionary with the mapping properties.
         """
         return {
-             'rel_respuestas': relationship(Respuesta, backref='questions'),
-             'rel_reportes2': relationship(ReporteRes, backref='questions')   
+             'rel_respuestas': relationship(Respuesta, backref='questions')#,
+             #'rel_reportes2': relationship(ReporteRes, backref='questions')   
         }
 
        
