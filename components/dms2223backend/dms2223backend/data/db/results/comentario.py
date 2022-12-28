@@ -1,19 +1,14 @@
 from sqlalchemy import Enum
 from typing import Dict
-from sqlalchemy import Table, MetaData, Column
-from sqlalchemy import String, func 
-from sqlalchemy import Boolean, DateTime, ForeignKey
+from sqlalchemy import Table, MetaData, Column, String, Boolean, DateTime, ForeignKey, Integer
 from sqlalchemy.orm import relationship 
-
-from dms2223backend.data.db.results.resultbase import ResultBase
-
-from sqlalchemy import Integer
 
 from datetime import datetime
 from dms2223backend.data.sentiment import Sentiment
 
 from dms2223backend.data.db.results.votoCom import VotoCom
 from dms2223backend.data.db.results.reporteCom import ReporteCom
+from dms2223backend.data.db.results.resultbase import ResultBase
 
 
 class Comentario(ResultBase):
