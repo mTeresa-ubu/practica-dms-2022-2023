@@ -16,5 +16,5 @@ def crear_Respuesta(body: Dict, qid:int):
         return HTTPStatus.BAD_REQUEST
 
 
-def vote_respuesta():
+def vote_respuesta(aid : int):
         return HTTPStatus.BAD_REQUEST     
