@@ -22,7 +22,7 @@ class Pregunta(ResultBase):
         self.body: str = body
         self.title: str = title
         self.qid: int
-        self.timestamp: DateTime  = datetime.timestamp(datetime.now())
+        self.timestamp: DateTime
         self.oculto: bool
         
     @staticmethod
@@ -43,12 +43,12 @@ class Pregunta(ResultBase):
               Column('body', String(350), nullable=False), #Nunca puede ser null
               Column('title', String(100), nullable=False),
               Column('qid', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime, nullable=False),
+              Column('timestamp', DateTime, nullable=False, default=func.now()),
               Column('oculto', Boolean, default=False)
         )
 
     @staticmethod
-    def _mapping_properties() -> Dict:
+    def _mapping_properties() -> dict:
         """ Gets the mapping properties dictionary.
 
           Returns:
