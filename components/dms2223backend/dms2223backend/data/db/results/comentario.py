@@ -40,7 +40,8 @@ class Comentario(ResultBase):
               metadata,
               Column('username', String(32)),
               Column('body', String(350), nullable=False), #Nunca puede ser null
-              Column('aid', Integer, ForeignKey('answers.id'), nullable=False),
+              #Column('aid', Integer, ForeignKey('answers.id'), nullable=False),
+              Column('aid', Integer, nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False, default=func.now()),
               Column('oculto', Boolean, default=False),
