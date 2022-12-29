@@ -12,9 +12,7 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     with current_app.app_context():
         username = token_info['user_token']['username']
         res:Dict = PreguntasServicio.create_pregunta(current_app.db, username, body['body'], body['title'])
-        if not res:
-            return ("No se ha creado la pregunta correctaente", HTTPStatus.BAD_REQUEST)
-    return (res, HTTPStatus.OK)
+    return (res, HTTPStatus.CREATED)
 
 def get_preg_id(qid:int) -> Tuple[Dict,int]:
     """ Devuelve una pregunta sabiendo el id
@@ -32,8 +30,6 @@ def get_pregs() -> Tuple[Dict,int]:
     with current_app.app_context():
         resp:Dict = PreguntasServicio.get_preguntas(
             current_app.db)
-        if not resp:
-            return("No existen preguntas", HTTPStatus.BAD_REQUEST)
     return (resp, HTTPStatus.OK)
 
 # def get_preg_answers(qid:int) -> Tuple[List[Dict],Optional[int]]:
