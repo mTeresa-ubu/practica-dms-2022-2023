@@ -44,13 +44,12 @@ class Respuesta(ResultBase):
               Column('body', String(350), nullable=False), #Nunca puede ser null
               Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime, nullable=False),
+              Column('timestamp', DateTime, nullable=False, default=func.now()),
               Column('oculto', Boolean, default=False)
-
         )
 
     @staticmethod
-    def _mapping_properties() -> Dict:
+    def _mapping_properties() -> dict:
         """ Gets the mapping properties dictionary.
 
           Returns:
@@ -58,8 +57,8 @@ class Respuesta(ResultBase):
         """
         return {
              'rel_comentarios': relationship(Comentario, backref='answers'),
-             'rel_reportes': relationship(ReporteRes, backref='answers'),
-             'rel_votos': relationship(VotoRes, backref='answers')
+             #'rel_reportes': relationship(ReporteRes, backref='answers'),
+             #'rel_votos': relationship(VotoRes, backref='answers')
              
         }
 
