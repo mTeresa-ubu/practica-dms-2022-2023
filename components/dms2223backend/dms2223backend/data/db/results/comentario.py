@@ -8,7 +8,7 @@ from dms2223backend.data.sentiment import Sentiment
 from dms2223backend.data.db.results.votoCom import VotoCom
 from dms2223backend.data.db.results.reporteCom import ReporteCom
 from dms2223backend.data.db.results.resultbase import ResultBase
-from dms2223backend.data.db.results.respuesta import Respuesta
+#from dms2223backend.data.db.results.respuesta import Respuesta
 from dms2223backend.data.db.results.reporteRes import ReporteRes
 
 
