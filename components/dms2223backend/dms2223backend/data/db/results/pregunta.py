@@ -56,7 +56,7 @@ class Pregunta(ResultBase):
         """
         return {
              'rel_respuestas': relationship(Respuesta, backref='questions'),
-             'rel_reportes2': relationship(ReporteRes, backref='questions')   
+             #'rel_reportes2': relationship(ReporteRes, backref='questions')   
         }
 
        
