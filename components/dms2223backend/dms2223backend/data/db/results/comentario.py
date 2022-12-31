@@ -1,6 +1,5 @@
-from sqlalchemy import Enum
+from sqlalchemy import Enum, Table, MetaData, Column, String, Boolean, DateTime, ForeignKey, Integer, func
 from typing import Dict
-from sqlalchemy import Table, MetaData, Column, String, Boolean, DateTime, ForeignKey, Integer, func
 from sqlalchemy.orm import relationship 
 
 from dms2223backend.data.sentiment import Sentiment

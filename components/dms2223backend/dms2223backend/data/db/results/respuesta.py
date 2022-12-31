@@ -17,13 +17,13 @@ from dms2223backend.data.db.results.comentario import Comentario
 
 class Respuesta(ResultBase):
 
-    def __init__(self, username: str, body: str, qid: int):
+    def __init__(self, body: Dict,username: str):
 
         self.username: str = username
-        self.body: str = body
-        self.qid: int = qid
+        self.qid: int = body['qid']
+        self.body: str = body['body']
+        #self.timestamp: DateTime
         self.id: int 
-        self.timestamp: DateTime  = datetime.timestamp(datetime.now())
         self.oculto: bool
         
     @staticmethod
@@ -44,12 +44,13 @@ class Respuesta(ResultBase):
               Column('body', String(350), nullable=False), #Nunca puede ser null
               Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime, nullable=False, default=func.now()),
+              #Column('timestamp', DateTime,server_default=func.now()),
               Column('oculto', Boolean, default=False)
+
         )
 
     @staticmethod
-    def _mapping_properties() -> dict:
+    def _mapping_properties() -> Dict:
         """ Gets the mapping properties dictionary.
 
           Returns:

@@ -9,10 +9,10 @@ from sqlalchemy import select # type: ignore
 class RespuestaFuncs():
 
     @staticmethod
-    def create(session:Session,username: str, body: str, qid: int) -> Respuesta: 
+    def create(session:Session,username: str, body: Dict) -> Respuesta: 
         if not body:
             raise ValueError('Campo contenido vacío.')
-        nueva = Respuesta(username,body,qid, oculto=False) 
+        nueva = Respuesta(username=username,body=body) 
 
         session.add(nueva)
         session.commit()
