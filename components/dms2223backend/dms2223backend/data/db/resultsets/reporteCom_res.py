@@ -9,21 +9,21 @@ from sqlalchemy import select # type: ignore
 class ReporteComFuncs():
 
     @staticmethod
-    def create(session:Session, username: str, reason: str, aid: int) -> ReporteCom: #Estaba mal, mirar desde el spec lo que necesitamos
+    def create(session:Session, username: str, reason: str, cid: int) -> ReporteCom: #Estaba mal, mirar desde el spec lo que necesitamos
         if not reason:
             raise ValueError('Campo razón vacío.')
-        if not aid:
+        if not cid:
             raise ValueError('Id reporte comentario vacío.')
        
-        nueva = ReporteCom(username, reason, aid, ReportStatus.PENDING) #En el orden del result
+        nueva = ReporteCom(username, reason, cid, ReportStatus.PENDING) #En el orden del result
 
         session.add(nueva)
         session.commit()
         return nueva
         
     @staticmethod
-    def get_reporteCom(session:Session,aid:int) -> ReporteCom:
-        stmt = session.query(ReporteCom).where(ReporteCom.id == aid).first()
+    def get_reporteCom(session:Session, id:int) -> ReporteCom:
+        stmt = session.query(ReporteCom).where(ReporteCom.id == id).first()
         return stmt
 
     @staticmethod

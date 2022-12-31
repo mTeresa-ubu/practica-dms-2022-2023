@@ -9,21 +9,21 @@ from sqlalchemy import select # type: ignore
 class ReportePregFuncs():
 
     @staticmethod
-    def create(session:Session, username: str, reason: str, aid: int) -> ReportePreg: #Estaba mal, mirar desde el spec lo que necesitamos
+    def create(session:Session, username: str, reason: str, qid: int) -> ReportePreg: #Estaba mal, mirar desde el spec lo que necesitamos
         if not reason:
             raise ValueError('Campo razón vacío.')
-        if not aid:
+        if not qid:
             raise ValueError('Id reporte comentario vacío.')
        
-        nueva = ReportePreg(username, reason, aid, ReportStatus.PENDING) #En el orden del result
+        nueva = ReportePreg(username, reason, qid, ReportStatus.PENDING) #En el orden del result
 
         session.add(nueva)
         session.commit()
         return nueva
         
     @staticmethod
-    def get_reportePreg(session:Session,aid:int) -> ReportePreg:
-        stmt = session.query(ReportePreg).where(ReportePreg.id == aid).first()
+    def get_reportePreg(session:Session, id:int) -> ReportePreg:
+        stmt = session.query(ReportePreg).where(ReportePreg.id == id).first()
         return stmt
 
     @staticmethod

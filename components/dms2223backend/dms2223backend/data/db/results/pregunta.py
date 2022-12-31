@@ -1,4 +1,4 @@
-
+from typing import Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
 from sqlalchemy import Boolean, DateTime, ForeignKey
@@ -12,18 +12,17 @@ from datetime import datetime
 
 from dms2223backend.data.db.results.respuesta import Respuesta
 from dms2223backend.data.db.results.reporteRes import ReporteRes
-from sqlalchemy import func
 
 class Pregunta(ResultBase):
       
 
-    def __init__(self, body: str, title: str, username: str,  oculto: bool):
+    def __init__(self, username: str, body: str, title: str, oculto: bool):
 
         self.username: str = username
         self.body: str = body
         self.title: str = title
         self.qid: int
-        self.timestamp: DateTime #= datetime.timestamp(datetime.now()) no funciona de esta forma, por defecto abajo
+        self.timestamp: DateTime
         self.oculto: bool
         
     @staticmethod
@@ -56,7 +55,7 @@ class Pregunta(ResultBase):
               - Dict: A dictionary with the mapping properties.
         """
         return {
-             'rel_respuestas': relationship(Respuesta, backref='questions')#,
+             'rel_respuestas': relationship(Respuesta, backref='questions'),
              #'rel_reportes2': relationship(ReporteRes, backref='questions')   
         }
 

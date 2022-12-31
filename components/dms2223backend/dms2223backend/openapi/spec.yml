@@ -296,7 +296,7 @@ paths:
 
         The owner of the report will be automatically retrieved from the
         user token against the authorization server.
-      operationId: dms2223backend.presentation.rest.reporte.list_reportsPreg
+      operationId: dms2223backend.presentation.rest.reporte.create_repPreg
       parameters:
         - $ref: '#/components/parameters/QuestionIdPathParam'
       requestBody:
@@ -344,7 +344,7 @@ paths:
 
         Several parameters can be used to filter out the reports according to
         their status.
-      operationId: dms2223backend.presentation.rest.reporte.create_repPreg
+      operationId: dms2223backend.presentation.rest.reporte.list_repPreg
       parameters:
         - name: pending
           description: |
@@ -414,7 +414,7 @@ paths:
 
         When a report on a question is accepted, the linked question should be
         hidden so neither the question nor its answers and comments are visible.
-      operationId: dms2223backend.presentation.rest.reporte.get_reportsPreg
+      operationId: dms2223backend.presentation.rest.reporte.change_status_repPreg
       parameters:
         - $ref: '#/components/parameters/QuestionReportIdPathParam'
       requestBody:
@@ -529,7 +529,7 @@ paths:
 
         The owner of the report will be automatically retrieved from the
         user token against the authorization server.
-      operationId: dms2223backend.presentation.rest.reporte.get_reportsRes
+      operationId: dms2223backend.presentation.rest.reporte.create_repRes
       parameters:
         - $ref: '#/components/parameters/AnswerIdPathParam'
       requestBody:
@@ -577,7 +577,7 @@ paths:
 
         Several parameters can be used to filter out the reports according to
         their status.
-      operationId: dms2223backend.presentation.rest.reporte.create_repRes
+      operationId: dms2223backend.presentation.rest.reporte.list_repRes
       parameters:
         - name: pending
           description: |
@@ -633,7 +633,7 @@ paths:
 
         When a report on an answer is accepted, the linked answer should be
         hidden so neither the answer nor its comments are visible.
-      operationId: dms2223backend.presentation.rest.reporte.list_reportsRes
+      operationId: dms2223backend.presentation.rest.reporte.change_status_repRes
       parameters:
         - $ref: '#/components/parameters/AnswerReportIdPathParam'
       requestBody:
@@ -698,7 +698,7 @@ paths:
 
         The owner of the report will be automatically retrieved from the
         user token against the authorization server.
-      operationId: dms2223backend.presentation.rest.comentario.report_comment #operationId: dms2223backend.presentation.rest.reporte.list_reportsCom
+      operationId: dms2223backend.presentation.rest.reporte.create_repCom
       parameters:
         - $ref: '#/components/parameters/CommentIdPathParam'
       requestBody:
@@ -746,7 +746,7 @@ paths:
 
         Several parameters can be used to filter out the reports according to
         their status.
-      operationId: dms2223backend.presentation.rest.reporte.create_repCom
+      operationId: dms2223backend.presentation.rest.reporte.list_repCom
       parameters:
         - name: pending
           description: |
@@ -802,7 +802,7 @@ paths:
 
         When a report on a comment is accepted, the linked comment should be
         hidden so it will not be visible.
-      operationId: dms2223backend.presentation.rest.reporte.list_reportsCom
+      operationId: dms2223backend.presentation.rest.reporte.change_status_repCom
       parameters:
         - $ref: '#/components/parameters/CommentReportIdPathParam'
       requestBody:

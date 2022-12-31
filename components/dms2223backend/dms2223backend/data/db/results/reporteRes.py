@@ -23,7 +23,7 @@ class ReporteRes(ResultBase):
         self.reason: str = reason
         self.aid: int = aid 
         self.id: int
-        self.timestamp: DateTime  = datetime.timestamp(datetime.now())
+        #self.timestamp: DateTime  = datetime.timestamp(datetime.now())
         self.status: ReportStatus = status
         
     @staticmethod
@@ -42,9 +42,9 @@ class ReporteRes(ResultBase):
               metadata,
               Column('username', String(32), nullable=False),
               Column('reason', String(350), nullable=False), #Nunca puede ser null
-              Column('aid', Integer, ForeignKey('answers.qid'), nullable=False),
+              Column('aid', Integer, ForeignKey('answers.id'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime, nullable=False),
+              #Column('timestamp', DateTime, nullable=False),
               Column('status', Enum(ReportStatus), nullable=False, default=ReportStatus.PENDING)
 
         )
