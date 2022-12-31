@@ -1,20 +1,10 @@
 """REST API controllers responsible of handling the server operations about questions
 """
-
-import json
-import time
 from typing import Dict, Tuple, Optional, List, Union
 from http import HTTPStatus
-
-
 from sqlalchemy.orm.session import Session # type: ignore
-
 from dms2223backend.service.serviciopreguntas import PreguntasServicio
 from flask import current_app
-import requests
-
-def __init__(self) -> None:
-    pass
 
 def create_preg(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     """ Recoge los datos de la peticion y los manda al servicio de preguntas
@@ -30,10 +20,12 @@ def get_preg_id(qid:int) -> Tuple[Dict,int]:
     with current_app.app_context():
         resp:Dict = PreguntasServicio.get_pregunta(
             current_app.db,qid)
+        if not resp:
+            return("No existe esa pregunta", HTTPStatus.BAD_REQUEST)
     return (resp, HTTPStatus.OK)
 
 def get_pregs() -> Tuple[Dict,int]:
-    """ Devuelve una pregunta sabiendo el id
+    """ Devuelve preguntas
     """
     with current_app.app_context():
         resp:Dict = PreguntasServicio.get_preguntas(
