@@ -26,4 +26,4 @@ servicioComentario.crear_comentario(db,"Teresa", "Este es el comentario 2", 2, S
 
 ServicioReporte.create_reportPreg(db, "Jose", "Reporte de pregunta 1", 1)
 ServicioReporte.create_reportRes(db, "Roberto", "Reporte de pregunta 2", 2)
-ServicioReporte.create_reportCom(db, "Adrian", "Reporte de pregunta 3", 3)
+ServicioReporte.create_reportCom(db, "Adrian", "Reporte de pregunta 3", 1)

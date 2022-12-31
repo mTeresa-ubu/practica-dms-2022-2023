@@ -22,7 +22,7 @@ def create_preg(body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     with current_app.app_context():
         username = token_info['user_token']['username']
         res:Dict = PreguntasServicio.create_pregunta(current_app.db, body['body'], body['title'], username)
-    return (res, HTTPStatus.OK)
+    return (res, HTTPStatus.CREATED)
 
 def get_preg_id(qid:int) -> Tuple[Dict,int]:
     """ Devuelve una pregunta sabiendo el id
