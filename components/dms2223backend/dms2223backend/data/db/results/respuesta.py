@@ -22,7 +22,7 @@ class Respuesta(ResultBase):
         self.username: str = username
         self.qid: int = body['qid']
         self.body: str = body['body']
-        #self.timestamp: DateTime
+        self.timestamp: DateTime
         self.id: int 
         self.oculto: bool
         
@@ -44,7 +44,7 @@ class Respuesta(ResultBase):
               Column('body', String(350), nullable=False), #Nunca puede ser null
               Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              #Column('timestamp', DateTime,server_default=func.now()),
+              Column('timestamp', DateTime,server_default=func.now()),
               Column('oculto', Boolean, default=False)
 
         )

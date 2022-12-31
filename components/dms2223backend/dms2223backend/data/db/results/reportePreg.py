@@ -18,13 +18,13 @@ from dms2223backend.data.reportstatus import ReportStatus
 
 class ReportePreg(ResultBase):
 
-    def __init__(self, username: str, reason: str, aid: int, status: ReportStatus):
+    def __init__(self, username: str, reason: str, qid: int, status: ReportStatus):
 
         self.username: str = username
         self.reason: str = reason
-        self.aid: int = aid 
+        self.qid: int = qid 
         self.id: int
-        self.timestamp: DateTime  = datetime.timestamp(datetime.now())
+        #self.timestamp: DateTime  = datetime.timestamp(datetime.now())
         self.status: ReportStatus = status
         
     @staticmethod
@@ -43,9 +43,9 @@ class ReportePreg(ResultBase):
               metadata,
               Column('username', String(32), nullable=False),
               Column('reason', String(350), nullable=False), #Nunca puede ser null
-              Column('aid', Integer, ForeignKey('questions.qid'), nullable=False),
+              Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime, nullable=False),
+              #Column('timestamp', DateTime, nullable=False),
               Column('status', Enum(ReportStatus), nullable=False, default=ReportStatus.PENDING)
 
         )

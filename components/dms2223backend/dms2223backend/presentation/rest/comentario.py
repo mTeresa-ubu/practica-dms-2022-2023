@@ -11,7 +11,7 @@ def create_comment(aid: int, body: Dict, token_info: Dict) -> Tuple[Union[Dict,s
     with current_app.app_context():
         usuario = token_info['user_token']['username']
         comentario:Dict = servicioComentario.crear_comentario(current_app.db, usuario, body['body'], aid, body['sentiment'])
-    return (comentario, HTTPStatus.OK)
+    return (comentario, HTTPStatus.CREATED)
 
 def get_comments(aid:int) -> Tuple[Dict,int]:
     """ Devuelve los comentarios del id de respuesta

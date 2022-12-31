@@ -11,11 +11,11 @@ class servicioComentario():
     def init(self):
         self.auth_service = AuthService(apikey_secret='1234',host="172.10.1.10",port=4000)
 
-    def crear_comentario(schema:Schema, autor: str, body: str, aid: int, sentiment: Sentiment) -> dict:
+    def crear_comentario(schema:Schema, autor: str, body: str, aid: int, sentiment: Sentiment) -> Dict:
         session: Session = schema.new_session()
         comentario = ComentarioFuncs.create(session, autor, body, aid, sentiment)
         #AQUI MAITE CREA UN DICCIONARIO Y CREO QUE NO ES NECESARIO
-        comentario:dict = {
+        comentario:Dict = {
             "aid":comentario.aid,
             "timestamp":comentario.timestamp,
             "body":comentario.body,
@@ -27,7 +27,7 @@ class servicioComentario():
     def get_comentario(schema:Schema, id:int) -> Comentario:
         session: Session = schema.new_session()
         com: Comentario = ComentarioFuncs.get_comentario(session, id)
-        com:dict = {
+        com:Dict = {
             "aid":com.aid,
             "title":com.title,
             "timestamp":com.timestamp,

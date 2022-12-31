@@ -22,8 +22,8 @@ class ReporteResFuncs():
         return nueva
         
     @staticmethod
-    def get_reporteRes(session:Session,aid:int) -> ReporteRes:
-        stmt = session.query(ReporteRes).where(ReporteRes.id == aid).first()
+    def get_reporteRes(session:Session, id:int) -> ReporteRes:
+        stmt = session.query(ReporteRes).where(ReporteRes.id == id).first()
         return stmt
 
     @staticmethod
