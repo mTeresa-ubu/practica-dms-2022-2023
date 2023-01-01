@@ -4,7 +4,7 @@ from sqlalchemy.orm.session import Session  # type: ignore
 from typing import List, Dict
 
 class ServicioRespuestas():
-
+    @staticmethod
     def getRespuestasAPregunta(schema: Schema, qid: int):
         """Devuelve un diccionario de las respuestas correspondientes a la pregunta
            pasada por parametro.
@@ -19,7 +19,7 @@ class ServicioRespuestas():
 
         out: List[Dict] = RespuestaFuncs.list_all(session,qid)
         lista_respuestas: List = []
-
+  
         for respuesta in out:
             lista_respuestas.append({
                 "id":respuesta.id,
@@ -29,7 +29,7 @@ class ServicioRespuestas():
             })
         schema.remove_session()
         return lista_respuestas
-    
+    @staticmethod
     def create_Respuesta(schema:Schema,username:str,body:Dict):
         """Crea una respuesta y devuelve el diccionario de la respuesta creada.
 
@@ -54,3 +54,13 @@ class ServicioRespuestas():
         schema.remove_session()
 
         return respuesta
+
+    @staticmethod
+    def existe_respuesta(schema: Schema,qid:int):
+        session: Session = schema.new_session()
+        respuesta: Dict = RespuestaFuncs.get_respuesta(session,qid)
+        schema.remove_session()
+        if not respuesta:
+            return False
+        else:
+            return True
