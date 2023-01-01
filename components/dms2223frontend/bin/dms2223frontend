@@ -111,10 +111,13 @@ def get_respuesta(id_respuesta):
 def get_crear_preguntas():
     return PreguntasEndpoints.get_crear_preguntas(auth_service)
 
-# Alvar [16/11/2022]
 @app.route("/pregunta/<id_preg>",methods=['GET'])
 def get_pregunta(id_preg):
     return PreguntasEndpoints.get_pregunta(auth_service,id_preg)
+
+@app.route("/crear_pregunta", methods=['POST'])
+def post_preguntas():
+    return PreguntasEndpoints.post_preguntas(auth_service, backend_service)
 
 
 

@@ -36,23 +36,39 @@ class BackendService():
     def __base_url(self) -> str:
         return f'http://{self.__host}:{self.__port}{self.__api_base_path}'
 
-    # def create_preg(self, body:str, token, title, username):
-    #     response_data: ResponseData = ResponseData()
-    #     response: requests.Response = requests.post(
-    #         self.__base_url() + '/questions',
-    #         json={
-    #             'title': title,
-    #             'body': body
-    #         },
-    #         headers={
-    #             'Authorization': f'Bearer {token}',
-    #             self.__apikey_header: self.__apikey_secret
-    #         },
-    #         timeout=60
-    #     )
-    #     response_data.set_successful(response.ok)
-    #     if response_data.is_successful():
-    #         response_data.set_content(response.json())
-    #     else:
-    #         response_data.add_message(response.content.decode('ascii'))
-    #     return response_data
+    def create_preg(self, body:str, token, title):
+        response_data: ResponseData = ResponseData()
+        response: requests.Response = requests.post(
+            self.__base_url() + '/questions',
+            json={
+                'title': title,
+                'body': body
+            },
+            headers={
+                'Authorization': f'Bearer {token}',
+                self.__apikey_header: self.__apikey_secret
+            },
+            timeout=60
+        )
+        response_data.set_successful(response.ok)
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
+            response_data.add_message(response.content.decode('ascii'))
+        return response_data
+    def get_preguntas(self, token):
+        response_data: ResponseData = ResponseData()
+        response: requests.Response = requests.get(
+            self.__base_url() + f'/questions',
+            headers={
+                'Authorization': f'Bearer {token}',
+                self.__apikey_header: self.__apikey_secret
+            },
+            timeout=60
+        )
+        response_data.set_successful(response.ok)
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
+            response_data.add_message(response.content.decode('ascii'))
+        return response_data
