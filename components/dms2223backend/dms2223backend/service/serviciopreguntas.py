@@ -70,3 +70,17 @@ class PreguntasServicio():
         
         schema.remove_session()
         return res
+
+    @staticmethod
+    def ocultarPreg(schema: Schema, id: int):
+        """Oculta la pregunta
+        """
+        session: Session = schema.new_session()
+
+        preg = PreguntaFuncs.get_pregunta(session,id)
+        preg.hidden = True
+
+        session.add(preg)
+        session.commit()
+
+        schema.remove_session()
