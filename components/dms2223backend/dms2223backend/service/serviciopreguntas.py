@@ -71,6 +71,18 @@ class PreguntasServicio():
         schema.remove_session()
         return res
 
+
+
+    @staticmethod
+    def existe_pregunta(schema: Schema,qid:int) -> bool:
+        session: Session = schema.new_session()
+        preg: Pregunta = PreguntaFuncs.get_pregunta(session, qid)
+        schema.remove_session()
+        if not preg:
+            return False
+        else:
+            return True
+
     @staticmethod
     def ocultarPreg(schema: Schema, id: int):
         """Oculta la pregunta
@@ -84,3 +96,4 @@ class PreguntasServicio():
         session.commit()
 
         schema.remove_session()
+
