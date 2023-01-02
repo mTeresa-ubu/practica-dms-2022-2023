@@ -6,7 +6,7 @@ from dms2223backend.service.serviciopreguntas import PreguntasServicio
 
 def lista_Respuestas(qid : int):       
     with current_app.app_context():
-        if not PreguntasServicio.existe_pregunta(schema=current_app.db,qid=body['qid']):
+        if not PreguntasServicio.existe_pregunta(schema=current_app.db,qid=qid):
                 idPregunta = str(qid)
 
                 respuesta = "La pregunta con id "+ idPregunta +" no existe"

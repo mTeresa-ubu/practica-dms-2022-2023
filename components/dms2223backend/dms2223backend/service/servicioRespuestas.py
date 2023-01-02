@@ -1,4 +1,5 @@
 from dms2223backend.data.db.resultsets.respuesta_res import RespuestaFuncs
+from dms2223backend.service.servicioComentario import servicioComentario
 from dms2223backend.data.db import Schema
 from sqlalchemy.orm.session import Session  # type: ignore
 from typing import List, Dict
@@ -22,10 +23,13 @@ class ServicioRespuestas():
   
         for respuesta in out:
             lista_respuestas.append({
-                "id":respuesta.id,
-                "qid":respuesta.qid,
-                "body":respuesta.body,
-                "owner":{"username":respuesta.username},
+            "id":respuesta.id,
+            "qid":respuesta.qid,
+            "body":respuesta.body,
+            "comentarios": servicioComentario.get_comentarios(schema=schema,aid=respuesta.id),
+            "owner":{"username":respuesta.username},
+            "timestamp":respuesta.timestamp,
+            "oculto":respuesta.oculto
             })
         schema.remove_session()
         return lista_respuestas
@@ -47,7 +51,9 @@ class ServicioRespuestas():
             "id":res.id,
             "qid":res.qid,
             "body":res.body,
+            "comentarios": servicioComentario.get_comentarios(schema=schema,aid=res.id),
             "owner":{"username":res.username},
+            "timestamp":res.timestamp,
             "oculto":res.oculto
         }
 

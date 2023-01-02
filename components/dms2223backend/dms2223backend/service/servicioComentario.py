@@ -38,5 +38,15 @@ class servicioComentario():
     def get_comentarios(schema:Schema, aid:int) -> List[Comentario]:
         session: Session = schema.new_session()
         comentariosADevolver = ComentarioFuncs.list_all(session, aid)
+        lista_comentarios: List = []
+        for comentario in comentariosADevolver:
+            lista_comentarios.append({
+                "aid":comentario.aid,
+                "body":comentario.body,
+                "id": comentario.id,
+                "owner":{"username":comentario.username},
+                "sentiment": comentario.sentiment.name,
+                "timestamp":comentario.timestamp
+            })
         schema.remove_session()
-        return comentariosADevolver
+        return lista_comentarios
