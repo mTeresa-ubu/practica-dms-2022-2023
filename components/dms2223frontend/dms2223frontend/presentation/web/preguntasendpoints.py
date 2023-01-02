@@ -49,10 +49,9 @@ class PreguntasEndpoints():
          if Role.ADMINISTRATION.name not in session['roles']: #cambiar a discussion cuando funcione
             return redirect(url_for('get_home'))
          preg = PreguntaWeb.nueva_pregunta(back_service, title=request.form.get('title'), body=request.form.get('body'))
+         redirect_to = request.form['redirect_to']
+         if not redirect_to:
+            redirect_to = url_for('get_questions')
+         
+         return redirect(redirect_to)
 
-         return redirect(request.form['redirect_to'])
-
-    @staticmethod
-    def get_pregunta(auth_service: AuthService, id_preg: str) -> Union[Response, Text]:
-        return render_template('pregunta.html', title=request.form.get('title'), body=request.form.get('body'))
-        #return render_template('pregunta.html', pregunta_env=preg, respuestas_env=resps)

@@ -36,7 +36,7 @@ class BackendService():
     def __base_url(self) -> str:
         return f'http://{self.__host}:{self.__port}{self.__api_base_path}'
 
-    def create_preg(self, body:str, token, title):
+    def create_preg(self, body:str, token: str, title: str):
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.post(
             self.__base_url() + '/questions',
@@ -56,10 +56,28 @@ class BackendService():
         else:
             response_data.add_message(response.content.decode('ascii'))
         return response_data
-    def get_preguntas(self, token):
+        
+    def get_preguntas(self, token: str):
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.get(
             self.__base_url() + f'/questions',
+            headers={
+                'Authorization': f'Bearer {token}',
+                self.__apikey_header: self.__apikey_secret
+            },
+            timeout=60
+        )
+        response_data.set_successful(response.ok)
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
+            response_data.add_message(response.content.decode('ascii'))
+        return response_data
+
+    def get_pregunta(self, token: str, qid: int):
+        response_data: ResponseData = ResponseData()
+        response: requests.Response = requests.get(
+            self.__base_url() + f'/questions{qid}', #similar al anterior en preguntasendpoints
             headers={
                 'Authorization': f'Bearer {token}',
                 self.__apikey_header: self.__apikey_secret
