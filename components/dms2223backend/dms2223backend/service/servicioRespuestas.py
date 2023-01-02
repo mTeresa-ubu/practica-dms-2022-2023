@@ -61,6 +61,7 @@ class ServicioRespuestas():
 
         return respuesta
 
+
     @staticmethod
     def existe_respuesta(schema: Schema,qid:int):
         session: Session = schema.new_session()
@@ -70,3 +71,18 @@ class ServicioRespuestas():
             return False
         else:
             return True
+
+    @staticmethod
+    def ocultarRes(schema: Schema, id: int):
+        """Oculta la respuesta
+        """
+        session: Session = schema.new_session()
+
+        res = RespuestaFuncs.get_respuesta(session,id)
+        res.hidden = True
+
+        session.add(res)
+        session.commit()
+
+        schema.remove_session()
+

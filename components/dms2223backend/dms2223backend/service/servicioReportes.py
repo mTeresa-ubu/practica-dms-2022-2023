@@ -7,6 +7,8 @@ from dms2223backend.data.db.resultsets.reportePreg_res import ReportePregFuncs
 from dms2223backend.data.db.resultsets.reporteRes_res import ReporteResFuncs
 from dms2223backend.data.reportstatus import ReportStatus
 from dms2223backend.service.serviciopreguntas import PreguntasServicio
+from dms2223backend.service.servicioComentario import servicioComentario
+from dms2223backend.service.servicioRespuestas import ServicioRespuestas
 
 #Rober Lastras
 
@@ -45,7 +47,8 @@ class ServicioReporte():
         
         rep = ReporteComFuncs.create(session, username, reason, cid)
         rep:Dict = {
-            "cid":rep.cid   ,
+            "id":rep.id,
+            "cid":rep.cid,
             "reason":rep.reason,
             #"timestamp":rep.timestamp,
             'status': rep.status.name,
@@ -56,12 +59,12 @@ class ServicioReporte():
         return rep
     
     @staticmethod
-    def get_reportCom(schema:Schema, id:int) -> Dict:
+    def get_reportCom(schema:Schema, crid:int) -> Dict:
         """Devuelve los datos de un reporte de comentario
         """
         session: Session = schema.new_session()
 
-        rep = ReportePregFuncs.get_reportePreg(session, id)
+        rep = ReporteComFuncs.get_reporteCom(session, crid)
         rep:Dict = {
             "id":rep.id,
             "cid":rep.cid,
@@ -80,12 +83,11 @@ class ServicioReporte():
         """
         session: Session = schema.new_session()
 
-        rep: ReportePregFuncs = ReportePregFuncs.get_reportePreg(session, crid)
+        rep: ReporteComFuncs = ReporteComFuncs.get_reporteCom(session, crid)
 
         rep.status = ReportStatus[status]
         if status == 'ACCEPTED':
-            #PreguntasServicio.ocultar(schema, rep.qid)
-            pass
+            servicioComentario.ocultarCom(schema, rep.cid)
 
         session.add(rep)
         session.commit()
@@ -126,6 +128,7 @@ class ServicioReporte():
         
         rep = ReportePregFuncs.create(session, username, reason, qid)
         rep:Dict = {
+            "id":rep.id,
             "qid":rep.qid,
             "reason":rep.reason,
             #"timestamp":rep.timestamp,
@@ -137,12 +140,12 @@ class ServicioReporte():
         return rep
 
     @staticmethod
-    def get_reportPreg(schema:Schema, id:int) -> Dict:
+    def get_reportPreg(schema:Schema, qrid:int) -> Dict:
         """Devuelve los datos de un reporte de pregunta
         """
         session: Session = schema.new_session()
 
-        rep = ReportePregFuncs.get_reportePreg(session, id)
+        rep = ReportePregFuncs.get_reportePreg(session, qrid)
         rep:Dict = {
             "id":rep.id,
             "qid":rep.qid,
@@ -165,8 +168,7 @@ class ServicioReporte():
 
         rep.status = ReportStatus[status]
         if status == 'ACCEPTED':
-            #PreguntasServicio.ocultar(schema, rep.qid)
-            pass
+            PreguntasServicio.ocultarPreg(schema, rep.qid)
 
         session.add(rep)
         session.commit()
@@ -207,6 +209,7 @@ class ServicioReporte():
         
         rep = ReporteResFuncs.create(session, username, reason, aid)
         rep:Dict = {
+            "id":rep.id,
             "aid":rep.aid,
             "reason":rep.reason,
             #"timestamp":rep.timestamp,
@@ -218,12 +221,12 @@ class ServicioReporte():
         return rep
 
     @staticmethod
-    def get_reportRes(schema:Schema, id:int) -> Dict:
+    def get_reportRes(schema:Schema, arid:int) -> Dict:
         """Devuelve los datos de un reporte de respuesta
         """
         session: Session = schema.new_session()
 
-        rep = ReportePregFuncs.get_reportePreg(session, id)
+        rep = ReporteResFuncs.get_reporteRes(session, arid)
         rep:Dict = {
             "id":rep.id,
             "aid":rep.aid,
@@ -242,12 +245,11 @@ class ServicioReporte():
         """
         session: Session = schema.new_session()
 
-        rep: ReportePregFuncs = ReportePregFuncs.get_reportePreg(session, arid)
+        rep: ReporteResFuncs = ReporteResFuncs.get_reporteRes(session, arid)
 
         rep.status = ReportStatus[status]
         if status == 'ACCEPTED':
-            #PreguntasServicio.ocultar(schema, rep.qid)
-            pass
+            ServicioRespuestas.ocultarRes(schema, rep.aid)
 
         session.add(rep)
         session.commit()

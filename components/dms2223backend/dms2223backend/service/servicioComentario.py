@@ -50,3 +50,18 @@ class servicioComentario():
             })
         schema.remove_session()
         return lista_comentarios
+    
+    @staticmethod
+    def ocultarCom(schema: Schema, id: int):
+        """Oculta el comentario
+        """
+        session: Session = schema.new_session()
+
+        com = ComentarioFuncs.get_comentario(session,id)
+        com.hidden = True
+
+        session.add(com)
+        session.commit()
+
+        schema.remove_session()
+
