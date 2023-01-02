@@ -16,13 +16,6 @@ from datetime import datetime
 from flask import request
 
 class PreguntasEndpoints():
-    # @staticmethod
-    # def post_pregunta(auth_service: AuthService, id_preg: str) -> Union[Response, Text]:
-    #     if not WebAuth.test_token(auth_service):
-    #         return redirect(url_for('get_login'))
-    #     if Role.DISCUSSION.name not in session['roles']:
-    #         return redirect(url_for('get_home'))
-    #     return render_template('preguntas/nueva_pregunta.html', name=session['user'], roles=session['roles'])
      
     """ Monostate class responsible of handling the session web endpoint requests.
     """
