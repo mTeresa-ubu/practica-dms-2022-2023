@@ -54,3 +54,17 @@ class ServicioRespuestas():
         schema.remove_session()
 
         return respuesta
+    
+    @staticmethod
+    def ocultarRes(schema: Schema, id: int):
+        """Oculta la respuesta
+        """
+        session: Session = schema.new_session()
+
+        res = RespuestaFuncs.get_respuesta(session,id)
+        res.hidden = True
+
+        session.add(res)
+        session.commit()
+
+        schema.remove_session()
