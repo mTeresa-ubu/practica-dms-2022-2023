@@ -70,9 +70,7 @@ class PreguntasServicio():
         
         schema.remove_session()
         return res
-
-
-
+        
     @staticmethod
     def existe_pregunta(schema: Schema,qid:int) -> bool:
         session: Session = schema.new_session()
@@ -96,4 +94,3 @@ class PreguntasServicio():
         session.commit()
 
         schema.remove_session()
-
