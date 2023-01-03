@@ -79,7 +79,7 @@ class ServicioRespuestas():
         session: Session = schema.new_session()
 
         res = RespuestaFuncs.get_respuesta(session,id)
-        res.hidden = True
+        res.oculto = True
 
         session.add(res)
         session.commit()

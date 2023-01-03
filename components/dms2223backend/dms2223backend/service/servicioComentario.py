@@ -62,7 +62,7 @@ class servicioComentario():
         session: Session = schema.new_session()
 
         com = ComentarioFuncs.get_comentario(session,id)
-        com.hidden = True
+        com.oculto = True
 
         session.add(com)
         session.commit()
