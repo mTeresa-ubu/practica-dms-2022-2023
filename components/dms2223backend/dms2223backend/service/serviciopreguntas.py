@@ -88,7 +88,7 @@ class PreguntasServicio():
         session: Session = schema.new_session()
 
         preg = PreguntaFuncs.get_pregunta(session,id)
-        preg.hidden = True
+        preg.oculto = True
 
         session.add(preg)
         session.commit()

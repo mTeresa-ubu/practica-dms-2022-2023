@@ -29,7 +29,7 @@ class ServicioReporte():
                 "id":rep.id,
                 "cid":rep.cid,
                 "reason":rep.reason,
-                #"timestamp":rep.timestamp,
+                "timestamp":rep.timestamp,
                 'status': rep.status.name,
                 "owner":{"username":rep.username}
                 }
@@ -50,7 +50,7 @@ class ServicioReporte():
             "id":rep.id,
             "cid":rep.cid,
             "reason":rep.reason,
-            #"timestamp":rep.timestamp,
+            "timestamp":rep.timestamp,
             'status': rep.status.name,
             "owner":{"username":rep.username}
         }
@@ -69,7 +69,7 @@ class ServicioReporte():
             "id":rep.id,
             "cid":rep.cid,
             "reason":rep.reason,
-            #"timestamp":rep.timestamp,
+            "timestamp":rep.timestamp,
             'status': rep.status.name,
             "owner":{"username":rep.username}
         }
@@ -94,6 +94,15 @@ class ServicioReporte():
 
         schema.remove_session()
 
+    @staticmethod
+    def existe_reporteCom(schema: Schema, crid:int):
+        session: Session = schema.new_session()
+        rep: Dict = ReporteComFuncs.get_reporteCom(session, crid)
+        schema.remove_session()
+        if not rep:
+            return False
+        else:
+            return True
 
     # Reportes para preguntas
     
@@ -110,7 +119,7 @@ class ServicioReporte():
                 "id":rep.id,
                 "qid":rep.qid,
                 "reason":rep.reason,
-                #"timestamp":rep.timestamp,
+                "timestamp":rep.timestamp,
                 'status': rep.status.name,
                 "owner":{"username":rep.username}
                 }
@@ -131,7 +140,7 @@ class ServicioReporte():
             "id":rep.id,
             "qid":rep.qid,
             "reason":rep.reason,
-            #"timestamp":rep.timestamp,
+            "timestamp":rep.timestamp,
             'status': rep.status.name,
             "owner":{"username":rep.username}
         }
@@ -150,7 +159,7 @@ class ServicioReporte():
             "id":rep.id,
             "qid":rep.qid,
             "reason":rep.reason,
-            #"timestamp":rep.timestamp,
+            "timestamp":rep.timestamp,
             'status': rep.status.name,
             "owner":{"username":rep.username}
         }
@@ -175,6 +184,16 @@ class ServicioReporte():
 
         schema.remove_session()
 
+    @staticmethod
+    def existe_reportePreg(schema: Schema, qrid:int):
+        session: Session = schema.new_session()
+        rep: Dict = ReportePregFuncs.get_reportePreg(session, qrid)
+        schema.remove_session()
+        if not rep:
+            return False
+        else:
+            return True
+
 
     # Reportes para respuestas
 
@@ -191,7 +210,7 @@ class ServicioReporte():
                 "id":rep.id,
                 "aid":rep.aid,
                 "reason":rep.reason,
-                #"timestamp":rep.timestamp,
+                "timestamp":rep.timestamp,
                 'status': rep.status.name,
                 "owner":{"username":rep.username}
                 }
@@ -212,7 +231,7 @@ class ServicioReporte():
             "id":rep.id,
             "aid":rep.aid,
             "reason":rep.reason,
-            #"timestamp":rep.timestamp,
+            "timestamp":rep.timestamp,
             'status': rep.status.name,
             "owner":{"username":rep.username}
         }
@@ -231,7 +250,7 @@ class ServicioReporte():
             "id":rep.id,
             "aid":rep.aid,
             "reason":rep.reason,
-            #"timestamp":rep.timestamp,
+            "timestamp":rep.timestamp,
             'status': rep.status.name,
             "owner":{"username":rep.username}
         }
@@ -255,3 +274,13 @@ class ServicioReporte():
         session.commit()
 
         schema.remove_session()
+    
+    @staticmethod
+    def existe_reporteRes(schema: Schema, arid:int):
+        session: Session = schema.new_session()
+        rep: Dict = ReporteResFuncs.get_reporteRes(session, arid)
+        schema.remove_session()
+        if not rep:
+            return False
+        else:
+            return True
