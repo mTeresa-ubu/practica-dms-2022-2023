@@ -9,8 +9,10 @@
         <input type="text" id="titulo" name="titulo" size="100"><br><br>
         <label for="detalles">¿Cuales son los detalles de la pregunta?:</label><br>
         <textarea id="detalles" rows="10" cols="117" name="detalles" form="formulario"></textarea><br><br>
-        <p class="aligncenter">{{ submit_button('greenbg', 'Enviar Pregunta') }}</p>-->
-        <p class="aligncenter">{{ reset_button('graybg', 'Vaciar Campos') }}</p><br>
+        <p class="aligncenter">{{button("greenbg","/home","Enviar Pregunta",())}}</p>-->
+        <p class="aligncenter">{{button("graybg","/crear_pregunta","Vaciar Campos",())}}</p><br>
     </form>
 </div>
 {% endblock %}
+
+

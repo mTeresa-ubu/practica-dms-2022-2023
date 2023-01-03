@@ -4,51 +4,18 @@
 from dms2223frontend.data.clases.pregunta import Pregunta
 from dms2223frontend.data.clases.respuesta import Respuesta
 from dms2223frontend.data.rest.authservice import AuthService
+from dms2223frontend.data.rest.backendservice import BackendService
 
 from typing import Text, Union
 from flask import redirect, url_for, session, render_template
 from werkzeug.wrappers import Response
 from dms2223common.data import Role
 from .webauth import WebAuth
+from .pregunta import PreguntaWeb
 from datetime import datetime
-
+from flask import request
 
 class PreguntasEndpoints():
-    @staticmethod
-    def get_pregunta(auth_service: AuthService, id_preg: str) -> Union[Response, Text]:
-        preg = Pregunta(
-            "Que dia es hoy",
-            id_preg,
-            datetime.now(),
-            34,
-            35,
-            "Yo",
-            "Titulo"
-        )
-
-        resps = [
-            Respuesta(
-                autor="Persona1",
-                id_preg=id_preg,
-                id_resp="1",
-                contenido="Respuesta buena",
-                fecha=datetime.now(),
-                votos_negativos=30,
-                votos_positivos=2,
-                num_comentarios=1
-                ),
-            Respuesta(
-                autor="Persona1",
-                id_preg=id_preg,
-                id_resp="1",
-                contenido="Respuesta Mala",
-                fecha=datetime.now(),
-                votos_negativos=3,
-                votos_positivos=20,
-                num_comentarios=12
-                ),
-        ]
-        return render_template('pregunta.html', pregunta_env=preg, respuestas_env=resps)
      
     """ Monostate class responsible of handling the session web endpoint requests.
     """
@@ -64,8 +31,20 @@ class PreguntasEndpoints():
         """
         if not WebAuth.test_token(auth_service):
             return redirect(url_for('get_login'))
-        if Role.ADMINISTRATION.name not in session['roles']:
+        if Role.ADMINISTRATION.name not in session['roles']: #cambiar a discussion cuando funcione
             return redirect(url_for('get_home'))
-        name = session['user']
-        return render_template('preguntas/crear_preguntas.html', name=name, roles=session['roles'])
+        return render_template('preguntas/crear_preguntas.html', name=session['user'], roles=session['roles'])
+        
+    @staticmethod
+    def post_preguntas(auth_service: AuthService, back_service: BackendService) -> Union[Response, Text]:
+         if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+         if Role.ADMINISTRATION.name not in session['roles']: #cambiar a discussion cuando funcione
+            return redirect(url_for('get_home'))
+         preg = PreguntaWeb.nueva_pregunta(back_service, title=request.form.get('title'), body=request.form.get('body'))
+         redirect_to = request.form['redirect_to']
+         if not redirect_to:
+            redirect_to = url_for('get_questions')
+         
+         return redirect(redirect_to)
 

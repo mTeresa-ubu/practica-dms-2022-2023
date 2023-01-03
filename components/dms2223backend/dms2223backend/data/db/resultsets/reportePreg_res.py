@@ -22,8 +22,8 @@ class ReportePregFuncs():
         return nueva
         
     @staticmethod
-    def get_reportePreg(session:Session, id:int) -> ReportePreg:
-        stmt = session.query(ReportePreg).where(ReportePreg.id == id).first()
+    def get_reportePreg(session:Session, qrid:int) -> ReportePreg:
+        stmt = session.query(ReportePreg).where(ReportePreg.id == qrid).first()
         return stmt
 
     @staticmethod

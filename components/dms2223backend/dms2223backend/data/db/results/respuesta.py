@@ -1,7 +1,7 @@
-from typing import Dict
+from typing import List,Dict
 from sqlalchemy import Table, MetaData, Column
 from sqlalchemy import String, func 
-from sqlalchemy import Boolean, DateTime, ForeignKey
+from sqlalchemy import Boolean, DateTime, ForeignKey,PickleType
 from sqlalchemy.orm import relationship 
 
 from dms2223backend.data.db.results.resultbase import ResultBase
@@ -17,10 +17,10 @@ from dms2223backend.data.db.results.comentario import Comentario
 
 class Respuesta(ResultBase):
 
-    def __init__(self, body: Dict,username: str):
+    def __init__(self, body: Dict,username: str,qid:int):
 
         self.username: str = username
-        self.qid: int = body['qid']
+        self.qid: int = qid
         self.body: str = body['body']
         self.timestamp: DateTime
         self.id: int 
@@ -44,8 +44,8 @@ class Respuesta(ResultBase):
               Column('body', String(350), nullable=False), #Nunca puede ser null
               Column('qid', Integer, ForeignKey('questions.qid'), nullable=False),
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
-              Column('timestamp', DateTime,server_default=func.now()),
-              Column('oculto', Boolean, default=False)
+              Column('timestamp', DateTime, nullable=False, default=func.now()),
+              Column('oculto', Boolean, default=False),
 
         )
 
@@ -58,7 +58,7 @@ class Respuesta(ResultBase):
         """
         return {
              'rel_comentarios': relationship(Comentario, backref='answers'),
-             #'rel_reportes': relationship(ReporteRes, backref='answers'),
+             'rel_reportes': relationship(ReporteRes, backref='answers'),
              #'rel_votos': relationship(VotoRes, backref='answers')
              
         }
