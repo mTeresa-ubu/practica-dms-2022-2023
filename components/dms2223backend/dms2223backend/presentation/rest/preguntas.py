@@ -20,8 +20,8 @@ def get_preg_id(qid:int) -> Tuple[Dict,int]:
     with current_app.app_context():
         resp:Dict = PreguntasServicio.get_pregunta(
             current_app.db,qid)
-        if not resp:
-            return("No existe esa pregunta", HTTPStatus.BAD_REQUEST)
+        if PreguntasServicio.existe_pregunta(current_app.db,qid) == False:
+            return("No existe esa pregunta", HTTPStatus.NOT_FOUND)
     return (resp, HTTPStatus.OK)
 
 def get_pregs() -> Tuple[Dict,int]:
