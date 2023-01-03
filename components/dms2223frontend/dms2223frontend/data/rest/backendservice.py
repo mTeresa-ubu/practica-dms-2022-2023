@@ -36,6 +36,29 @@ class BackendService():
     def __base_url(self) -> str:
         return f'http://{self.__host}:{self.__port}{self.__api_base_path}'
 
+    def crear_comentario(self, token, autor, body, aid, sentiment):
+        response_data: ResponseData = ResponseData()
+        response: requests.Response = requests.post(
+            self.__base_url() + f'/answers/{aid}/comments',
+            json = {
+                'autor': autor,
+                'body': body,
+                'aid': aid,
+                'sentiment': sentiment
+            },
+            headers= {
+                'Authorization': f'Bearer {token}',
+                self.__apikey_header: self.__apikey_secret
+            },
+            timeout=60
+        )
+        response_data.set_successful(response.ok)
+        if response_data.is_successful():
+            response_data.set_content(response.json())
+        else:
+            response_data.add_message(response.content.decode('ascii'))
+        return response_data
+
     def create_preg(self, body:str, token: str, title: str):
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.post(

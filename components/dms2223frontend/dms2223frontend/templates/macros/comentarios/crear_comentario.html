@@ -1,0 +1,29 @@
+{% macro form_comentario(respuesta) %}
+{% from "macros/buttons.html" import submit_button, button %}
+<script src="/static/scripts/editor_texto.js" ></script>
+
+<div class="contenedor_respuesta">
+    <form action="comentario" method="post">
+    <h3>Tu comentario:</h3>
+        <input type="hidden" id="respuesta" value="{{ respuesta }}">
+        <div id="editor_comentario">
+            <div id="controles_texto">
+                <!-- Botones de negrita, cursiva etc.. -->
+                {{ button("yellowbg","","Negrita") }}
+                {{ button("yellowbg","","Cursiva") }}
+                {{ button("yellowbg","","Subrallado") }}
+            </div>
+            <div class="marco_texto">
+            <textarea 
+                id="texto" 
+                class="texto_formulario" 
+                name="texto"
+                rows="10"
+                cols="100"
+                placeholder="Tu respuesta aqui"></textarea>
+            </div>
+            {{ submit_button('bluebg', 'Comentar') }}
+        </div>
+    </form>
+</div>
+{% endmacro %}

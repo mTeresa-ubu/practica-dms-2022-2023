@@ -14,26 +14,30 @@ class servicioComentario():
     def crear_comentario(schema:Schema, autor: str, body: str, aid: int, sentiment: Sentiment) -> Dict:
         session: Session = schema.new_session()
         comentario = ComentarioFuncs.create(session, autor, body, aid, sentiment)
-        #AQUI MAITE CREA UN DICCIONARIO Y CREO QUE NO ES NECESARIO
         comentario:Dict = {
-            "aid":comentario.aid,
-            "timestamp":comentario.timestamp,
+           "aid":comentario.aid,
             "body":comentario.body,
-            "owner":{"username":comentario.username}
+            "id": comentario.id,
+            "owner":{"username":comentario.username},
+            "sentiment": comentario.sentiment.name,
+            "timestamp":comentario.timestamp
         }
         schema.remove_session()
         return comentario
 
     def get_comentario(schema:Schema, id:int) -> Comentario:
         session: Session = schema.new_session()
-        com: Comentario = ComentarioFuncs.get_comentario(session, id)
-        com:Dict = {
-            "aid":com.aid,
-            "title":com.title,
-            "timestamp":com.timestamp,
+        comentario: Comentario = ComentarioFuncs.get_comentario(session, id)
+        comentario:Dict = {
+            "aid":comentario.aid,
+            "body":comentario.body,
+            "id": comentario.id,
+            "owner":{"username":comentario.username},
+            "sentiment": comentario.sentiment.name,
+            "timestamp":comentario.timestamp
         }
         schema.remove_session()
-        return com
+        return comentario
 
     def get_comentarios(schema:Schema, aid:int) -> List[Comentario]:
         session: Session = schema.new_session()
@@ -65,3 +69,13 @@ class servicioComentario():
 
         schema.remove_session()
 
+    @staticmethod
+    def existe_comentario(schema: Schema,qid:int):
+        session: Session = schema.new_session()
+        comentario: Dict = ComentarioFuncs.get_comentario(session,qid)
+        schema.remove_session()
+        if not comentario:
+            return False
+        else:
+            return True
+    

@@ -4,6 +4,7 @@ from typing import Dict, Tuple, Union
 from http import HTTPStatus
 from flask import current_app
 from dms2223backend.service.servicioComentario import servicioComentario
+from dms2223backend.service.servicioRespuestas import ServicioRespuestas
 
 def create_comment(aid: int, body: Dict, token_info: Dict) -> Tuple[Union[Dict,str],int]:
     """ Crea un comentario
@@ -11,6 +12,8 @@ def create_comment(aid: int, body: Dict, token_info: Dict) -> Tuple[Union[Dict,s
     with current_app.app_context():
         usuario = token_info['user_token']['username']
         comentario:Dict = servicioComentario.crear_comentario(current_app.db, usuario, body['body'], aid, body['sentiment'])
+        if ServicioRespuestas.existe_respuesta(current_app.db, aid) == False:
+            return ("No existe la respuesta", HTTPStatus.NOT_FOUND)
     return (comentario, HTTPStatus.CREATED)
 
 def get_comments(aid:int) -> Tuple[Dict,int]:
@@ -25,6 +28,8 @@ def get_comment(id:int) -> Tuple[Dict,int]:
     """
     with current_app.app_context():
         comentario:Dict = servicioComentario.get_comentario(current_app.db,id)
+        if servicioComentario.existe_comentario(current_app.db, id) == False:
+            return ("No existe el comentario", HTTPStatus.NOT_FOUND)
     return (comentario, HTTPStatus.OK)
 
 def vote_comment(cid: int) -> Tuple[dict, int]:
