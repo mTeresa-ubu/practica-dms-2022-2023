@@ -25,6 +25,8 @@ def get_comment(id:int) -> Tuple[Dict,int]:
     """
     with current_app.app_context():
         comentario:Dict = servicioComentario.get_comentario(current_app.db,id)
+        if servicioComentario.existe_comentario(current_app.db, id) == False:
+            return ("No existe el comentario", HTTPStatus.NOT_FOUND)
     return (comentario, HTTPStatus.OK)
 
 def vote_comment(cid: int) -> Tuple[dict, int]:
