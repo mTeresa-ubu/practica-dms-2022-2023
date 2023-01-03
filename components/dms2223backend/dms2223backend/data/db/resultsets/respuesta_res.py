@@ -9,17 +9,17 @@ from sqlalchemy import select # type: ignore
 class RespuestaFuncs():
 
     @staticmethod
-    def create(session:Session,username: str, body: Dict) -> Respuesta: 
+    def create(session:Session,username: str, body: Dict,qid:int) -> Respuesta: 
         if not body:
             raise ValueError('Campo contenido vacío.')
-        nueva = Respuesta(username=username,body=body) 
+        nueva = Respuesta(username=username,body=body,qid=qid) 
         session.add(nueva)
         session.commit()
         return nueva
         
     @staticmethod
-    def get_respuesta(session:Session,qid:int) -> bool:
-        respuesta = session.query(Respuesta).where(Respuesta.qid == qid).first()
+    def get_respuesta(session:Session,id:int) -> bool:
+        respuesta = session.query(Respuesta).where(Respuesta.id == id).first()
         return respuesta
 
     @staticmethod

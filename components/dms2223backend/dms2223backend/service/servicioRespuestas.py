@@ -34,7 +34,7 @@ class ServicioRespuestas():
         schema.remove_session()
         return lista_respuestas
     @staticmethod
-    def create_Respuesta(schema:Schema,username:str,body:Dict):
+    def create_Respuesta(schema:Schema,username:str,body:Dict,qid:int):
         """Crea una respuesta y devuelve el diccionario de la respuesta creada.
 
         Args: qid: Identificador de la pregunta que se va a responder.
@@ -45,7 +45,7 @@ class ServicioRespuestas():
         """
         session: Session = schema.new_session()
 
-        res: Dict = RespuestaFuncs.create(session,username=username, body=body)
+        res: Dict = RespuestaFuncs.create(session,username=username, body=body,qid=qid)
 
         respuesta: Dict = {
             "id":res.id,
@@ -63,9 +63,9 @@ class ServicioRespuestas():
 
 
     @staticmethod
-    def existe_respuesta(schema: Schema,qid:int):
+    def existe_respuesta(schema: Schema,id:int):
         session: Session = schema.new_session()
-        respuesta: Dict = RespuestaFuncs.get_respuesta(session,qid)
+        respuesta: Dict = RespuestaFuncs.get_respuesta(session,id)
         schema.remove_session()
         if not respuesta:
             return False

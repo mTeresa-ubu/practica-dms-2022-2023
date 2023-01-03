@@ -17,10 +17,10 @@ from dms2223backend.data.db.results.comentario import Comentario
 
 class Respuesta(ResultBase):
 
-    def __init__(self, body: Dict,username: str):
+    def __init__(self, body: Dict,username: str,qid:int):
 
         self.username: str = username
-        self.qid: int = body['qid']
+        self.qid: int = qid
         self.body: str = body['body']
         self.timestamp: DateTime
         self.id: int 

@@ -20,7 +20,7 @@ def lista_Respuestas(qid : int):
 
 def crear_Respuesta(body: Dict,token_info:int,qid:int):
         with current_app.app_context():
-                if not PreguntasServicio.existe_pregunta(schema=current_app.db,qid=body['qid']):
+                if not PreguntasServicio.existe_pregunta(schema=current_app.db,qid=qid):
                         idPregunta = str(qid)
 
                         respuesta = "La pregunta con id "+ idPregunta +" no existe"
@@ -30,7 +30,7 @@ def crear_Respuesta(body: Dict,token_info:int,qid:int):
                         username = token_info['user_token']['username']
 
                         respuesta: Dict = ServicioRespuestas.create_Respuesta(
-                        schema=current_app.db,username=username,body=body)
+                        schema=current_app.db,username=username,body=body,qid=qid)
 
                         return (respuesta, HTTPStatus.CREATED)
 
