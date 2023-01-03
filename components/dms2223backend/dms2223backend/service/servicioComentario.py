@@ -15,24 +15,29 @@ class servicioComentario():
         session: Session = schema.new_session()
         comentario = ComentarioFuncs.create(session, autor, body, aid, sentiment)
         comentario:Dict = {
-            "aid":comentario.aid,
-            "timestamp":comentario.timestamp,
+           "aid":comentario.aid,
             "body":comentario.body,
-            "owner":{"username":comentario.username}
+            "id": comentario.id,
+            "owner":{"username":comentario.username},
+            "sentiment": comentario.sentiment.name,
+            "timestamp":comentario.timestamp
         }
         schema.remove_session()
         return comentario
 
     def get_comentario(schema:Schema, id:int) -> Comentario:
         session: Session = schema.new_session()
-        com: Comentario = ComentarioFuncs.get_comentario(session, id)
-        com:Dict = {
-            "aid":com.aid,
-            "title":com.title,
-            "timestamp":com.timestamp,
+        comentario: Comentario = ComentarioFuncs.get_comentario(session, id)
+        comentario:Dict = {
+            "aid":comentario.aid,
+            "body":comentario.body,
+            "id": comentario.id,
+            "owner":{"username":comentario.username},
+            "sentiment": comentario.sentiment.name,
+            "timestamp":comentario.timestamp
         }
         schema.remove_session()
-        return com
+        return comentario
 
     def get_comentarios(schema:Schema, aid:int) -> List[Comentario]:
         session: Session = schema.new_session()
