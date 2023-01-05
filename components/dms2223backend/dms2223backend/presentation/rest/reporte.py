@@ -52,7 +52,7 @@ def change_status_repCom(crid: int, body: Dict) -> Tuple[Dict,int]:
             ServicioReporte.change_status_reportCom(current_app.db, crid, body['status'])
             rep: Dict = ServicioReporte.get_reportCom(current_app.db, crid)
             #rep: Dict = ServicioReporte.change_status_reportCom(current_app.db, crid, body['status'])
-            return (rep, HTTPStatus.OK)
+            return (rep, HTTPStatus.NO_CONTENT)
 
 
 # Reportes para preguntas
@@ -96,7 +96,7 @@ def change_status_repPreg(qrid: int, body: Dict) -> Tuple[Dict,int]:
             ServicioReporte.change_status_reportPreg(current_app.db, qrid, body['status'])
             rep: Dict = ServicioReporte.get_reportPreg(current_app.db, qrid)
             #rep: Dict = ServicioReporte.change_status_reportPreg(current_app.db, qrid, body['status'])
-            return (rep, HTTPStatus.OK)
+            return (rep, HTTPStatus.NO_CONTENT)
 
 
 # Reportes para respuestas
@@ -140,4 +140,4 @@ def change_status_repRes(arid: int, body: Dict) -> Tuple[Dict,int]:
             ServicioReporte.change_status_reportRes(current_app.db, arid, body['status'])
             rep: Dict = ServicioReporte.get_reportRes(current_app.db, arid)
             #rep: Dict = ServicioReporte.change_status_reportRes(current_app.db, arid, body['status'])
-            return (rep, HTTPStatus.OK)
+            return (rep, HTTPStatus.NO_CONTENT)
