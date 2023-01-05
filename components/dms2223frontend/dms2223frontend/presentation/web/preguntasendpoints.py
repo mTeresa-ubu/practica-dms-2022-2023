@@ -48,3 +48,30 @@ class PreguntasEndpoints():
          
          return redirect(redirect_to)
 
+    
+    @staticmethod
+    def get_crear_reportePreg(auth_service: AuthService) -> Union[Response, Text]:
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.DISCUSSION.name not in session['roles']:
+            return redirect(url_for('get_home'))
+
+        return render_template('/preguntas/crear_reporte_pregunta.html', name=session['user'], roles=session['roles'], qid=request.args.get('qid'))
+
+    @staticmethod
+    def post_reportePreg(auth_service: AuthService, backend_service: BackendService) -> Union[Response, Text]:
+        if not WebAuth.test_token(auth_service):
+            return redirect(url_for('get_login'))
+        if Role.DISCUSSION.name not in session['roles']:
+            return redirect(url_for('get_home'))
+
+        qid = request.form.get('qid')
+        reason = request.form.get('bodyText')
+
+        new_question = PreguntaWeb.new_report_question(backend_service, qid=qid, reason=reason)
+        if not new_question:
+            return redirect(url_for('get_new_question'))
+        redirect_to = request.form['redirect_to']
+        if not redirect_to:
+            redirect_to = url_for('get_questions')
+        return redirect(redirect_to)

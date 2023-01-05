@@ -13,3 +13,11 @@ class PreguntaWeb():
             return response.get_content()
         else:
             return None
+    
+    @staticmethod
+    def nuevo_reportePreg(backend_service: BackendService, qid: str, reason: str) -> Optional[Dict]:
+        response: ResponseData = backend_service.create_reportePreg(qid, reason, session.get('token'))
+        WebUtils.flash_response_messages(response)
+        
+        return response.get_content()
+    
