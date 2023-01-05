@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "macros/buttons.html" import button, submit_button %}
+{% block title %}{% block subtitle %}{% endblock %}Reportar Pregunta{% endblock %}
+{% block contentheading %}Reportar Pregunta{% endblock %}
+{% block pagecontent %}
+
+<div id="reportePreg-form">
+    <h2 class="aligncenter">Realiza un reporte de la pregunta</h2><br>
+    <form action="/crear_reporte_pregunta" method="post">
+        <label for="arg">Argumenta el reporte:</label><br>
+        <input type="text" id="argumento" name="argumento">
+        <p>{{ submit_button('bluebg', 'Crear Reporte') }}</p>
+        <input type="hidden" name="qid" value="{{ qid }}"/>
+        <input type="hidden" name="redirect_to" value="/discussion"> 
+    </form> 
+</div>
+
+{% endblock %}
