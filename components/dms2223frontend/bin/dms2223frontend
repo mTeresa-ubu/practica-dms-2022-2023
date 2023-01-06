@@ -107,7 +107,7 @@ def get_respuesta(id_respuesta):
     return RespuestasEndpoints.get_respuesta(auth_service,id_respuesta)
 
 
-@app.route("/crear_pregunta", methods=['GET'])
+@app.route("/crear_preguntas", methods=['GET'])
 def get_crear_preguntas():
     return PreguntasEndpoints.get_nueva_pregunta(auth_service)
 
@@ -115,7 +115,7 @@ def get_crear_preguntas():
 def get_preguntas():
     return PreguntasEndpoints.get_preguntas(auth_service)
 
-@app.route("/crear_pregunta", methods=['POST'])
+@app.route("/crear_preguntas", methods=['POST'])
 def post_preguntas():
     return PreguntasEndpoints.post_preguntas(auth_service, backend_service)
 
