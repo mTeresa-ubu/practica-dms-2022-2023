@@ -17,11 +17,11 @@ def list_repCom() -> Tuple[Dict,int]:
         rep: Dict = ServicioReporte.list_reportsCom(current_app.db)
     return (rep, HTTPStatus.OK)
 
-def get_repCom(id:int) -> Tuple[Dict,int]:
+def get_repCom(crid:int) -> Tuple[Dict,int]:
     """ Devuelve un reporte sabiendo el id
     """
     with current_app.app_context():
-        rep: Dict = ServicioReporte.get_reportCom(current_app.db, id)
+        rep: Dict = ServicioReporte.get_reportCom(current_app.db, crid)
         if not rep:
             return("No existe ese reporte", HTTPStatus.BAD_REQUEST)
     return (rep, HTTPStatus.OK)
@@ -40,7 +40,8 @@ def change_status_repCom(crid: int, body: Dict) -> Tuple[Union[Dict,str],int]:
     with current_app.app_context():
         ServicioReporte.change_status_reportCom(current_app.db, crid, body['status'])
         rep: Dict = ServicioReporte.get_reportCom(current_app.db, crid)
-        return rep, HTTPStatus.OK
+        #rep: Dict = ServicioReporte.change_status_reportCom(current_app.db, crid, body['status'])
+    return (rep, HTTPStatus.NO_CONTENT)
 
 
 # Reportes para preguntas
@@ -52,11 +53,11 @@ def list_repPreg() -> Tuple[Dict,int]:
         rep: Dict = ServicioReporte.list_reportsPreg(current_app.db)
     return (rep, HTTPStatus.OK)
 
-def get_repPreg() -> Tuple[Dict,int]:
+def get_repPreg(qrid:int) -> Tuple[Dict,int]:
     """ Devuelve un reporte sabiendo el id
     """
     with current_app.app_context():
-        rep: Dict = ServicioReporte.get_reportPreg(current_app.db, id)
+        rep: Dict = ServicioReporte.get_reportPreg(current_app.db, qrid)
         if not rep:
             return("No existe ese reporte", HTTPStatus.BAD_REQUEST)
     return (rep, HTTPStatus.OK)
@@ -75,7 +76,8 @@ def change_status_repPreg(qrid: int, body: Dict) -> Tuple[Union[Dict,str],int]:
     with current_app.app_context():
         ServicioReporte.change_status_reportPreg(current_app.db, qrid, body['status'])
         rep: Dict = ServicioReporte.get_reportPreg(current_app.db, qrid)
-        return rep, HTTPStatus.OK
+        #rep: Dict = ServicioReporte.change_status_reportPreg(current_app.db, qrid, body['status'])
+    return rep, HTTPStatus.NO_CONTENT
 
 
 # Reportes para respuestas
@@ -87,11 +89,11 @@ def list_repRes() -> Tuple[Dict,int]:
         rep: Dict = ServicioReporte.list_reportsRes(current_app.db)
     return (rep, HTTPStatus.OK)
 
-def get_repRes() -> Tuple[Dict,int]:
+def get_repRes(arid:int) -> Tuple[Dict,int]:
     """ Devuelve un reporte sabiendo el id
     """
     with current_app.app_context():
-        rep: Dict = ServicioReporte.get_reportRes(current_app.db, id)
+        rep: Dict = ServicioReporte.get_reportRes(current_app.db, arid)
         if not rep:
             return("No existe ese reporte", HTTPStatus.BAD_REQUEST)
     return (rep, HTTPStatus.OK)
@@ -110,4 +112,5 @@ def change_status_repRes(arid: int, body: Dict) -> Tuple[Union[Dict,str],int]:
     with current_app.app_context():
         ServicioReporte.change_status_reportRes(current_app.db, arid, body['status'])
         rep: Dict = ServicioReporte.get_reportRes(current_app.db, arid)
-        return rep, HTTPStatus.OK
+        #rep: Dict = ServicioReporte.change_status_reportRes(current_app.db, arid, body['status'])
+    return rep, HTTPStatus.NO_CONTENT
