@@ -44,9 +44,10 @@ class PreguntasEndpoints():
          if Role.ADMINISTRATION.name not in session['roles']: #cambiar a discussion cuando funcione
             return redirect(url_for('get_home'))
          preg = PreguntaWeb.nueva_pregunta(back_service, title=request.form.get('title'), body=request.form.get('body'))
-         redirect_to = request.form['redirect_to']
-         if not redirect_to:
-            redirect_to = url_for('get_questions')
+         if not preg:
+            return redirect(url_for('get_nueva_pregunta'))
+         else:
+            redirect_to = url_for('get_preguntas')
          
          return redirect(redirect_to)
 
@@ -82,5 +83,5 @@ class PreguntasEndpoints():
         if Role.ADMINISTRATION.name not in session['roles']: #cambiar a discussion cuando funcione
             return redirect(url_for('get_home'))
       
-        return render_template('preguntas/crear_preguntas.html', name=session['user'], roles=session['roles'], title=request.form.get('title'), body=request.form.get('body'))
+        return render_template('/preguntas/crear_preguntas.html', name=session['user'], roles=session['roles'], title=request.form.get('title'), body=request.form.get('body'))
 
