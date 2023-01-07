@@ -9,7 +9,7 @@ class PreguntaWeb():
     def nueva_pregunta(backend_service: BackendService, title: str, body: str) -> Optional[Dict]:
         response: ResponseData = backend_service.create_preg(body, session.get('token'), title)
         WebUtils.flash_response_messages(response)
-        if response is not None:
-            return response.get_content()
-        else:
-            return None
+        # if response is not None:
+        return response.get_content()
+        # else:
+        #     return None
