@@ -24,7 +24,7 @@ Nos gustaría poder adjuntar muchas más fotos pero, a pesar del esfuerzo, no he
 1.	Lo primero que debemos hacer es acceder a la página web http://127.0.0.1:8080
 2.	Pulsando el botón de “login” e introduciendo unas credenciales válidas iniciaremos sesión. (en nuestro caso las credenciales admin admin están por defecto disponibles):
 
-		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/blob/roberGuiaUsuario/Imagenes/login.PNG)
+	![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/blob/roberGuiaUsuario/Imagenes/login.PNG)
 	
 3.	Una vez en la página de inicio, podemos visualizar las preguntas creadas recientemente.
 4.	En la parte superior de la página, podemos movernos de la página "/home" a la pagina "/admin" y viciversa.
