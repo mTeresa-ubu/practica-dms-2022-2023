@@ -97,12 +97,13 @@ Este diseño se puede asemejar a la arquitectura de tres capas. Ya que tenemos u
   	- En el backend:
 	  - Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se 		comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
   3. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Y Para estos dos últimos, hemos decidido dividirlos en comentario y respuesta (y adicionalmente pregunta para reporte) por simplicidad.
+  
   	- En el backend, hemos realizado los métodos getters y setters para:
-	1. Comentarios
-	2. Preguntas 
-	3. Respuesta
-	4. Reporte
-	5. Votos
+		1. Comentarios
+		2. Preguntas 
+		3. Respuesta
+		4. Reporte
+		5. Votos
 	
 	
 Se ha usado el dms2223auth proporcionado por el profesor para realizar todas las autenticaciones necesarias, además de como ayuda para poder entender ciertas partes del código.
@@ -117,22 +118,22 @@ Los pasos para realizar la comprobación en el Swagger son:
 4. En Network seleccionar "login" y copiar el Set Cookie de Request Header
 5. Ir a http://localhost:4000/api/v1/ui
 6. Authorize:
-- 1234
-- admin, admin
-- Pegar el Set Cookie
+	- 1234
+	- admin, admin
+	- Pegar el Set Cookie
 7. Seleccionar sesion POST:
-- Try it out
-- Execute
-- Ir a Code 200
-- Copiar Response body
+	- Try it out
+	- Execute
+	- Ir a Code 200
+	- Copiar Response body
 - 8. Ir a http://localhost:5000/api/v1/ui
-Authorize:
-- 1234
-- Pegar Response body	
+	- Authorize:
+	- 1234
+	- Pegar Response body	
 9. Selecionamos la operación que deseemos realizar:
-- Try it out
-- Execute
-- Comprobar que funciona correctamente.
+	- Try it out
+	- Execute
+	- Comprobar que funciona correctamente.
 
 #### 3. Comprobación del funcionamiento de la base de datos
 La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado un fichero: dms2223backend-crear-ejemplo
@@ -172,7 +173,7 @@ Para utilizar WebSockets en nuestra práctica, haríamos los siguientes pasos:
 3. En la parte del backend, utilizaríamos un framework que permita trabajar con WebSockets. Se suelen usar Socket.IO y ws.
 4. En el backend también crearíamos una instancia de la clase WebSocketServer y proporcionaríamos un manejador de eventos para el evento connection, que se activará cuando un nuevo cliente se conecte al servidor.
 5. Una vez establecido el canal de comunicación, utilizaríamos métodos como send() y close() para enviar mensajes y cerrar la conexión desde cualquiera de los extremos (cliente o servidor).
-6. 
+
 Aquí, se nos ha ocurrido también implementar también la opción de “deshacer” un mensaje escrito, para lo que podríamos utilizar un patrón comando ya que este, como indica su propia intención, “Encapsula una petición como un objeto, permitiendo parametrizar clientes con diferentes peticiones, crear colas o registros de peticiones, o soportar operaciones que se pueden deshacer.”
 Además del iterador para recorrer toda la lista de mensajes enviados, recibidos… secuencialmente.
 
