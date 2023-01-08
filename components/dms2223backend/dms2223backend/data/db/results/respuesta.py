@@ -25,6 +25,7 @@ class Respuesta(ResultBase):
         self.timestamp: DateTime
         self.id: int 
         self.oculto: bool
+        self.votos: int = 0
         
     @staticmethod
     def _table_definition(metadata: MetaData) -> Table:
@@ -46,6 +47,7 @@ class Respuesta(ResultBase):
               Column('id', Integer, autoincrement=True, primary_key=True), #Cada nuevo registro, +1
               Column('timestamp', DateTime, nullable=False, default=func.now()),
               Column('oculto', Boolean, default=False),
+              Column('votos', Integer)
 
         )
 

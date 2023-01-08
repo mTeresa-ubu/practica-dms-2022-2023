@@ -36,4 +36,9 @@ def crear_Respuesta(body: Dict,token_info:int,qid:int):
 
 
 def vote_respuesta(aid : int):
-        return HTTPStatus.BAD_REQUEST     
+        with current_app.app_context():
+                if ServicioRespuestas.existe_respuesta(schema=current_app.db,id=aid):
+                        ServicioRespuestas.votar_Respuesta(schema=current_app.db,id=aid)
+                        return HTTPStatus.CREATED
+                else:
+                        return HTTPStatus.BAD_REQUEST     

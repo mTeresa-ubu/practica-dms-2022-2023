@@ -29,8 +29,7 @@ class VotoCom(ResultBase):
               'votesCom',
               metadata,
               Column('username', String(32), nullable=False, primary_key=True),
-              Column('aid', Integer, ForeignKey('comments.id'), nullable=False, primary_key=True) #primary key compuesta que definimos anterioremente
-
+              Column('aid', Integer, ForeignKey('comments.id'), nullable=False, primary_key=True) #primary key compuesta que definimos anteriorementes
         )
     
     __mapper_args__ = {
