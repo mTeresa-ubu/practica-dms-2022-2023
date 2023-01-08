@@ -97,7 +97,7 @@ Este diseño se puede asemejar a la arquitectura de tres capas. Ya que tenemos u
   	- En el backend:
 	  - Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se 		comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
   3. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Y Para estos dos últimos, hemos decidido dividirlos en comentario y respuesta (y adicionalmente pregunta para reporte) por simplicidad.
- 	- En el backend, hemos realizado los métodos getters y setters para:
+  	- En el backend, hemos realizado los métodos getters y setters para:
 	1. Comentarios
 	2. Preguntas 
 	3. Respuesta
