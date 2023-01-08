@@ -29,32 +29,6 @@ class CommonEndpoints():
 
         name = session['user']
 
-        #Lista de preguntas hardcodeada
-        #Cambiar por una peticion que solicite la lista
-        pregs=[
-            Pregunta("Contenido 1","1",datetime.now(),34,35,"Yo","Titulo 1"),
-            Pregunta("Contenido 2","2",datetime.now(),34,35,"Yo","Titulo 2"),
-            Pregunta("Contenido 3","3",datetime.now(),34,35,"Yo","Titulo 3"),
-            Pregunta("Contenido 4","4",datetime.now(),34,35,"Yo","Titulo 4")
-        ]
-
         return render_template('home.html', 
             name=name, 
-            roles=session['roles'],
-            preguntas=pregs)
-
-    @staticmethod
-    def get_inicio():
-        """ Genstiona el acceso a inicio sin ningun tipo de login necesario
-        
-        """
-
-        pregs=[
-            Pregunta("Contenido 1","1",datetime.now(),34,35,"Yo","Titulo 1"),
-            Pregunta("Contenido 2","2",datetime.now(),34,35,"Yo","Titulo 2"),
-            Pregunta("Contenido 3","3",datetime.now(),34,35,"Yo","Titulo 3"),
-            Pregunta("Contenido 4","4",datetime.now(),34,35,"Yo","Titulo 4")
-        ]
-
-        return render_template('inicio/inicio.html',
-            preguntas=pregs)
+            roles=session['roles'])

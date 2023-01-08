@@ -50,8 +50,8 @@ app.secret_key = bytes(cfg.get_app_secret_key(), 'ascii')
 # Alvar [4/11/2022]
 @app.route("/", methods=['GET'])
 def get_default():
-    return CommonEndpoints.get_inicio()
-    #return CommonEndpoints.get_home(auth_service)
+    #return CommonEndpoints.get_inicio()
+    return CommonEndpoints.get_home(auth_service)
 
 @app.route("/login", methods=['GET'])
 def get_login():
@@ -102,9 +102,9 @@ def post_admin_users_edit():
     return AdminEndpoints.post_admin_users_edit(auth_service)
 
 #Cambiar este
-@app.route("/respuesta/<id_respuesta>",methods=['GET'])
+@app.route("/questions/qid/answers",methods=['GET'])
 def get_respuesta(id_respuesta):
-    return RespuestasEndpoints.get_respuesta(auth_service,id_respuesta)
+    return RespuestasEndpoints.get_respuesta(auth_service,backend_service)
 
 
 @app.route("/crear_preguntas", methods=['GET'])
