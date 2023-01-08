@@ -79,24 +79,24 @@ Además, dentro de esa carpeta hemos añadido algunos diagramas que realizamos i
 
 Lo primero que hicimos fue distribuir el trabajo del que se ocuparían las capas, ya que anteriormente no respetábamos el principio “Single Responsability” al no separar en algunas de ellas las responsabilidades. De esta forma, lo estamos cumpliendo. 
 
-Por otro lado, la arquitectura multicapa proporciona ciertas ventajas que nos interesan. Como la coherencia de las clases que creamos y el encapsulamiento. Sin embargo, en la realización del proyecto hemos notada la gran desventaja de cambios en cascada, ya que, por ejemplo, al corregir alguna función en la capa de datos, hemos tenido que realizar cambios en todas las capas, lo que resulta tedioso para el programador.
+Por otro lado, la arquitectura multicapa proporciona ciertas ventajas que nos interesan. Como la coherencia de las clases que creamos y el encapsulamiento. Sin embargo, en la realización del proyecto hemos notado la gran desventaja de cambios en cascada, ya que, por ejemplo, al corregir alguna función en la capa de datos, hemos tenido que realizar cambios en todas las capas, lo que resulta tedioso para el programador.
 
-Este diseño se puede asemejar a la arquitectura de tres capas. Ya que tenemos una capa para la presentación, una para el origen de datos y otra para la lógica (en nuestro caso la llamamos servicio). A continuación, las describiremos.
+Este diseño se puede asemejar a la arquitectura de tres capas. Ya que tenemos una capa para la presentación, una para el origen de datos y otra para la lógica (en nuestro caso la llamamos servicio).En nuestro caso la capa de presentación nunca se comunica con la capa de origen de datos, la comunicación siempre se realiza con la capa de servicios como intermediaria. A continuación, las describiremos:
 
-  1. Capa de datos: es la encargada de almacenar todos los datos.
+  1. Capa de datos: es la encargada de almacenar todos los datos y de proporcionarlos a los distintos servicios.
   - En el frontend:
  	 - Aquí vamos a realizar la conexión del frontend con el backend. Esto se va a realizar mediante el backend service a modo de “fachada” puesto que nuestro 		objetivo es desacoplar el frontend del backend haciendo que este funcione sin conocer la informacion del backend. De esta forma, cuando se realizan las 		solicitudes HTTP desde el frontend, mediante este patrón se traducirá la respuesta del backend al formato esperado por el frontend.
 		Facilitando su uso de esta forma, al tener una interfaz unificada de alto nivel.
   -En el backend: 
 	  - Hemos definido distintos ficheros siguiendo el diagrama de datos creado. En esta capa definimos las tablas, las relaciones y ciertos servicios de datos, 		con los cuales funciona la capa de servicios. 
 	  Hemos creado distintas clases para las distintas funcionalidades, así como tantas clases como elementos existen en los requisitos, de forma que conseguimos 		un sistema desacoplado. 
-	  - En esta parte podremos encontrar las clases para las preguntas, respuestas, comentarios y reportes.
+	  - En esta parte podremos encontrar las clases para las preguntas, respuestas, comentarios y reportes y votos, elementos fundamentales para el desarrollo del proyecto.
   2. Capa de presentación: es la encargada de realizar las operaciones comunicándose con la capa de servicios.
   	- En el frontend:
 	  - Aquí podremos encontrar todos los endpoints, que son las “direcciones” a las que se van a enviar las peticiones. A estos los llamaremos desde el 		dms2223frontend para realizar los “GET” y los “POST” correspondientes.
   	- En el backend:
-	  - Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se 		comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
-  3. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Y Para estos dos últimos, hemos decidido dividirlos en comentario y respuesta (y adicionalmente pregunta para reporte) por simplicidad.
+	  - Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
+  3. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Cada clase tiene su servicio, proporcionando una comunicación independiente y solida.
   
   	- En el backend, hemos realizado los métodos getters y setters para:
 		1. Comentarios
@@ -126,7 +126,7 @@ Los pasos para realizar la comprobación en el Swagger son:
 	- Execute
 	- Ir a Code 200
 	- Copiar Response body
-- 8. Ir a http://localhost:5000/api/v1/ui
+8. Ir a http://localhost:5000/api/v1/ui
 	- Authorize:
 	- 1234
 	- Pegar Response body	
@@ -183,6 +183,8 @@ Para utilizar WebSockets en nuestra práctica, haríamos los siguientes pasos:
 
 Aquí, se nos ha ocurrido también implementar también la opción de “deshacer” un mensaje escrito, para lo que podríamos utilizar un patrón comando ya que este, como indica su propia intención, “Encapsula una petición como un objeto, permitiendo parametrizar clientes con diferentes peticiones, crear colas o registros de peticiones, o soportar operaciones que se pueden deshacer.”
 Además del iterador para recorrer toda la lista de mensajes enviados, recibidos… secuencialmente.
+
+Como aportación final a esta parte, y viajando a un nivel más avanzado, sería muy útil y conveniente añadir un sistema de seguridad para estos mensajes, como un sistema de  cifrado punto a punto.
 
 
 ### 6. Guía de usuario
