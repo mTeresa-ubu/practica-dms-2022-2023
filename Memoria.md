@@ -142,7 +142,39 @@ Authorize:
 - Try it out
 - Execute
 - Comprobar que funciona correctamente.
+- 
 ### 4. Linea futura de trabajo
+Nuestra línea de futuro consistirá en un servicio básico de mensajería entre usuarios dentro de la plataforma.
+
+Desde el perfil del usuario, buscando el nombre de la persona deseada, podremos pulsar el botón “enviar mensaje”.
+
+El usuario que lo reciba podrá, desde su buzón de entrada (dentro de su perfil de usuario también) abrir este mensaje, que se encontrará ubicado dentro del apartado “recibidos”.
+
+El usuario emisor también podrá ver los mensajes que ha enviado en el apartado de "enviados".
+Adicionalmente, los mensajes podrán clasificarse en leídos, no leídos, enviados, etc. Para esto, dentro de la base de datos, necesitamos un campo con el tipo de mensaje (enviado, recibido…) y posteriormente,  utilizaríamos un filtro para mostrar solo los “leídos”, “enviados”, etc en función de la opción seleccionada por el usuario.
+
+Tal y como hemos dejado preparado el diseño, la forma en que se implementaría es la siguiente:
+
+En el frontend habrá que diseñar los .html correspondientes con la información que se mostrará por pantalla, así como crear los botones necesarios.
+Una vez pulsado ese botón, en las macros se definirá toda la lógica.
+
+Con la autenticación, deberemos de asegurarnos de que solo los usuarios autorizados pueden enviar y recibir mensajes, esto lo haremos a nivel de código, comprobando que si el usuario no tiene acceso, se lance una excepción.
+
+Además, habrá que almacenar los mensajes en la base de datos, para ello dentro del diseño habrá que añadir una clase “Mensajes” con un atributo id de usuario, que, como su propio nombre indica, coincidirá con el id del usuario.
+
+Para que los usuarios puedan recibir mensajes en tiempo real, en lugar de tener que actualizar manualmente la página, implementaríamos WebSockets. 
+WebSockets es una tecnología que permite la comunicación en tiempo real entre el cliente y el servidor a través de un canal de comunicación bidireccional y persistente. Esto significa que, una vez establecido el canal de comunicación, ambos extremos (cliente y servidor) pueden enviar y recibir datos en cualquier momento sin necesidad de realizar una nueva solicitud HTTP.
+
+Para utilizar WebSockets en nuestra práctica, haríamos los siguientes pasos:
+1. En la parte del frontend, crearíamos una instancia de la clase WebSocket y le proporcionaríamos la dirección del servidor al que queremos conectarnos. 
+2. Una vez creada la instancia, configuraríamos los manejadores de eventos para los diferentes tipos de eventos que pudieran ocurrir durante la comunicación.
+3. En la parte del backend, utilizaríamos un framework que permita trabajar con WebSockets. Se suelen usar Socket.IO y ws.
+4. En el backend también crearíamos una instancia de la clase WebSocketServer y proporcionaríamos un manejador de eventos para el evento connection, que se activará cuando un nuevo cliente se conecte al servidor.
+5. Una vez establecido el canal de comunicación, utilizaríamos métodos como send() y close() para enviar mensajes y cerrar la conexión desde cualquiera de los extremos (cliente o servidor).
+6. 
+Aquí, se nos ha ocurrido también implementar también la opción de “deshacer” un mensaje escrito, para lo que podríamos utilizar un patrón comando ya que este, como indica su propia intención, “Encapsula una petición como un objeto, permitiendo parametrizar clientes con diferentes peticiones, crear colas o registros de peticiones, o soportar operaciones que se pueden deshacer.”
+Además del iterador para recorrer toda la lista de mensajes enviados, recibidos… secuencialmente.
+
 
 ### 5. Guía de usuario
 Aunque, por falta de tiempo, no hemos podido terminar el trabajo, tenemos las ideas claras sobre cómo debería de ser el funcionamiento de la página web, por ello, en la carpeta GuiaUsuario, se pueden consultar esta.
