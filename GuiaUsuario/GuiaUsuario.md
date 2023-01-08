@@ -11,11 +11,11 @@ En nuestro caso hemos decidido trabajar en Windows, por lo que tuvimos que:
 	- Abrir el programa "Docker Desktop".
 	- Comprobar que en Configuración > General, este seleccionada la siguiente opción:
 
-		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/tree/roberGuiaUsuario/Imagenes/docker1.png){width='100px'}
+		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/blob/roberGuiaUsuario/Imagenes/docker1.png)
 		
 	- Y comprobar que en Configuración > Resources > WSL Integration, esten selecionadas las dos opciones que hay:
 
-		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/tree/roberGuiaUsuario/Imagenes/docker2.png){width='100px'}
+		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/blob/roberGuiaUsuario/Imagenes/docker2.png)
 		
 - Descargar el programa Visual Studio Code, para trabajar comodamente.
 - Realizar un clone del repositorio con el comando "git clone" (desde terminal).
@@ -24,7 +24,7 @@ Nos gustaría poder adjuntar muchas más fotos pero, a pesar del esfuerzo, no he
 1.	Lo primero que debemos hacer es acceder a la página web http://127.0.0.1:8080
 2.	Pulsando el botón de “login” e introduciendo unas credenciales válidas iniciaremos sesión. (en nuestro caso las credenciales admin admin están por defecto disponibles):
 
-		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/tree/roberGuiaUsuario/Imagenes/login.png)
+		![](https://github.com/mTeresa-ubu/practica-dms-2022-2023/blob/roberGuiaUsuario/Imagenes/login.png)
 	
 3.	Una vez en la página de inicio, podemos visualizar las preguntas creadas recientemente.
 4.	En la parte superior de la página, podemos movernos de la página "/home" a la pagina "/admin" y viciversa.
