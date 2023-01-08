@@ -63,7 +63,7 @@ class BackendService():
     def create_preg(self, body:str, token: str, title: str):
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.post(
-            self.__base_url() + '/questions',
+            self.__base_url() + '/home',
             json={
                 'title': title,
                 'body': body
@@ -84,7 +84,7 @@ class BackendService():
     def get_preguntas(self, token: str):
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.get(
-            self.__base_url() + f'/questions',
+            self.__base_url() + f'/home',
             headers={
                 'Authorization': f'Bearer {token}',
                 self.__apikey_header: self.__apikey_secret
@@ -101,7 +101,7 @@ class BackendService():
     def get_pregunta(self, token: str, qid: int):
         response_data: ResponseData = ResponseData()
         response: requests.Response = requests.get(
-            self.__base_url() + f'/questions{qid}', #similar al anterior en preguntasendpoints
+            self.__base_url() + f'/preguntas/{qid}', #similar al anterior en preguntasendpoints
             headers={
                 'Authorization': f'Bearer {token}',
                 self.__apikey_header: self.__apikey_secret

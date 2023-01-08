@@ -89,14 +89,6 @@ a {
     margin: 0.2em 0;
 }
 
-#contentheader p{
-    font-size: medium;
-}
-
-#contentheader a{
-    font-size: medium;
-}
-
 #contentheader h2 {
     color: #9b0015;
 }
@@ -170,15 +162,6 @@ table th {
     box-shadow: 0 0.3em 0.1em inset rgb(0 0 0 / 20%);
 }
 
-.greenbg {
-    background-color: #1cbd4c;
-    color: #fff;
-}
-
-.greenbg a {
-    color: #fff;
-}
-
 .bluebg {
     background-color: #253aa7;
     color: #fff;
@@ -206,24 +189,6 @@ table th {
     color: #000;
 }
 
-.greenbg {
-    background-color: #167c24;
-    color: #fff;
-}
-
-.greenbg a {
-    color: #fff;
-}
-
-.graybg {
-    background-color: #444444;
-    color: #fff;
-}
-
-.graybg a {
-    color: #fff;
-}
-
 .questiondiv {
     margin: 10px;
     padding: 5px;
@@ -238,109 +203,4 @@ table th {
 .questionscore {
     font-size: smaller;
     color: #777;
-}
-
-/* Pagina de inico 
-*  Alvar [14/11/2022]
-*/
-
-.container2cols {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-/* Editor de respuestas
-*  Alvar [14/11/2022]
-*/
-
-textarea {
-    padding: .2em;
-    border: 0em;
-}
-
-textarea:focus {
-    outline: .2em;
-}
-
-.marco_texto{
-    padding: .5em .1em 0em .1em;
-    /* border-radius: .5em; */
-    border: .1em solid #777;
-    width: fit-content;
-    margin: 0;
-}
-
-#editor_respuesta {
-    width: fit-content;
-    border-radius: .5em;
-    border-style: solid;
-}
-
-/* Respuesta
-*  Alvar [14/11/2022]
-*/
-
-.respuesta_div {
-    margin: .5em;
-    padding: 0em .2em;
-    border: #ddd 1px solid;
-    border-left: #ddd 5px solid;
-}
-
-.respuesta_texto {
-    width: 100%;
-}
-
-#votos {
-    width: 5em;
-    display: flex;
-    flex-direction: column;
-}
-
-.respuesta_div .container2cols {
-    justify-content: flex-start;
-}
-
-.contenedor_respuestas {
-    margin: 0em 0em 0em 2em;
-}
-
-/* Comentario
-*  Alvar [14/11/2022]
-*/
-
-.contenido_comentario {
-    width: 100%;
-    height: 100%;
-}
-
-.contenido_comentario p{
-    height: 100%;
-    vertical-align: middle; 
-}
-
-
-.comentario_div {
-    margin: .5em;
-    border: #ddd 1px solid;
-    border-left: #ddd 5px solid;
-    padding: 0em .2em;
-}
-
-.metadatos_comentario {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.metadatos_comentario * {
-    margin: .2em .4em;
-}
-
-/* Contenedor de preguntas
-* Alvar [24/11/2022]
-*/
-
-#preguntas {
-    width: 45%;
 }

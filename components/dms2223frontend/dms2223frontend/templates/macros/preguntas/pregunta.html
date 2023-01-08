@@ -1,5 +1,5 @@
 <!--Imports de los botones de votacion-->
-{% from 'macros/buttons.html' import voteUp_button, voteDown_button %}
+{% from 'macros/buttons.html' import button, voteUp_button, voteDown_button %}
 
 <!--Pregunta en formato de titulo-->
 {% macro tituloPregunta(titulo,id_pregunta) %}
@@ -37,7 +37,8 @@
 <!--Macro de la pregunta simple-->
 {% macro pregunta_simple(pregunta) %}
 <div class="questiondiv">
-    {{tituloPregunta(pregunta.tituloPregunta,pregunta.id)}}
-    {{datosPregunta(pregunta.autor,pregunta.fecha_creacion)}}
+    {{pregunta['title']}}
+    {{pregunta['body']}}
+    {{pregunta['timestamp']}}
 </div>
 {% endmacro %}
