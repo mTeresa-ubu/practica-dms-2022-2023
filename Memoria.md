@@ -135,7 +135,14 @@ Los pasos para realizar la comprobación en el Swagger son:
 	- Execute
 	- Comprobar que funciona correctamente.
 
-#### 3. Comprobación del funcionamiento de la base de datos
+#### 3. Cambios realizados en esta entrega
+Además de los citados anteriormente, en esta entrega hemos tratado de realizar una memoria más completa, comentando aquellos patrones que hemos utilizado e implementando la nueva línea futura de trabajo.
+
+Además, hemos intentado mejorar aquellos aspectos que en las dos entregas anteriores no eran correctos, como los hints de tipado, que, aunque actualmente no todos sean correctos, somos conscientes de que nos quedan muchos por añadir.
+
+Como conclusión, creeemos que, por falta de tiempo no hemos podido completarla satisfactoriamente, sin embargo, conocemos qué es lo que nos queda por hacer y cómo debemos de hacerlo.
+
+#### 4. Comprobación del funcionamiento de la base de datos
 La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado un fichero: dms2223backend-crear-ejemplo
 
 En él, la idea principal para testear fue:
@@ -145,7 +152,7 @@ En él, la idea principal para testear fue:
   4. Realizar commit de esta sesión.
   5. Cerrar la sesión.
  
-### 4. Linea futura de trabajo
+### 5. Linea futura de trabajo
 Nuestra línea de futuro consistirá en un servicio básico de mensajería entre usuarios dentro de la plataforma.
 
 Desde el perfil del usuario, buscando el nombre de la persona deseada, podremos pulsar el botón “enviar mensaje”.
@@ -178,19 +185,19 @@ Aquí, se nos ha ocurrido también implementar también la opción de “deshace
 Además del iterador para recorrer toda la lista de mensajes enviados, recibidos… secuencialmente.
 
 
-### 5. Guía de usuario
+### 6. Guía de usuario
 Aunque, por falta de tiempo, no hemos podido terminar el trabajo, tenemos las ideas claras sobre cómo debería de ser el funcionamiento de la página web, por ello, en la carpeta GuiaUsuario, se pueden consultar esta.
 
 Nos hubiera gustado poder poner capturas de pantalla sobre su funcionamiento, sin embargo, no nos ha dado tiempo por haber realizado prácticamente desde cero esta práctia.  
 
-### 6. Consideraciones de para el desarrollo
-#### 6.1 Docker
+### 7. Consideraciones de para el desarrollo
+#### 7.1 Docker
 Por su simplicidad se han decidido modificar los ficheros de instalacion e inicio y asi permitir el desarrollo sin necesiadad de reinicios.
 Se ha asumido que los desarrolladores actuales han instalado las imagenes, por lo que se ha comentado las lineas de *"/practica-dms-2022-2023/components/dms2223auth/bin/dms2223auth-create-admin"* para que no se intente volver a crear el usuario admin.
 Si se requiriese reinstalar la maquina habria que desomentarlas o no sera posible loguearse en la aplicacion.
 
 Ademas para permitir la compatibilidad con WSL2 se ha editado *" practica-dms-2022-2023/docker/config/dev.yml" liena 33* para enlazar el puerto 8080 de Docker con el 8080 de Windows.
-#### 4.2 Modo debug
+#### 7.2 Modo debug
 Para agilizar el desarrollo se ha configurado Jinja/Flask para actualizarsa cada vez que se produce un cambio en el frontend, asi no sera necesario reiniciar el servicio o la maquina docker cada vez que haga un cambio a la web. 
 Para ello se ha modificado:
 
