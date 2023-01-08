@@ -88,22 +88,23 @@ Este diseño se puede asemejar a la arquitectura de tres capas. Ya que tenemos u
  	 - Aquí vamos a realizar la conexión del frontend con el backend. Esto se va a realizar mediante el backend service a modo de “fachada” puesto que nuestro 		objetivo es desacoplar el frontend del backend haciendo que este funcione sin conocer la informacion del backend. De esta forma, cuando se realizan las 		solicitudes HTTP desde el frontend, mediante este patrón se traducirá la respuesta del backend al formato esperado por el frontend.
 		Facilitando su uso de esta forma, al tener una interfaz unificada de alto nivel.
   -En el backend: 
-	  -Hemos definido distintos ficheros siguiendo el diagrama de datos creado. En esta capa definimos las tablas, las relaciones y ciertos servicios de datos, con 	los cuales funciona la capa de servicios. 
-	Hemos creado distintas clases para las distintas funcionalidades, así como tantas clases como elementos existen en los requisitos, de forma que conseguimos un 		sistema desacoplado. 
-	  -En esta parte podremos encontrar las clases para las preguntas, respuestas, comentarios y reportes.
+	  - Hemos definido distintos ficheros siguiendo el diagrama de datos creado. En esta capa definimos las tablas, las relaciones y ciertos servicios de datos, 		con los cuales funciona la capa de servicios. 
+	  Hemos creado distintas clases para las distintas funcionalidades, así como tantas clases como elementos existen en los requisitos, de forma que conseguimos 		un sistema desacoplado. 
+	  - En esta parte podremos encontrar las clases para las preguntas, respuestas, comentarios y reportes.
   2. Capa de presentación: es la encargada de realizar las operaciones comunicándose con la capa de servicios.
-  -En el frontend:
-	  -Aquí podremos encontrar todos los endpoints, que son las “direcciones” a las que se van a enviar las peticiones. A estos los llamaremos desde el 		dms2223frontend para realizar los “GET” y los “POST” correspondientes.
-  -En el backend:
-	  -Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se 		comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
-  2. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Y Para estos dos últimos, hemos decidido dividirlos en comentario y respuesta (y adicionalmente pregunta para reporte) por simplicidad.
-
-  -En el backend, hemos realizado los métodos getters y setters para:
+  	- En el frontend:
+	  - Aquí podremos encontrar todos los endpoints, que son las “direcciones” a las que se van a enviar las peticiones. A estos los llamaremos desde el 		dms2223frontend para realizar los “GET” y los “POST” correspondientes.
+  	- En el backend:
+	  - Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se 		comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
+  3. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Y Para estos dos últimos, hemos decidido dividirlos en comentario y respuesta (y adicionalmente pregunta para reporte) por simplicidad.
+ 	- En el backend, hemos realizado los métodos getters y setters para:
 	1. Comentarios
 	2. Preguntas 
 	3. Respuesta
 	4. Reporte
 	5. Votos
+	
+	
 Se ha usado el dms2223auth proporcionado por el profesor para realizar todas las autenticaciones necesarias, además de como ayuda para poder entender ciertas partes del código.
 
 También hemos utilizado el dms2223common para realizar la unión del frontend con el backend, ya que desde el backend obtendremos los diccionarios de datos y, mediante el response data del common, lo comunicaremos con el frontend.
