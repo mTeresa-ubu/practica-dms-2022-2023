@@ -1,5 +1,5 @@
 # Memoria
-## Entrega 1
+## Entrega 3
 ### 1. Propuesta general de diseño
  Propuesta de una interfaz sencilla estilo *stackoverflow* pero con comentarios de estilo *reddit* en varios niveles segun quien responde a quien. 
  
@@ -63,164 +63,100 @@ La base de las aplicacion son las preguntas con respuestas a modo de resolucion 
   - Tendran un tamñano mas reducido en pantalla
   - Se sombrearan según la valoracion
   - Podran ser votados para resaltar los mas útiles
+### 2. Memoria entrega 3
 
-#### 1.5 Respuesta
-Para responder a una pregunta realizada por un usuario, se ha creado una macro, llamada respuesta y que, como es de esperar, contiene la respuesta a una pregunta realizada por un usuario.
-En el fichero respuesta.html podemos encontrar:
-  -En primer lugar, los imports tanto de la macro input como de los botones y del contenedor de respuestas creado.
-  -Posteriormente, se visualizará "Respuesta" y, a continuación, el contenido concreto de la respuesta.
-  -Una vez visualizado este, el usuario visualizará por pantalla las acciones que puede realizar. Estas son: Votar, responder, añadir un comentario, dar feedback(positivo, negativo o neutro) y, por último, reportar la respuesta.
-  -Además, al final aparecerá el nombre del usuario que ha respondido junto con la fecha y la hora en la que lo hizo.
-  Estos datos se sacarán del backend.
-El acceso a la respuesta se realizará desde "/respuesta".
-Cuando deseemos implementar esta macro, lo primero que debemos de realizar es un import de ella.
-Y, cuando queramos ver el contenido de la respuesta lo llamaremos utilizando {{ respuesta.contenidoRespuesta }}.
-Por si además se desea crear una nueva respuesta, se ha implementado un botón "Crear respuesta", que se visualizará despues del contenido de la respuesta.
+#### 3 Comprobación del funcionamiento de la base de datos
+La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado un fichero: dms2223backend-crear-ejemplo
 
-
-#### 1.6 Respuesta (Votaciones)
-Para llevar a cabo las votaciones de las preguntas y las respuestas se han creado dos macros correspondientes con los botones para votos positivos y para votos negativos. Dichas macros se encuentran en el fichero "buttons.html", obteniendo cada una de ellas características especiales como el color de fondo (verde en caso de voto positivo y rojo en caso de voto negativo) y el texto que contiene (vote Up en caso de voto positivo y vote Down en caso de voto negativo), tambien se realiza una llamada en cada caso al método correspondiente cuando es pulsado (voteUp() en caso de voto positivo y voteDown() en caso de voto negativo). Los metodos a los que se llaman cuando se pulsa el boton se encuentran en el fichero votos.py, en el que se ha creado la clase Voto con cuatro metodos posibles: El primero "voteUp" hará que se sume un punto positivo a los votos de la pregunta/respuesta. El segundo "unvoteUp" se llamará en caso de querer anular el punto positivo de la pregunta/respuesta en caso de haber sumado previamente dicho punto. El tercero "voteDown" hara que se sume un punto negativo a los votos de la pregunta/respuesta. Por ultimo, el cuarto "unvoteDown" se llamará en caso de querer anular el punto negativo de la pregunta/respuesta en caso de haber sumado previamente dicho punto. Adicionalmente, se ha creado un Endpoint para actualizar las votaciones de las preguntas/respuestas, quedando tambien reflejado en el frontend.
-
-
-#### 1.7 Pregunta
-  Para la realización de este apartado se han creado distintos macros que suplen las necesidades de os requisitos.
-  
-  En primer lugar tenemos los imports corresipondientes a los botones de votacion. Estos botones tienen unos métodos definidos que cambiaran los datos posteriormente.
-  
-  A continuación, hemos creado un titulo de pregunta que recibirá el titulo de la pregunta por parametro y lo mostrara en la página. Este método se ha preparado para que posteriormente en la implemntación del backend sea fácil de utilizar.
-
-  Posteriormente, se han creado campos para el autor de la preunta y fecha de la realización de la misma. Este macro se ha realizado con el fin de que el sistema pase por parametro los datos necesarios(usuario y fecha) cuando el usuario envie la pregunta.
-
-  Finalmente se han llamdo a las funciones de votacion(up y down) y se ha creado un macro para el cuerpo de la pregunta, que recibe como parametro la descripción que sera el cuerpo de la pregunta.
-
-  La creación de estas macros van contenidas en una macro pregunta. Se ha planteado la posibilidad de no contenerlos en una macro superior, con el fin de reutilizar las macros de otra forma para la lista de preguntas pero hemos consensuado que es contraproducente. 
-
-
-#### 1.8 Creaccion de preguntas
-
-El usuario tendra la opcion de poder crear preguntas, para ello se ha creado un template (el cual extiende de "base.html") llamado crear_preguntas.html.
-En este archivo encontramos los siguientes componentes:
-  - Un import de la macro de los botones, en el cual agregamos "submit_button" y "reset_button", este ultimo se ha creado para poder vaciar los campos del formulario al crear la pregunta.
-  - Un formulario con sus respectivos labels (Titulo de la pregunta y Detalles de la pregunta), inputs ("titulo" de tipo text, "detalles" de tipo textarea) y buttons (Enviar Pregunta y Vaciar Campos).
-    - El boton "Enviar Pregunta" es de tipo "submit_button", su funcion sera gruardar: el nombre del usuario que ha realizado la pregunta, la fecha cuando se ha realizado la pregunta, el titulo de la pregunta y el detalle/descripcion de la pregunta.
-    - El boton "Vaciar Campos" es de tipo "reset_button", su función es resetear (vaciar) los campos del formulario.
-Para acceder a la creaccion de preguntas se hace desde "/crear_preguntas".
-
-
-### 2. Diseño del backend
-Durante todo el desarrollo del backend se han tenido en cuenta los principios SOLID vistos en clase, como al tratar de no repetir código, etc...
-
-#### 2.1 Diseño de la base de datos
-Una vez comenzamos con el backend, lo primero que realizamos fue el diseño de la base de datos.
-Para ello, identificamos los siguientes elementos:
-
-    - Reporte
-    - Usuario
-    - Elemento
-    - Voto
-    - Comentario
-    - Respuesta
-    - Pregunta
-    - Feedback
-Lo importante de este diseño fue reconocer cuales son las claves primarias y foráneas y sus relaciones.
-El diseño final, tras varias modificaciones es el siguiente:
-
-
-Por eso, para el diseño del backend, dentro de la carpeta dms2223backend/dms2223backend/data/db se han creado las correspondientes carpetas y ficheros:
-
-    - Reporte
-      - reporte.py
-    - Usuario
-      - usuario.py
-    - Voto
-      - voto.py
-    - Elemento
-      - elemento.py
-      - comentario.py
-      - respuesta.py
-      - pregunta.py
-    - Feedback
-      - feedback.py
-
-Y dentro de estos .py se han generado las clases que hemos visto en el diagrama de arriba.
-*En todas estas carpetas se ha creado también su _init_.py, necesario para el buen funcionamiento.
-
-#### 2.2 Comprobación del funcionamiento de la base de datos
-La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado dos ficheros: dms2223backend-crear-ejemplo y dms2223backend-mTeresa.
-
-En ellos, la idea principal para testear fue:
+En él, la idea principal para testear fue:
   1. Crear una nueva sesión de la base de datos.
   2. Crear usuarios, votos, preguntas, respuestas, comentaros, feedbacks y reportes de ejemplo con las estructuras adecuadas.
   3. Añadir estos elementos a la sesión anteriormente creada.
   4. Realizar commit de esta sesión.
   5. Cerrar la sesión.
+ 
+ ### 4 Entrega memoria 3
+Para esta última entrega, aunque nos lleve más trabajo, hemos decidido reorganizar la práctica prácticamente desde 0, ya que todos coincidíamos en que no entendíamos muy bien las decisiones de diseño anteriormente tomadas y, tras consensuarlas, hemos decidido realizarla como comentamos a continuación. 
 
-  De forma adicional, hemos impreso por pantalla todas las tablas creadas para comprobar que lo han hecho de la forma que queríamos.
+En lo que sí que seguimos de acuerdo fue en la organización del trabajo, en continuar trabajando cada uno en una rama ya que de esta forma creemos que trabajamos bien.
+Inicialmente, pensamos en una arquitectura de 4 capas (lógica, datos, presentación y servicios), sin embargo, finalmente, hemos considerado que con 3 capas será suficiente para cumplir con los principios SOLID.
 
-#### 2.3 API para obtener comentario por id
-Para realizar la API:
-  - En la carpeta dms2223backend/dms2223backend/service se ha creado el fichero servicioComentario.py, donde se han implementado dos métodos, uno para obtener el comentario dado el id y, adicionalmente, otro para obtener todos los comentarios en una lista.
-  -  En la carpeta dms2223backend/dms2223backend/data/resultsets se ha creado el fichero comentario_rset.py, donde, primero, se han incluido todos los atributos que tiene un comentario en la clase principal y, posteriormente, se ha creado otra clase con un método estático cuya finalidad es devolver una lista con los comentarios que se han generado en esa sesión de la base de datos.
-#### 2.4 API para obtener pregunta por id
-#### 2.5 API para la creación y obtención de respuestas
-Para la realización de esta API se han seguido varios pasos:
+Además, eliminamos “Elemento” de la BBDD, el cual comprendía elementos comunes de pregunta, respuesta, voto y comentario.
 
-    - En primer lugar se han creado las tablas y valores necesarios, en este caso se han usado las tablas de Elemento, la cual contiene la fecha de creación, el autor, el contenido(diferirá dependiendo del tipo de elemento), visibilidad(tendra dos valores, por defecto; True), y el identificador del elemento que se genera automáticamente. Por otro lado tenemos la tabla de Respuesta, esta tabla hereda los valores del Elemento e incluye el identificador de la pregunta a la que corresponde y el identificador porpio. 
+La base de datos final puede verse dentro del apartado “diagramaBBDD”, ha sido planteada como relacional y trabajaremos con SQLite.
 
-    - A continuación, se ha creado una clase Respuestas ,creada en el archivo answerSets.py en dms2223backend/dms2223backend/data/resultsets, que servirá para obtener listas y diccionarios de estos valores con el fin de facilitar el uso del servicio y desacoplar el codigo.
+Además, dentro de esa carpeta hemos añadido algunos diagramas que realizamos inicialmente sobre el funcionamiento de la página.
 
-    - Con los elementos anteriores creados y testados pasamos a crear la clase de servicio: ServicioRespusta. Esta clase contiene los siguientes métodos :
+Lo primero que hicimos fue distribuir el trabajo del que se ocuparían las capas, ya que anteriormente no respetábamos el principio “Single Responsability” al no separar en algunas de ellas las responsabilidades. De esta forma, lo estamos cumpliendo. 
 
-      -crea_Respuesta: Este método recibe ciertos parametros correspondientes a la tabla de respuesta y añade la respuesta a la base de datos.
+Por otro lado, la arquitectura multicapa proporciona ciertas ventajas que nos interesan. Como la coherencia de las clases que creamos y el encapsulamiento. Sin embargo, en la realización del proyecto hemos notada la gran desventaja de cambios en cascada, ya que, por ejemplo, al corregir alguna función en la capa de datos, hemos tenido que realizar cambios en todas las capas, lo que resulta tedioso para el programador.
 
-      -obtenerRespuestasPorPregunta: Este méotdo recibe el identificador de una pregunta y encuentra las respuestas correspondientes a esa pregunta, añade las respuestas a un diccionario y devuelve el diccionario en cuestión.
+Este diseño se puede asemejar a la arquitectura de tres capas. Ya que tenemos una capa para la presentación, una para el origen de datos y otra para la lógica (en nuestro caso la llamamos servicio). A continuación, las describiremos.
 
-      -ocultarRespuesta: cambia el atributo de visibilidad del elemento respuesta por el valor de visibilidad pasado por parametro.
+  1. Capa de datos: es la encargada de almacenar todos los datos.
+  - En el frontend:
+ 	 - Aquí vamos a realizar la conexión del frontend con el backend. Esto se va a realizar mediante el backend service a modo de “fachada” puesto que nuestro 		objetivo es desacoplar el frontend del backend haciendo que este funcione sin conocer la informacion del backend. De esta forma, cuando se realizan las 		solicitudes HTTP desde el frontend, mediante este patrón se traducirá la respuesta del backend al formato esperado por el frontend.
+		Facilitando su uso de esta forma, al tener una interfaz unificada de alto nivel.
+  -En el backend: 
+	  -Hemos definido distintos ficheros siguiendo el diagrama de datos creado. En esta capa definimos las tablas, las relaciones y ciertos servicios de datos, con 	los cuales funciona la capa de servicios. 
+	Hemos creado distintas clases para las distintas funcionalidades, así como tantas clases como elementos existen en los requisitos, de forma que conseguimos un 		sistema desacoplado. 
+	  -En esta parte podremos encontrar las clases para las preguntas, respuestas, comentarios y reportes.
+  2. Capa de presentación: es la encargada de realizar las operaciones comunicándose con la capa de servicios.
+  -En el frontend:
+	  -Aquí podremos encontrar todos los endpoints, que son las “direcciones” a las que se van a enviar las peticiones. A estos los llamaremos desde el 		dms2223frontend para realizar los “GET” y los “POST” correspondientes.
+  -En el backend:
+	  -Hemos creado los distintos ficheros para comentario, pregunta, respuesta etc… y en cada uno de ellos se han definido los métodos necesarios con los que se 		comunicará con la capa de servicio. Además, devolverá las respuestas HTTP correspondientes.
+  2. Capa de servicios: es la encargada de comunicar la base de datos con la API REST. Y Para estos dos últimos, hemos decidido dividirlos en comentario y respuesta (y adicionalmente pregunta para reporte) por simplicidad.
 
-    
-    - Finalmente se ha creado el fichero que contiene las funciones que sirven de controlador para las operaciones que realiza el cliente. Este es el respuestaRest.py situado en dms2223backend/dms2223backend/presentation/rest. Aqui se han creado dos métodos: 
+  -En el backend, hemos realizado los métodos getters y setters para:
+	1. Comentarios
+	2. Preguntas 
+	3. Respuesta
+	4. Reporte
+	5. Votos
+Se ha usado el dms2223auth proporcionado por el profesor para realizar todas las autenticaciones necesarias, además de como ayuda para poder entender ciertas partes del código.
 
-    -lista_Respuestas: Con el id_Pregunta pasado por parametro se llama a la función creada en el servicio y con la lista de diccionarios de vuelve se devuelve el estado HTTP correspondinte.
+También hemos utilizado el dms2223common para realizar la unión del frontend con el backend, ya que desde el backend obtendremos los diccionarios de datos y, mediante el response data del common, lo comunicaremos con el frontend.
 
-    -crea_respuesta: con los parametro pasados, correspondientes a los valores de la tabla de la base de datos, se llama al servicio y se devuelve el estado HTTP correspondiente.
+Tras haber realizado el backend comprobamos que este funcionara con el Swagger, ya que debíamos arreglar el frontend.
+Los pasos para realizar la comprobación en el Swagger son:
+1. Ir a http://localhost:8080/login
+2. Inspeccionar elemento - Network
+3. Introducir usuario y contraseña (admin, admin)
+4. En Network seleccionar "login" y copiar el Set Cookie de Request Header
+5. Ir a http://localhost:4000/api/v1/ui
+6. Authorize:
+- 1234
+- admin, admin
+- Pegar el Set Cookie
+7. Seleccionar sesion POST:
+- Try it out
+- Execute
+- Ir a Code 200
+- Copiar Response body
+- 8. Ir a http://localhost:5000/api/v1/ui
+Authorize:
+- 1234
+- Pegar Response body	
+9. Selecionamos la operación que deseemos realizar:
+- Try it out
+- Execute
+- Comprobar que funciona correctamente.
+### 4. Linea futura de trabajo
 
-#### 2.6 API para crear nueva pregunta
-#### 2.7 API para crear nuevo comentario
-#### 2.8 API para crear un reporte
-Para la realización de esta API, ha sido necesario crear los siguientes ficheros:
-  - En la carpeta dms2223backend/dms2223backend/service se ha creado el fichero servicioReportes.py, donde se ha implementado la clase ServicioReporte con los métodos: list_reportes para obtener una lista con todos los reportes, y create_reporte que crea un nuevo reporte y devuelve un diccionario con el reporte en cuestión.
-  - En la carpeta dms2223backend/dms2223backend/data/resultsets se ha creado el fichero reporte_res.py, donde, primero, se han incluido todos los atributos que tiene un reporte en la clase principal y, posteriormente, se ha creado otra clase con un método estático cuya finalidad es devolver una lista con los reportes que se han generado en esa sesión de la base de datos.
-  - En la carpeta dms2223backend/dms2223backend/presentation/rest se ha creado el fichero reportes.py, en el cual se ha generado el metodo list_reportes que devuelve una lista con los reportes existentes, y el metodo create_rep que recoge los datos de la peticion y los manda al servicio de reportes.
-#### 2.9 API para votar
-Para la realizacion de la API hemos construido tres archivos en tres rutas diferentes:
+### 5. Guía de usuario
+Aunque, por falta de tiempo, no hemos podido terminar el trabajo, tenemos las ideas claras sobre cómo debería de ser el funcionamiento de la página web, por ello, en la carpeta GuiaUsuario, se pueden consultar esta.
 
-- votoElemento.py en la ruta: /practica-dms-2022-2023/components/dms2223backend/dms2223backend/data/resultsets/votoElemento.py
-- votarCualquierElemento.py en la ruta: /practica-dms-2022-2023/components/dms2223backend/dms2223backend/service/votarCualquierElemento.py
-- votos.py en la ruta: /practica-dms-2022-2023/components/dms2223backend/dms2223backend/presentation/rest/votos.py
+Nos hubiera gustado poder poner capturas de pantalla sobre su funcionamiento, sin embargo, no nos ha dado tiempo por haber realizado prácticamente desde cero esta práctia.  
 
-En el archivo votarCualquierElemento.py se ha implementado la clase votosElemento con los métodos: 
-- get_votos_positivos: para obtener el numero de votos de positivos del elemento pasando su id.
-- get_votos_negativos: para obtener el numero de votos de negativos del elemento pasando su id.
-- post_votos_positivos: para votar positivamente al elemento pasando su id.
-- post_votos_negativos: para votar negativamente al elemento pasando su id.
-	
-En el archivo votoElemento.py, se han implementado dos clases:
-- class Votos(): Se incluyen todos los atributos que tiene un voto.
-- class VotosFuncs():Clase con un método estático cuya finalidad es devolver una lista con los votos que se han generado en esa sesión de la base de datos.
-	
-En el archivo votos.py se han implementado los metodos:
-- post_votosPositivos_id: Envia un voto positivo al elemento pasando su id.
-- post_votosNegativos_id: Envia un voto negativo al elemento pasando su id.
-- get_votosPositivos_id: Devuelve el numero de votos positivos del elemento pasando su id.
-- get_votosNegativos_id: Devuelve el numero de votos negativos del elemento pasando su id.
-### 3. Consideraciones de para el desarrollo
-#### 3.1 Docker
+### 6. Consideraciones de para el desarrollo
+#### 6.1 Docker
 Por su simplicidad se han decidido modificar los ficheros de instalacion e inicio y asi permitir el desarrollo sin necesiadad de reinicios.
 Se ha asumido que los desarrolladores actuales han instalado las imagenes, por lo que se ha comentado las lineas de *"/practica-dms-2022-2023/components/dms2223auth/bin/dms2223auth-create-admin"* para que no se intente volver a crear el usuario admin.
 Si se requiriese reinstalar la maquina habria que desomentarlas o no sera posible loguearse en la aplicacion.
 
 Ademas para permitir la compatibilidad con WSL2 se ha editado *" practica-dms-2022-2023/docker/config/dev.yml" liena 33* para enlazar el puerto 8080 de Docker con el 8080 de Windows.
-#### 3.2 Modo debug
+#### 4.2 Modo debug
 Para agilizar el desarrollo se ha configurado Jinja/Flask para actualizarsa cada vez que se produce un cambio en el frontend, asi no sera necesario reiniciar el servicio o la maquina docker cada vez que haga un cambio a la web. 
 Para ello se ha modificado:
 
