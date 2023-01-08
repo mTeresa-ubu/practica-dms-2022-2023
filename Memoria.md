@@ -63,19 +63,9 @@ La base de las aplicacion son las preguntas con respuestas a modo de resolucion 
   - Tendran un tamñano mas reducido en pantalla
   - Se sombrearan según la valoracion
   - Podran ser votados para resaltar los mas útiles
+ 
 ### 2. Memoria entrega 3
 
-#### 3 Comprobación del funcionamiento de la base de datos
-La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado un fichero: dms2223backend-crear-ejemplo
-
-En él, la idea principal para testear fue:
-  1. Crear una nueva sesión de la base de datos.
-  2. Crear usuarios, votos, preguntas, respuestas, comentaros, feedbacks y reportes de ejemplo con las estructuras adecuadas.
-  3. Añadir estos elementos a la sesión anteriormente creada.
-  4. Realizar commit de esta sesión.
-  5. Cerrar la sesión.
- 
- ### 4 Entrega memoria 3
 Para esta última entrega, aunque nos lleve más trabajo, hemos decidido reorganizar la práctica prácticamente desde 0, ya que todos coincidíamos en que no entendíamos muy bien las decisiones de diseño anteriormente tomadas y, tras consensuarlas, hemos decidido realizarla como comentamos a continuación. 
 
 En lo que sí que seguimos de acuerdo fue en la organización del trabajo, en continuar trabajando cada uno en una rama ya que de esta forma creemos que trabajamos bien.
@@ -142,7 +132,17 @@ Authorize:
 - Try it out
 - Execute
 - Comprobar que funciona correctamente.
-- 
+
+#### 3. Comprobación del funcionamiento de la base de datos
+La comprobación de la base de datos se ha realizado de la siguiente forma: en la carpeta dms2223backend/bin/dms2223backend se han creado un fichero: dms2223backend-crear-ejemplo
+
+En él, la idea principal para testear fue:
+  1. Crear una nueva sesión de la base de datos.
+  2. Crear usuarios, votos, preguntas, respuestas, comentaros, feedbacks y reportes de ejemplo con las estructuras adecuadas.
+  3. Añadir estos elementos a la sesión anteriormente creada.
+  4. Realizar commit de esta sesión.
+  5. Cerrar la sesión.
+ 
 ### 4. Linea futura de trabajo
 Nuestra línea de futuro consistirá en un servicio básico de mensajería entre usuarios dentro de la plataforma.
 
